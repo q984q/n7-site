@@ -115,7 +115,7 @@ function showResult(){
     '<div class="qbody" aria-live="polite"><h3 class="qh">Ваше решение</h3><p class="qhint">Предварительная рекомендация по вашим ответам. Окончательный подбор — после замера и проекта.</p>'+
     ranked.map(function(c,i){var x=CATS[c];return '<div class="qres"><b>'+(i+1)+'. '+esc(x[0])+'</b><p>'+esc(x[2])+'</p><a class="more" href="'+x[1]+'">Подробнее о решении →</a></div>'}).join('')+
     '<div class="qmeta"><span>Класс освещения: <b>'+esc(CLASSES[lvl])+'</b></span><span>Площадь: <b>'+esc(AREAS[area])+'</b></span></div>'+
-    '<div class="fbtns"><button type="button" class="btn" id="qSend">Отправить результат в WhatsApp</button>'+
+    '<div class="fbtns"><button type="button" class="btn" id="qSend">Отправить результат →</button>'+
     '<button type="button" class="ib" id="qList">+ В лист подбора</button>'+
     '<a class="ib" href="produktsiya.html#calc-slot">Калькулятор</a>'+
     '<a class="ib" href="produktsiya.html#osveshhenie">Освещение</a>'+

@@ -200,7 +200,7 @@ function lighting(){
     items.forEach(function(c){c.hidden=f!=='all'&&c.getAttribute('data-l')!==f});
     flipPlay(items,first);move();
     var n=items.filter(function(c){return !c.hidden}).length;
-    if(count)count.textContent='Показано '+n+' из 8 типов освещения';
+    if(count)count.textContent='Показано '+n+' из '+items.length+' типов освещения';
   })});
   var tg=$('#ltoggle');
   if(tg)tg.addEventListener('click',function(){

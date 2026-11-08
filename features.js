@@ -26,11 +26,23 @@ var done=function(){toast(msg||'Скопировано')},fail=function(){toast(
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,fail)}
 else{var ta=d.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';d.body.appendChild(ta);ta.select();try{d.execCommand('copy')?done():fail()}catch(e){fail()}d.body.removeChild(ta)}
 }
-function send(text){
+function wa(text){
 var url='https://wa.me/'+WA+'?text='+encodeURIComponent(text);
 try{w.open(url,'_blank','noopener')}catch(e){}
 toast('Открываем WhatsApp с готовым сообщением');
 return url;
+}
+/* Заявки из квиза, калькулятора и листа подбора уходят в Telegram сразу.
+   Публичный URL прокси задаётся в main.js / window.N7_LEAD_ENDPOINT; токена здесь нет. */
+function send(text){
+var ep=String(w.N7_LEAD_ENDPOINT||'').trim();
+if(!ep||!w.fetch)return wa(text);
+return w.fetch(ep,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
+  body:JSON.stringify({kind:'quick',name:'Посетитель сайта',phone:'',text:text,
+    page:d.title,url:location.href,ts:new Date().toISOString()})})
+  .then(function(x){if(!x.ok)throw 0;return x.json()})
+  .then(function(j){if(!j||j.ok===false)throw 0;toast('Заявка отправлена в Telegram');return true})
+  .catch(function(){return wa(text)});
 }
 w.n7Send=send;
 $$('[data-copy]').forEach(function(b){b.addEventListener('click',function(){copyText(b.getAttribute('data-copy'),'Номер скопирован')})});

@@ -24,14 +24,17 @@ put(PHOTOS.projects,'.grid:not(.cat) figure');put(PHOTOS.products,'.cat figure')
 var qp=new URLSearchParams(location.search).get('p'),mg=$('#msg');if(qp&&mg)mg.value='Интересует: '+qp;
 
 /* ---------------- форма заявки ----------------
-   ENDPOINT: подключите Formspree / свой сервер, и заявки будут уходить туда через POST.
+   ENDPOINT: публичный URL серверного прокси (tools/telegram-proxy/).
+   Токен бота НЕ находится в этом файле и вообще в репозитории — он живёт
+   в секретах Cloudflare Worker. Задать endpoint можно двумя способами:
+     window.N7_LEAD_ENDPOINT = 'https://…workers.dev'
+     <form id="lead" data-endpoint="https://…workers.dev">
    Пока endpoint не задан, работает резервный сценарий без сервера:
-   браузер собирает текст заявки и открывает WhatsApp с готовым сообщением,
-   а в блоке статуса остаются кнопки «Отправить», «Скопировать» и «Позвонить».   */
-var ENDPOINT='[FORMSPREE_URL]';
+   браузер собирает текст заявки и открывает WhatsApp с готовым сообщением.   */
+var f=$('#lead'),st=$('#status');
+var ENDPOINT=String((window.N7_LEAD_ENDPOINT||'')||(f&&f.getAttribute('data-endpoint'))||'').trim();
 var WA='77778848818';
 var TEL1='+7 (777) 884-88-18',TEL2='+7 (747) 534-40-14';
-var f=$('#lead'),st=$('#status');
 
 function show(t,bad){st.hidden=false;st.className=bad?'bad':'';st.textContent=t}
 function chk(id,bad,msg,s){var el=d.getElementById(id),e=d.getElementById(id+'-e');el.setAttribute('aria-invalid',bad);e.textContent=bad?msg:'';if(bad&&s.ok){el.focus();s.ok=false}}
@@ -46,6 +49,16 @@ try{
   }
 }catch(e){}
 return t;
+}
+function leadPayload(){
+  var p={name:$('#fname').value.trim(),phone:$('#phone').value.trim(),work:$('#work').value,
+    msg:$('#msg').value.trim(),page:d.title,url:location.href,text:leadText(),ts:new Date().toISOString()};
+  try{
+    if(window.n7List&&window.n7List.count&&window.n7List.count()){
+      p.list=window.n7List.all().map(function(x,i){return (i+1)+'. '+x.title+' — '+String(x.text||'').slice(0,160)}).join('\n').slice(0,1600);
+    }
+  }catch(e){}
+  return p;
 }
 function fallback(){
 var text=leadText(),url='https://wa.me/'+WA+'?text='+encodeURIComponent(text);
@@ -72,9 +85,11 @@ chk('phone',$('#phone').value.replace(/\D/g,'').length<10,'Введите тел
 chk('agree',!$('#agree').checked,'Нужно согласие на обработку данных',s);
 if(!s.ok){show('Проверьте поля, отмеченные ошибкой.',true);return}
 var btn=$('#send');btn.disabled=true;
-if(ENDPOINT.charAt(0)==='['){btn.disabled=false;fallback();return}
-fetch(ENDPOINT,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}})
-.then(function(x){if(!x.ok)throw 0;f.reset();show('Спасибо! Заявка отправлена. Мы свяжемся с вами в ближайшее время.')})
+if(!ENDPOINT){btn.disabled=false;fallback();return}
+fetch(ENDPOINT,{method:'POST',body:JSON.stringify(leadPayload()),
+  headers:{'Content-Type':'application/json',Accept:'application/json'}})
+.then(function(x){if(!x.ok)throw 0;return x.json()})
+.then(function(j){if(!j||j.ok===false)throw 0;f.reset();show('Спасибо! Заявка отправлена. Мы свяжемся с вами в ближайшее время.')})
 .catch(function(){btn.disabled=false;fallback()})
 .then(function(){btn.disabled=false});
 });

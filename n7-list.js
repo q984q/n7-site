@@ -49,7 +49,7 @@ function drawer(){
   el.innerHTML='<div class="ld-head"><b>Лист подбора</b><button type="button" class="ld-close ib" id="ldCloseFocus" aria-label="Закрыть">×</button></div>'+
     '<p class="ld-sub">Соберите позиции и отправьте один запрос — цены считаем индивидуально, публичного прайса нет.</p>'+
     '<div class="ld-list" id="ldList"></div>'+
-    '<div class="ld-acts" id="ldActs"><button type="button" class="btn" id="ldSend">Отправить в WhatsApp</button>'+
+    '<div class="ld-acts" id="ldActs"><button type="button" class="btn" id="ldSend">Отправить заявку / КП</button>'+
     '<div class="fbtns"><button type="button" class="ib" id="ldCopy">Скопировать список</button>'+
     '<button type="button" class="ib" id="ldLink">Ссылка на подбор</button>'+
     '<button type="button" class="ib" id="ldPrint">Спецификация PDF</button>'+

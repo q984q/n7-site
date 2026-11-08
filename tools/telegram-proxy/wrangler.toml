@@ -1,0 +1,10 @@
+name = "n7-lead-telegram"
+main = "worker.js"
+compatibility_date = "2024-11-01"
+
+# Секреты НЕ пишутся в этот файл. Задайте их один раз:
+#   npx wrangler secret put TELEGRAM_TOKEN
+#   npx wrangler secret put TELEGRAM_CHAT_ID   (необязательно: возьмём из getUpdates)
+#   npx wrangler secret put ALLOWED_ORIGIN     (необязательно: по умолчанию GitHub Pages)
+[vars]
+ALLOWED_ORIGIN = "https://q984q.github.io"

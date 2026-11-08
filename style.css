@@ -67,7 +67,7 @@ header .btn{min-height:44px;padding:0 20px;white-space:nowrap;flex:0 0 auto}
 .hero .sub{display:block;font:400 clamp(.7rem,1.8vw,1.1rem) var(--lg);letter-spacing:.62em;margin:.4em -.62em 36px 0;padding-left:.3em}
 .hero h1{font-size:clamp(1.5rem,3.2vw,2.3rem);max-width:18ch}
 .hero p{margin:18px 0 32px;color:var(--mut)}
-.hero .acts{display:flex;flex-wrap:nowrap;gap:10px;align-items:center;max-width:100%;
+.hero .acts{display:flex;flex-wrap:nowrap;gap:8px;align-items:center;max-width:100%;
   overflow-x:auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none;
   padding:9px 12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-pill);
   box-shadow:var(--sh-2);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
@@ -75,7 +75,7 @@ header .btn{min-height:44px;padding:0 20px;white-space:nowrap;flex:0 0 auto}
 .hero .acts{width:100%;min-width:0}
 .hero .acts{background:rgba(255,255,255,.95);border-color:rgba(255,255,255,.7);box-shadow:var(--sh-3)}
 .hero .acts a{color:#141516}
-.hero .acts a:not(.btn){font-size:.92rem;text-underline-offset:3px}
+.hero .acts a:not(.btn){font-size:.86rem;text-underline-offset:3px}
 .hero .acts a:not(.btn):hover{color:#8a6d00}
 .hero .acts a:not(.btn):hover{color:var(--ac)}
 .hero .acts>*{flex:0 0 auto;scroll-snap-align:start;white-space:nowrap}
@@ -241,8 +241,8 @@ figure .ph{transform:perspective(700px) rotateX(var(--rx,0deg)) rotateY(var(--ry
 .deco.dr>*{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.4s .3s cubic-bezier(.6,0,.2,1) forwards}
 .mqs{overflow:hidden;padding:34px 0}
 .mqw{overflow:hidden;background:var(--ac);color:#141516;transform:rotate(-1.5deg);width:104%;margin-left:-2%}
-.mq{display:flex;width:max-content;padding:16px 0;animation:mq 34s linear infinite}
-.mqw:hover .mq{animation-play-state:paused}
+.mq{display:flex;width:max-content;padding:16px 0;animation:none;transform:none}
+.mq .mt:nth-child(2){display:none}
 .mt{display:flex;flex:none}
 .mt span{font:700 clamp(1rem,2.2vw,1.5rem) var(--hd);padding:0 28px;white-space:nowrap}
 .mt span::after{content:"";display:inline-block;width:10px;height:10px;margin-left:56px;background:#141516;transform:rotate(45deg)}
@@ -259,7 +259,7 @@ figure .ph{transform:perspective(700px) rotateX(var(--rx,0deg)) rotateY(var(--ry
 @keyframes pb{to{transform:scaleX(1)}}
 @keyframes drift{to{transform:translateY(90px)}}
 .hero .court{animation:drift linear both;animation-timeline:scroll(root);animation-range:0 100vh}
-.hero-photo{inset:-90px 0;animation:drift linear both;animation-timeline:scroll(root);animation-range:0 100vh}
+.hero-photo{inset:0;animation:none}
 .pagehero .deco{animation:drift linear both;animation-timeline:scroll(root);animation-range:0 80vh}
 @keyframes wm{from{transform:translateY(14%)}to{transform:translateY(-10%)}}
 .why::after{animation:wm linear both;animation-timeline:view()}
@@ -406,7 +406,7 @@ ol.steps.s4{grid-template-columns:1fr}@media(min-width:900px){ol.steps.s4{grid-t
 /* ===== каталог: свет, движение, освещение площадок ===== */
 [hidden]{display:none!important}
 .amb{position:relative;isolation:isolate;overflow:hidden}
-.amb::before{content:"";position:absolute;inset:-30% -12%;z-index:-1;pointer-events:none;background:radial-gradient(38% 48% at 18% 28%,rgba(242,194,0,.16),transparent 72%),radial-gradient(34% 44% at 82% 74%,rgba(242,194,0,.11),transparent 72%);animation:ambient 17s ease-in-out infinite alternate}
+.amb::before{content:"";position:absolute;inset:-30% -12%;z-index:-1;pointer-events:none;background:radial-gradient(38% 48% at 18% 28%,rgba(242,194,0,.16),transparent 72%),radial-gradient(34% 44% at 82% 74%,rgba(242,194,0,.11),transparent 72%);animation:none}
 @keyframes ambient{from{transform:translate3d(-3%,-2%,0) scale(1)}to{transform:translate3d(4%,3%,0) scale(1.14)}}
 
 /* скользящий индикатор фильтра */
@@ -428,8 +428,8 @@ ol.steps.s4{grid-template-columns:1fr}@media(min-width:900px){ol.steps.s4{grid-t
 
 /* карточки типов освещения */
 .lstats{grid-column:auto;margin:0 0 28px;padding:18px 0;border-bottom:1px solid var(--line)}
-.ltop{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-bottom:20px}
-.lfilters{display:flex;flex-wrap:wrap;gap:10px;position:relative}
+.ltop{display:block;margin-bottom:20px}
+.lfilters{display:flex;flex-wrap:wrap;gap:10px;position:relative;max-width:min(100%,1000px);margin-bottom:12px}
 .lfilters button{min-height:44px;padding:0 16px;font:500 .92rem var(--bd);background:none;color:inherit;border:1px solid var(--line);border-radius:2px;cursor:pointer;transition:color .3s,border-color .3s}
 .lfilters button:hover{border-color:var(--fg)}
 .ltoggle{min-height:44px;padding:0 18px;background:var(--ac);color:#141516;border:0;border-radius:2px;font:700 .9rem var(--bd);cursor:pointer;transition:transform .2s,box-shadow .25s,background .25s}
@@ -842,6 +842,15 @@ form.wz-off .wz-step[hidden]{display:block!important}
   .fbtns::-webkit-scrollbar,.wz-dots::-webkit-scrollbar,.qmeta::-webkit-scrollbar{display:none}
   .filters>*,.lfilters>*,.chips>*,.fbtns>*,.wz-dots>*,.qmeta>*{flex:0 0 auto;scroll-snap-align:start;white-space:nowrap}
   .chips span,.filters button,.lfilters button{padding:10px 16px}
+  /* Фильтры освещения: сетка в 2 ряда, а не обрезанная горизонтальная лента */
+  .ltop{display:block}
+  .lfilters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;
+    overflow:visible;scroll-snap-type:none;padding:2px 0 8px;max-width:100%}
+  .lfilters>*{min-width:0;scroll-snap-align:none;white-space:normal}
+  .lfilters button{width:100%;min-height:42px;padding:8px 10px;font-size:.82rem;line-height:1.2;text-align:center}
+  .lfilters .fpill{display:none}
+  .lfilters.fx-pills button[aria-pressed=true]{background:var(--fg)!important;color:var(--bg)!important;border-color:var(--fg)!important}
+  #ltoggle{width:100%;margin-top:10px}
   .fbtns .btn,.fbtns .ib{min-height:44px;padding:0 16px}
 
   /* КОНТЕНТ остаётся вертикальным: карточки, услуги, освещение и этапы работ
@@ -961,3 +970,28 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{width:0;height:0;display:none}
 /* кнопки «В лист подбора» больше не переносятся в кривой кружок */
 .addlist,#qList{width:auto;min-width:0;max-width:100%;height:44px;white-space:nowrap;
   border-radius:var(--r-pill);padding:0 15px;background:var(--surface2)}
+
+/* ============ Hero-панель на телефоне: сетка 2×2, без обрезков ============ */
+@media(max-width:760px){
+.hero .acts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;overflow:visible;
+  padding:9px;border-radius:var(--r-lg);background:rgba(255,255,255,.96)}
+.hero .acts>*{width:100%;min-width:0;white-space:normal;scroll-snap-align:none}
+.hero .acts>.btn{grid-column:1/-1;padding:11px 16px;min-height:46px}
+.hero .acts a:not(.btn){display:flex;align-items:center;justify-content:center;min-height:42px;
+  padding:8px 10px;border:1px solid var(--line);border-radius:var(--r-pill);
+  font-size:.82rem;text-align:center;text-decoration:none;line-height:1.2}
+.hero .acts a:not(.btn):last-child{grid-column:1/-1}
+}
+
+/* ============ Услуги: вся карточка открывается по нажатию ============ */
+.svc-card{color:inherit;text-decoration:none;transition:background .2s}
+.svc-card:hover{background:var(--pan)}
+.svc-card .more{color:var(--ac);font-weight:700}
+.svc-card:hover .more{text-decoration:underline}
+@media(max-width:760px){
+.svc-card{padding:20px 14px;border-top:1px solid var(--line);border-radius:var(--r-lg)}
+.svc-card:last-of-type{border-bottom:1px solid var(--line)}
+.svc-card .srow>.ph,.srow>.ph{aspect-ratio:16/9;max-height:200px}
+.svc-card h3{font-size:1.15rem}
+.svc-card .more{display:inline-block;margin-top:6px;padding:10px 0}
+}

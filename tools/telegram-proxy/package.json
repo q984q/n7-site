@@ -1,0 +1,13 @@
+{
+  "name": "n7-lead-telegram",
+  "private": true,
+  "description": "Защищённый приём заявок N7 Construction → Telegram Bot API (Cloudflare Worker)",
+  "scripts": {
+    "test": "node tests/test-worker.cjs && node tests/test-lead.cjs",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "jsdom": "^31.0.0",
+    "wrangler": "^3.90.0"
+  }
+}
