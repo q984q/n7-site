@@ -16,17 +16,47 @@ d.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
 var bs=d.querySelectorAll('.filters button'),fs=d.querySelectorAll('.grid figure');
 bs.forEach(function(x){x.onclick=function(){bs.forEach(function(y){y.setAttribute('aria-pressed',y===x)});
 fs.forEach(function(f){f.hidden=x.dataset.f!=='all'&&f.dataset.t!==x.dataset.f})}});
-/* фото: пути к файлам WebP. projects: галерея проектов, products: каталог; порядок как на странице */
+/* фото: paths to WebP files. projects: галерея проектов, products: каталог; порядок как на странице */
 var PHOTOS={hero:'',projects:[],products:[]}; /* пример: {hero:'img/hero.webp',projects:['img/p1.webp'],products:['img/c1.webp']} */
 var hp=$('.hero-photo');if(PHOTOS.hero&&hp){hp.style.backgroundImage='url("'+PHOTOS.hero+'")';hp.classList.add('on')}
 function put(list,sel){var gs=d.querySelectorAll(sel);list.forEach(function(u,i){var g=gs[i];if(!u||!g)return;var im=d.createElement('img');im.src=u;im.alt=g.querySelector('b').textContent;im.width=800;im.height=600;im.loading='lazy';g.querySelector('.ph').appendChild(im)})}
 put(PHOTOS.projects,'.grid:not(.cat) figure');put(PHOTOS.products,'.cat figure');
 var qp=new URLSearchParams(location.search).get('p'),mg=$('#msg');if(qp&&mg)mg.value='Интересует: '+qp;
-/* форма */
-var ENDPOINT='[FORMSPREE_URL]'; /* например https://formspree.io/f/xxxx */
+
+/* ---------------- форма заявки ----------------
+   ENDPOINT: подключите Formspree / свой сервер, и заявки будут уходить туда через POST.
+   Пока endpoint не задан, работает резервный сценарий без сервера:
+   браузер собирает текст заявки и открывает WhatsApp с готовым сообщением,
+   а в блоке статуса остаются кнопки «Отправить», «Скопировать» и «Позвонить».   */
+var ENDPOINT='[FORMSPREE_URL]';
+var WA='77778848818';
+var TEL1='+7 (777) 884-88-18',TEL2='+7 (747) 534-40-14';
 var f=$('#lead'),st=$('#status');
+
 function show(t,bad){st.hidden=false;st.className=bad?'bad':'';st.textContent=t}
 function chk(id,bad,msg,s){var el=d.getElementById(id),e=d.getElementById(id+'-e');el.setAttribute('aria-invalid',bad);e.textContent=bad?msg:'';if(bad&&s.ok){el.focus();s.ok=false}}
+function leadText(){
+var name=$('#fname').value.trim(),phone=$('#phone').value.trim(),work=$('#work').value,msg=$('#msg').value.trim();
+return 'Заявка с сайта N7 Construction\nИмя: '+name+'\nТелефон: '+phone+'\nНаправление: '+work+(msg?'\nКомментарий: '+msg:'');
+}
+function fallback(){
+var text=leadText(),url='https://wa.me/'+WA+'?text='+encodeURIComponent(text);
+st.hidden=false;st.className='';
+st.textContent='Заявка подготовлена. Отправьте её в WhatsApp или позвоните нам: '+TEL1+', '+TEL2+'.';
+var box=d.createElement('div');box.className='fbtns';
+var a=d.createElement('a');a.className='btn';a.href=url;a.target='_blank';a.rel='noopener';a.textContent='Отправить в WhatsApp';
+var copy=d.createElement('button');copy.className='ib';copy.type='button';copy.textContent='Скопировать текст';
+copy.onclick=function(){
+var done=function(){copy.textContent='Скопировано'},fail=function(){copy.textContent='Выделите текст вручную'};
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,fail)}
+else{var ta=d.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';d.body.appendChild(ta);ta.select();try{d.execCommand('copy')?done():fail()}catch(e){fail()}d.body.removeChild(ta)}
+};
+var call=d.createElement('a');call.className='ib';call.href='tel:+77778848818';call.textContent='Позвонить';
+box.appendChild(a);box.appendChild(copy);box.appendChild(call);st.appendChild(box);
+var pre=d.createElement('pre');pre.className='leadtext';pre.textContent=text;st.appendChild(pre);
+try{window.open(url,'_blank','noopener')}catch(e){}
+}
+
 f&&f.addEventListener('submit',function(e){
 e.preventDefault();var s={ok:true};
 chk('fname',$('#fname').value.trim().length<2,'Введите имя',s);
@@ -34,10 +64,10 @@ chk('phone',$('#phone').value.replace(/\D/g,'').length<10,'Введите тел
 chk('agree',!$('#agree').checked,'Нужно согласие на обработку данных',s);
 if(!s.ok){show('Проверьте поля, отмеченные ошибкой.',true);return}
 var btn=$('#send');btn.disabled=true;
-if(ENDPOINT.charAt(0)==='['){btn.disabled=false;show('Онлайн-отправка пока не подключена. Позвоните нам: +7 (777) 884-88-18 или +7 (747) 534-40-14 — подготовим расчёт.',true);return}
+if(ENDPOINT.charAt(0)==='['){btn.disabled=false;fallback();return}
 fetch(ENDPOINT,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}})
 .then(function(x){if(!x.ok)throw 0;f.reset();show('Спасибо! Заявка отправлена. Мы свяжемся с вами в ближайшее время.')})
-.catch(function(){show('Не удалось отправить заявку. Позвоните нам: +7 (777) 884-88-18 или +7 (747) 534-40-14.',true)})
+.catch(function(){btn.disabled=false;fallback()})
 .then(function(){btn.disabled=false});
 });
 })();

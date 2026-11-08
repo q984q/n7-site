@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="style.css">
 <script>try{document.documentElement.dataset.theme=localStorage.getItem("n7-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
 <script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&"IntersectionObserver" in window){document.documentElement.classList.add("fx");setTimeout(function(){if(!window.__fx)document.documentElement.classList.remove("fx")},2500)}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"GeneralContractor","name":"N7 Construction","description":"Строительство, развитие, инфраструктура: жилые, коммерческие и промышленные объекты, проектирование, реконструкция","url":"https://q984q.github.io/n7-site","telephone":["+7 777 884-88-18","+7 747 534-40-14"],"email":"[почта]","address":{"@type":"PostalAddress","streetAddress":"[улица, дом]","addressLocality":"[город]","addressCountry":"KZ"},"areaServed":["Казахстан","СНГ"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"GeneralContractor","name":"N7 Construction","description":"Строительство, развитие, инфраструктура: жилые, коммерческие и промышленные объекты, проектирование, реконструкция","url":"https://q984q.github.io/n7-site","telephone":["+7 777 884-88-18","+7 747 534-40-14"],"areaServed":["Казахстан","СНГ"]}</script>
 </head>
 <body>
 <header>
@@ -34,20 +34,21 @@
 <section id="contacts" style="background:var(--pan)"><div class="w cn">
 <div>
 <h2>Получите расчёт</h2><p style="margin-bottom:20px">Для обсуждения проекта, сметы и условий сотрудничества.</p>
-<ul class="info"><li>Телефон: <a href="tel:+77778848818">+7 (777) 884-88-18</a></li><li>Телефон: <a href="tel:+77475344014">+7 (747) 534-40-14</a></li><li>WhatsApp, Telegram: [ссылки]</li><li>Почта: [почта]</li><li>Адрес: [город, улица, дом]</li></ul>
-<div class="map" role="img" aria-label="Место для карты">[Карта: вставьте iframe Яндекс.Карт или 2ГИС]</div>
+<ul class="info"><li>Телефон: <a href="tel:+77778848818">+7 (777) 884-88-18</a></li><li>Телефон: <a href="tel:+77475344014">+7 (747) 534-40-14</a></li><li><a href="https://wa.me/77778848818" target="_blank" rel="noopener">Написать в WhatsApp</a></li><li>Заявку можно оставить в форме ниже или по телефону</li><li>География работ: Казахстан и проекты СНГ</li></ul>
+<div class="map"><img src="img/map.webp" alt="Карта Казахстана с регионами работы N7 Construction" width="1672" height="816" loading="lazy"></div><p class="tnote" style="margin-top:12px">Работаем по Казахстану и проектам СНГ. <a href="geografiya.html">Ключевые регионы →</a></p>
 </div>
 <form id="lead" novalidate>
 <div><label for="fname">Имя</label><input id="fname" name="name" autocomplete="name" aria-describedby="fname-e"><div class="er" id="fname-e"></div></div>
 <div><label for="phone">Телефон</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+7" aria-describedby="phone-e"><div class="er" id="phone-e"></div></div>
-<div><label for="work">Тип работ</label><select id="work" name="work"><option>Жилое строительство</option><option>Коммерческое строительство</option><option>Промышленные объекты</option><option>Инфраструктура и дороги</option><option>Проектирование и инжиниринг</option><option>Реконструкция и капитальный ремонт</option><option>Другое</option></select></div>
+<div><label for="work">Тип работ</label><select id="work" name="work"><optgroup label="Строительство"><option>Жилое строительство</option><option>Коммерческое строительство</option><option>Промышленные объекты</option><option>Инфраструктура и дороги</option><option>Проектирование и инжиниринг</option><option>Реконструкция и капитальный ремонт</option></optgroup><optgroup label="Спортивные покрытия"><option>Модульные покрытия</option><option>ПВХ-покрытия в рулонах</option><option>Беговые дорожки</option><option>Спортивный паркет</option><option>Падел-корты</option><option>Подбор покрытия под объект</option></optgroup><option>Другое</option></select></div>
 <div><label for="msg">Комментарий</label><textarea id="msg" name="message" placeholder="Размер площадки, город, сроки"></textarea></div>
 <div><label class="ck" for="agree"><input id="agree" name="agree" type="checkbox" aria-describedby="agree-e"><span>Согласен на обработку данных по <a href="privacy.html">политике конфиденциальности</a></span></label><div class="er" id="agree-e"></div></div>
 <button class="btn" type="submit" id="send">Отправить заявку</button>
+<p class="tnote">Заявка откроется в WhatsApp с готовым текстом — отправьте сообщение, и мы свяжемся с вами.</p>
 <div id="status" role="status" aria-live="polite" hidden></div>
 </form>
 </div></section></main>
-<footer><div class="w fg"><div><span class="mark" aria-hidden="true">N7</span><small aria-hidden="true">CONSTRUCTION</small><p>Строительство, развитие, инфраструктура. Казахстан и СНГ.</p></div><div><b>Разделы</b><ul><li><a href="o-kompanii.html">О компании</a></li><li><a href="uslugi.html">Услуги</a></li><li><a href="sportivnye-pokrytiya.html">Спортивные покрытия</a></li><li><a href="produktsiya.html">Каталог покрытий</a></li><li><a href="proekty.html">Проекты</a></li><li><a href="sotrudnichestvo.html">Сотрудничество</a></li><li><a href="geografiya.html">География</a></li><li><a href="prezentatsiya.html">Презентация</a></li><li><a href="kontakty.html">Контакты</a></li></ul></div><div><b>Контакты</b><ul><li><a href="tel:+77778848818">+7 (777) 884-88-18</a></li><li><a href="tel:+77475344014">+7 (747) 534-40-14</a></li><li>[почта]</li><li>[город, улица, дом]</li></ul></div><div><b>Реквизиты</b><p>[Полное название юрлица]<br>[БИН / ИНН]<br><a href="privacy.html">Политика конфиденциальности</a></p></div></div></footer>
+<footer><div class="w fg"><div><span class="mark" aria-hidden="true">N7</span><small aria-hidden="true">CONSTRUCTION</small><p>Строительство, развитие, инфраструктура. Казахстан и СНГ.</p></div><div><b>Разделы</b><ul><li><a href="o-kompanii.html">О компании</a></li><li><a href="uslugi.html">Услуги</a></li><li><a href="sportivnye-pokrytiya.html">Спортивные покрытия</a></li><li><a href="produktsiya.html">Каталог покрытий</a></li><li><a href="proekty.html">Проекты</a></li><li><a href="sotrudnichestvo.html">Сотрудничество</a></li><li><a href="geografiya.html">География</a></li><li><a href="prezentatsiya.html">Презентация</a></li><li><a href="kontakty.html">Контакты</a></li></ul></div><div><b>Контакты</b><ul><li><a href="tel:+77778848818">+7 (777) 884-88-18</a></li><li><a href="tel:+77475344014">+7 (747) 534-40-14</a></li><li><a href="kontakty.html">Форма заявки</a></li><li>Казахстан и СНГ</li></ul></div><div><b>Информация</b><p>Реквизиты предоставляются по запросу.<br><a href="privacy.html">Политика конфиденциальности</a><br><a href="prezentatsiya.html">Презентация компании</a></p></div></div></footer>
 <script src="main.js" defer></script>
 <script src="fx.js" defer></script>
 </body>
