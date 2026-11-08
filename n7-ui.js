@@ -13,28 +13,67 @@ function slug(s){
   return String(s).toLowerCase().replace(/[а-яё]/g,function(c){return map[c]||''}).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,42)||'section';
 }
 
-/* ---------- 1. Оглавление и прогресс разделов ---------- */
+/* ---------- 1. Панель управления страницей: разделы + прогресс + быстрые действия ---------- */
+/* Единая на всех 18 страницах: одинаковая разметка, заголовок, прогресс и набор кнопок. */
 function toc(){
-  var main=$('main');if(!main)return;
+  var main=$('main')||d.body;
   var secs=$$('section',main).filter(function(s){return $('h2',s)});
-  if(secs.length<4)return;
-  secs.forEach(function(s,i){
-    if(!s.id){var h=$('h2',s);var t=h.getAttribute('aria-label')||h.textContent;s.id='sec-'+(i+1)+'-'+slug(t)}
+  var items=secs.map(function(s,i){
+    var h=$('h2',s),t=h.getAttribute('aria-label')||h.textContent;
+    if(!s.id)s.id='sec-'+(i+1)+'-'+slug(t);
+    return {href:'#'+esc(s.id),text:t};
   });
-  var el=d.createElement('nav');el.className='toc';el.setAttribute('aria-label','Разделы страницы');
-  el.innerHTML='<div class="tp"><b>Разделы</b><span id="tocNow">1 / '+secs.length+'</span></div><ol>'+
-    secs.map(function(s,i){var h=$('h2',s);var t=h.getAttribute('aria-label')||h.textContent;
-      return '<li><a href="#'+esc(s.id)+'"'+(i===0?' class="on"':'')+' data-i="'+i+'"><i></i><span>'+esc(t)+'</span></a></li>'}).join('')+'</ol>';
+  /* на коротких страницах та же панель, но вместо пустого оглавления — навигация по сайту */
+  var site=items.length<3;
+  if(site){
+    items=[['index.html','Главная'],['o-kompanii.html','О компании'],['uslugi.html','Услуги'],
+      ['sportivnye-pokrytiya.html','Продукция'],['proekty.html','Проекты'],
+      ['sotrudnichestvo.html','Сотрудничество'],['geografiya.html','География'],
+      ['prezentatsiya.html','Презентация'],['kontakty.html','Контакты']]
+      .map(function(a){return {href:a[0],text:a[1]}});
+  }
+  var el=d.createElement('nav');el.className='toc n7panel';
+  el.setAttribute('aria-label','Панель управления страницей');
+  el.innerHTML='<div class="tp"><b>Управление</b><span id="tocNow">'+(site?'Сайт':'1 / '+items.length)+'</span></div>'+
+    '<ol>'+items.map(function(x,i){
+      return '<li><a href="'+x.href+'"'+(site?'':' data-i="'+i+'"'+(i===0?' class="on"':''))+
+        '><i></i><span>'+esc(x.text.length>26?x.text.slice(0,25)+'…':x.text)+'</span></a></li>';
+    }).join('')+'</ol>'+
+    '<div class="tprog"><i></i></div>'+
+    '<div class="tc-acts">'+
+      '<button type="button" data-act="quiz"><span aria-hidden="true">✦</span> Подобрать за 60 сек</button>'+
+      '<button type="button" data-act="search"><span aria-hidden="true">⌕</span> Поиск по сайту</button>'+
+      '<button type="button" data-act="list"><span aria-hidden="true">☰</span> Лист подбора</button>'+
+      '<a class="tc-go" href="kontakty.html">Получить расчёт →</a>'+
+    '</div>';
   d.body.appendChild(el);
-  var links=$$('.toc a'),now=$('#tocNow');
-  function set(i){links.forEach(function(a,k){a.classList.toggle('on',k===i)});if(now)now.textContent=(i+1)+' / '+secs.length}
+
+  var links=$$('.toc ol a[data-i]'),now=$('#tocNow'),prog=$('.tprog i',el);
+  function set(i){links.forEach(function(a,k){a.classList.toggle('on',k===i)});if(now&&links.length)now.textContent=(i+1)+' / '+links.length}
   links.forEach(function(a){a.onclick=function(){set(parseInt(a.getAttribute('data-i'),10))}});
-  if(typeof w.IntersectionObserver==='function'){
+  if(!site&&typeof w.IntersectionObserver==='function'){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){
       if(e.isIntersecting){var i=secs.indexOf(e.target);if(i>=0)set(i)}
     })},{rootMargin:'-25% 0px -65% 0px'});
     secs.forEach(function(s){io.observe(s)});
   }
+  function progress(){
+    if(!prog)return;
+    var h=d.documentElement.scrollHeight-w.innerHeight;
+    prog.style.width=(h>0?Math.min(100,Math.max(0,w.scrollY/h*100)):100)+'%';
+  }
+  w.addEventListener('scroll',progress,{passive:true});progress();
+  $$('.tc-acts button',el).forEach(function(btn){
+    btn.onclick=function(){
+      var a=btn.getAttribute('data-act');
+      if(a==='search'){if(w.n7Search)w.n7Search.open();else location.href='index.html?q='}
+      else if(a==='list'){if(w.n7List)w.n7List.open()}
+      else if(a==='quiz'){
+        if($('#quiz')&&w.n7Quiz)w.n7Quiz.open();
+        else location.href='sportivnye-pokrytiya.html#quiz';
+      }
+    };
+  });
 }
 
 /* ---------- 2. Диммер освещения ---------- */
@@ -129,11 +168,7 @@ w.n7Compare={toggle:toggle};
 
 /* ---------- 5. Быстрый вход в квиз + микро-фидбек полей ---------- */
 function extras(){
-  if(!$('#quiz-slot')&&!/404/i.test(d.title)){
-    var a=d.createElement('a');a.className='qfab';a.href='sportivnye-pokrytiya.html#quiz';
-    a.innerHTML='<span aria-hidden="true">✦</span> Подобрать за 60 секунд';
-    d.body.appendChild(a);
-  }
+  /* быстрый вход в квиз теперь живёт в единой панели .tc-acts и в dock — дубль не нужен */
   $$('#lead input,#lead textarea,#lead select').forEach(function(el){
     el.addEventListener('input',function(){
       var ok=el.type==='checkbox'?el.checked:(el.value||'').trim().length>1;
