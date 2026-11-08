@@ -1010,3 +1010,24 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{width:0;height:0;display:none}
 .n7rail:focus-visible{outline-offset:6px}
 }
 @media(max-width:760px) and (prefers-reduced-motion:reduce){.n7rail{scroll-behavior:auto}.n7rail-ui button{transition:none}}
+
+/* ============ Чёткое разделение: покрытия / освещение ============ */
+.splitnav-wrap{margin-top:26px}
+@media(min-width:1100px){.splitnav-wrap{max-width:calc(100% - 210px);margin-inline:0}}
+.splitnav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.splitnav-i{display:flex;flex-direction:column;gap:7px;padding:22px 24px;text-decoration:none;
+  white-space:normal;min-width:0;
+  color:inherit;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  box-shadow:var(--sh-1);transition:border-color .2s,transform .2s,box-shadow .2s}
+.splitnav-i:hover{border-color:var(--ac);transform:translateY(-3px);box-shadow:var(--sh-2)}
+.splitnav-i.on{border-color:var(--ac);background:linear-gradient(135deg,rgba(242,194,0,.16),transparent 70%)}
+.splitnav-k{font:700 .72rem var(--bd);letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.splitnav-i>b{font:500 1.2rem/1.25 var(--hd)}
+.splitnav-i>span:not(.splitnav-k){font-size:.92rem;color:var(--mut);line-height:1.45}
+.splitnav-i>em{margin-top:4px;font:700 .9rem var(--bd);font-style:normal;color:var(--fg)}
+.splitnav-i.on>em{color:#8a6d00}
+@media(max-width:760px){
+  .splitnav{grid-template-columns:minmax(0,1fr);gap:10px}
+  .splitnav-i{padding:18px}
+  .splitnav-i>b{font-size:1.08rem}
+}

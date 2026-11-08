@@ -118,7 +118,7 @@ function showResult(){
     '<div class="fbtns"><button type="button" class="btn" id="qSend">Отправить результат →</button>'+
     '<button type="button" class="ib" id="qList">+ В лист подбора</button>'+
     '<a class="ib" href="produktsiya.html#calc-slot">Калькулятор</a>'+
-    '<a class="ib" href="produktsiya.html#osveshhenie">Освещение</a>'+
+    '<a class="ib" href="osveshhenie.html">Освещение</a>'+
     '<button type="button" class="ib" id="qAgain">Пройти заново</button></div>'+
     '<p class="tnote">Рекомендация носит ориентировочный характер. Толщину, основание, сертификацию, освещение и сроки подтверждаем проектом и требованиями федерации; цены публично не размещаем.</p></div></div>';
   var txt=resultText(scores,ranked,lvl,area);

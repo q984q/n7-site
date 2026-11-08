@@ -27,7 +27,7 @@ function toc(){
  var site=items.length<3;
  if(site){
   items=[['index.html','Главная'],['o-kompanii.html','О компании'],['uslugi.html','Услуги'],
-   ['sportivnye-pokrytiya.html','Продукция'],['produktsiya.html#osveshhenie','Освещение'],['proekty.html','Проекты'],
+   ['sportivnye-pokrytiya.html','Покрытия'],['osveshhenie.html','Освещение'],['proekty.html','Проекты'],
    ['sotrudnichestvo.html','Сотрудничество'],['geografiya.html','География'],
    ['prezentatsiya.html','Презентация'],['kontakty.html','Контакты']]
    .map(function(a){return {href:a[0],text:a[1]}});
@@ -149,7 +149,7 @@ function openCmp(){
   '<div class="tw"><table class="tbl"><thead><tr><th scope="col">Параметр</th>'+data.map(function(x){return '<th scope="col">'+esc(x.name)+'</th>'}).join('')+'</tr></thead><tbody>'+
   rows.map(function(r){return '<tr><td>'+esc(r[0])+'</td>'+data.map(function(x){return '<td>'+esc(r[1](x))+'</td>'}).join('')+'</tr>'}).join('')+'</tbody></table></div>'+
   '<div class="fbtns"><button type="button" class="btn" id="cmpList">Добавить все в лист подбора</button><button type="button" class="ib" id="cmpPrint">Печать</button></div>'+
-  '<p class="tnote">Характеристики приведены по спецификации производителя. Наличие, минимальная партия и совместимость с основанием уточняются при расчёте.</p></div></div>';
+  '<p class="tnote">Наличие, минимальная партия и совместимость с основанием уточняются при расчёте.</p></div></div>';
  var host=d.createElement('div');host.innerHTML=html;var modal=host.firstChild;d.body.appendChild(modal);
  $('.cmp-x',modal).onclick=function(){modal.remove()};
  modal.addEventListener('click',function(e){if(e.target===modal)modal.remove()});

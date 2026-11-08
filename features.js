@@ -223,7 +223,7 @@ slot.innerHTML='<h2>Подберите покрытие под вид спорт
 var out=$('.pick-r',slot),active=0;
 function render(){
 var s=SPORTS[active];
-out.innerHTML='<h3>'+s[0]+'</h3><p>'+s[1]+'</p><div class="fbtns">'+s[2].map(function(l){return '<a class="ib" href="'+l[0]+'">'+l[1]+' →</a>'}).join('')+'<a class="ib" href="produktsiya.html#osveshhenie">Освещение →</a><button class="btn" type="button" id="pick-send">Запросить КП</button></div>';
+out.innerHTML='<h3>'+s[0]+'</h3><p>'+s[1]+'</p><div class="fbtns">'+s[2].map(function(l){return '<a class="ib" href="'+l[0]+'">'+l[1]+' →</a>'}).join('')+'<a class="ib" href="osveshhenie.html">Освещение →</a><button class="btn" type="button" id="pick-send">Запросить КП</button></div>';
 var ptext='Подбор покрытия с сайта N7 Construction\nВид спорта: '+s[0]+'\nРекомендация: '+s[1];
 window.n7Snapshot.picker={title:'Подбор покрытия · '+s[0],text:ptext};
 $('#pick-send',out).onclick=function(){send(ptext)};
