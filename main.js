@@ -47,7 +47,7 @@ var box=d.createElement('div');box.className='fbtns';
 var a=d.createElement('a');a.className='btn';a.href=url;a.target='_blank';a.rel='noopener';a.textContent='Отправить в WhatsApp';
 var copy=d.createElement('button');copy.className='ib';copy.type='button';copy.textContent='Скопировать текст';
 copy.onclick=function(){
-var done=function(){copy.textContent='Скопировано'},fail=function(){copy.textContent='Выделите текст вручную'};
+var done=function(){copy.textContent='Скопировано';if(window.n7Toast)window.n7Toast('Текст заявки скопирован')},fail=function(){copy.textContent='Выделите текст вручную'};
 if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,fail)}
 else{var ta=d.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';d.body.appendChild(ta);ta.select();try{d.execCommand('copy')?done():fail()}catch(e){fail()}d.body.removeChild(ta)}
 };
