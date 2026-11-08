@@ -17,6 +17,7 @@ toastEl.textContent=msg;toastEl.hidden=false;toastEl.classList.add('on');
 clearTimeout(toastTimer);toastTimer=setTimeout(function(){toastEl.classList.remove('on');setTimeout(function(){toastEl.hidden=true},280)},2600);
 }
 w.n7Toast=toast;
+w.n7Copy=copyText;
 
 /* ---------- копирование и отправка в WhatsApp ---------- */
 function copyText(text,msg){
@@ -71,6 +72,8 @@ lb.addEventListener('touchend',function(e){if(sx===null)return;var dx=e.changedT
 
 /* ---------- анимация переключения фильтра каталога ---------- */
 function initFilterFx(){
+/* catalog-fx.js берёт фильтр каталога на себя (FLIP) */
+if(w.n7FlipInstalled)return;
 var bs=$$('.filters button');if(!bs.length)return;
 bs.forEach(function(b){b.addEventListener('click',function(){
 var vis=$$('.grid figure').filter(function(f){return !f.hidden});
@@ -181,7 +184,7 @@ slot.innerHTML='<h2>Подберите покрытие под вид спорт
 var out=$('.pick-r',slot),active=0;
 function render(){
 var s=SPORTS[active];
-out.innerHTML='<h3>'+s[0]+'</h3><p>'+s[1]+'</p><div class="fbtns">'+s[2].map(function(l){return '<a class="ib" href="'+l[0]+'">'+l[1]+' →</a>'}).join('')+'<button class="btn" type="button" id="pick-send">Запросить КП</button></div>';
+out.innerHTML='<h3>'+s[0]+'</h3><p>'+s[1]+'</p><div class="fbtns">'+s[2].map(function(l){return '<a class="ib" href="'+l[0]+'">'+l[1]+' →</a>'}).join('')+'<a class="ib" href="produktsiya.html#osveshhenie">Освещение →</a><button class="btn" type="button" id="pick-send">Запросить КП</button></div>';
 $('#pick-send',out).onclick=function(){send('Подбор покрытия с сайта N7 Construction\nВид спорта: '+s[0]+'\nРекомендация: '+s[1])};
 out.classList.remove('pulse');void out.offsetWidth;out.classList.add('pulse');
 }
