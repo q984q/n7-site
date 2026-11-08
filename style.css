@@ -1,8 +1,18 @@
 :root{--bg:#ecece8;--fg:#141516;--mut:#53544f;--line:#c4c4be;--pan:#e1e1dc;--ac:#f2c200;--err:#b42318;
 --s1:#6b6d72;--s2:#141516;--s3:#6b6d72;
 --hd:'Unbounded','Michroma',system-ui,sans-serif;--bd:'Manrope',system-ui,sans-serif;--lg:'Michroma','Unbounded',sans-serif;
---w:min(1200px,100% - 40px)}
-[data-theme=dark]{--bg:#141516;--fg:#ecece8;--mut:#a9aaa4;--line:#34363a;--pan:#1d1e20;--err:#ff8a80;--s1:#fff;--s2:#8f9195;--s3:#d5d6d8}
+--w:min(1200px,100% - 40px);
+/* единая система скруглений и мягких теней */
+--r-xs:6px;--r-sm:10px;--r-md:14px;--r-lg:20px;--r-xl:28px;--r-pill:999px;
+--sh-1:0 1px 2px rgba(16,17,18,.05),0 10px 28px -18px rgba(16,17,18,.34);
+--sh-2:0 4px 12px rgba(16,17,18,.06),0 22px 48px -24px rgba(16,17,18,.42);
+--sh-3:0 12px 26px -10px rgba(16,17,18,.18),0 32px 64px -28px rgba(242,194,0,.45);
+--sh-in:inset 0 1px 0 rgba(255,255,255,.38)}
+[data-theme=dark]{--bg:#141516;--fg:#ecece8;--mut:#a9aaa4;--line:#34363a;--pan:#1d1e20;--err:#ff8a80;--s1:#fff;--s2:#8f9195;--s3:#d5d6d8;
+--sh-1:0 1px 2px rgba(0,0,0,.55),0 10px 28px -16px rgba(0,0,0,.85);
+--sh-2:0 4px 12px rgba(0,0,0,.5),0 22px 48px -22px rgba(0,0,0,.9);
+--sh-3:0 12px 26px -10px rgba(0,0,0,.7),0 32px 64px -28px rgba(242,194,0,.35);
+--sh-in:inset 0 1px 0 rgba(255,255,255,.07)}
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth;scroll-padding-top:76px}
 body{background:var(--bg);color:var(--fg);font:400 1.0625rem/1.65 var(--bd);-webkit-font-smoothing:antialiased}
@@ -446,3 +456,56 @@ ol.steps.s4{grid-template-columns:1fr}@media(min-width:900px){ol.steps.s4{grid-t
 .lcalc-r .cr-line b{font-size:1.08rem}
 .lcalc .lnote{font-size:.85rem;line-height:1.55;margin:16px 0 0;border-left:3px solid var(--ac);padding-left:12px}
 @media(prefers-reduced-motion:reduce){.amb::before,.lvis .lamp,.lvis .beam{animation:none}.lvis .lamp{opacity:1}.lvis .beam{opacity:.3;transform:translateX(-50%) scaleY(1)}.glow::after,.fpill,.lcard,.ltoggle,.spot{transition:none}}
+
+/* ===== единая система скруглений и «идеальная» доводка ===== */
+::selection{background:var(--ac);color:#141516}
+
+/* кнопки, поля, чипы, индикаторы */
+.btn{border-radius:var(--r-pill);box-shadow:var(--sh-1),var(--sh-in)}
+.btn:hover{box-shadow:var(--sh-3)}
+.ib,.fbtns .ib,.dk-ui .ib{border-radius:var(--r-md)}
+.to-top{border-radius:50%;box-shadow:var(--sh-2),var(--sh-in)}
+.cp{border-radius:var(--r-sm)}
+.lb-x,.lb-p,.lb-n{border-radius:var(--r-md);backdrop-filter:blur(8px)}
+.lb-img{border-radius:var(--r-lg);box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.toast{border-radius:var(--r-pill);box-shadow:var(--sh-2)}
+.mbar{border-radius:var(--r-lg) var(--r-lg) 0 0;overflow:hidden;box-shadow:0 -8px 30px rgba(0,0,0,.22)}
+.filters button,.lfilters button,.ltoggle,.chip,.fpill,.chips span{border-radius:var(--r-pill)}
+.fpill{box-shadow:var(--sh-2)}
+.chips span{border-radius:var(--r-pill);padding:8px 16px}
+input,select,textarea{border-radius:var(--r-md);box-shadow:var(--sh-in)}
+.ck input{border-radius:var(--r-xs)}
+.sws .sw{border-radius:50%}
+.pcfg-view{border-radius:var(--r-lg);box-shadow:var(--sh-2)}
+
+/* карточки и панели */
+.pcard,.pcat,.lcard,.fmt>div{border-radius:var(--r-lg);box-shadow:var(--sh-1),var(--sh-in);overflow:hidden}
+.pcard:hover,.pcat:hover,.lcard:hover,.fmt>div:hover{box-shadow:var(--sh-3),var(--sh-in)}
+.grid>figure{border-radius:var(--r-lg);overflow:hidden}
+.grid>figure:not(.pcard){background:var(--bg);border:1px solid var(--line);box-shadow:var(--sh-1),var(--sh-in);transition:transform .25s,border-color .25s,box-shadow .3s}
+.grid>figure:not(.pcard):hover{box-shadow:var(--sh-3),var(--sh-in);border-color:var(--ac)}
+.grid>figure:not(.pcard) figcaption{padding:16px 18px 18px}
+.ph{border-radius:var(--r-lg)}
+.pcard>.ph,.pcat>.ph,.grid>figure>.ph{border:0;border-bottom:1px solid var(--line);border-radius:0}
+.pcat .ph{border-bottom:1px solid var(--line)}
+.pcard .badge{border-radius:var(--r-sm)}
+.pnote,.note-box,#status,.pick-r,.calc-r,.pcfg-r,.lcalc-r,.note,.leadtext{border-radius:var(--r-md)}
+.pnote,.note-box,.pick-r,.calc-r,.pcfg-r,.lcalc-r,.leadtext{box-shadow:var(--sh-1)}
+.tw{border-radius:var(--r-lg);box-shadow:var(--sh-1);overflow:hidden}
+.tbl thead th:first-child{border-top-left-radius:var(--r-lg)}
+.tbl thead th:last-child{border-top-right-radius:var(--r-lg)}
+.map,.mapimg{border-radius:var(--r-lg)}
+.map{overflow:hidden;box-shadow:var(--sh-1)}
+.map img{border-radius:var(--r-lg)}
+.bars .b,.bars .b i{border-radius:var(--r-pill)}
+details[open]{background:var(--pan);border-radius:var(--r-md);border-color:transparent}
+.lvis{border-radius:0}
+.lcalc-r .fbtns .btn{border-radius:var(--r-pill)}
+
+/* шапка: мягкое выпадающее меню на мобильных */
+@media(max-width:1180px){nav[data-open]{border-radius:0 0 var(--r-lg) var(--r-lg);box-shadow:var(--sh-2)}}
+header.s{box-shadow:0 10px 30px rgba(0,0,0,.14)}
+
+/* фокус аккуратно повторяет форму элемента */
+:focus-visible{outline:3px solid var(--fg);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){.pcard,.pcat,.lcard,.fmt>div,.grid>figure,.btn,.to-top{transition:none}}
