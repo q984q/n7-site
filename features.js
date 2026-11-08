@@ -116,7 +116,7 @@ var a=area*(1+waste/100);
 if(type==='tile'){var n=Math.ceil(a/SIZES[si][1]);return {main:n.toLocaleString('ru-RU')+' плиток',desc:'при размере '+SIZES[si][0]+', запас '+waste+'%',note:'Без учёта раскроя по периметру, разметки и подрезки.'}}
 if(type==='pvc'){var lm=Math.ceil(a/1.8);return {main:lm.toLocaleString('ru-RU')+' п. м',desc:'≈ '+Math.ceil(lm/20)+' рулонов по 20 м при ширине 1,8 м',note:'Для части артикулов длина рулона изготавливается на заказ — уточним при расчёте.'}}
 if(type==='track'){var t=Math.ceil(a/1.22);return {main:t.toLocaleString('ru-RU')+' п. м',desc:'≈ '+Math.ceil(t/20)+'–'+Math.ceil(t/15)+' рулонов при ширине 1,22 м',note:'Сборная дорожка поставляется рулонами 15–20 м.'}}
-if(type==='turf'){return {main:Math.ceil(a).toLocaleString('ru-RU')+' м² газона',desc:'≈ '+Math.ceil(a/200)+' корт(ов) 20×10 м по 200 м²',note:'Высота ворса 12 мм — по данным каталога производителя.'}}
+if(type==='turf'){return {main:Math.ceil(a).toLocaleString('ru-RU')+' м² газона',desc:'≈ '+Math.ceil(a/200)+' корт(ов) 20×10 м по 200 м²',note:'Высота ворса 12 мм.'}}
 var sh=Math.ceil(a/1.6506);return {main:sh.toLocaleString('ru-RU')+' щитов',desc:'модульный паркет 1800×917 мм (1,65 м² на щит)',note:'Для стационарных конструкций на килях расчёт ведётся по проекту.'};
 }
 function initCalc(){
@@ -168,7 +168,7 @@ slot.innerHTML='<h2>Соберите свой корт</h2><p class="intro">Вы
 '<div><label for="pmodel">Модель</label><select id="pmodel">'+mopts+'</select></div>'+
 '<div><label>Цвет каркаса (RAL)</label><div class="sws" id="pframe">'+sw1+'</div><span class="tnote" id="pframe-l">Чёрный RAL 9005</span></div>'+
 '<div><label>Цвет газона</label><div class="sws" id="pturf">'+sw2+'</div><span class="tnote" id="pturf-l">Зелёный</span></div>'+
-'<div><label for="plight">Мощность светильника</label><select id="plight"><option>200 Вт</option><option>300 Вт</option><option selected>400 Вт</option></select><span class="srcnote">по данным каталога производителя</span></div>'+
+'<div><label for="plight">Мощность светильника</label><select id="plight"><option>200 Вт</option><option>300 Вт</option><option selected>400 Вт</option></select></div>'+
 '<div><label class="ck" for="pads"><input id="pads" type="checkbox" checked><span>Защитные накладки на углы и стойки</span></label></div>'+
 '</div><div class="pcfg-r"><div class="pcfg-view" id="pview"><div class="pcfg-net"></div></div>'+
 '<ul class="pspec" id="pspec"></ul><div class="fbtns"><button class="btn" type="button" id="psend">Получить КП</button><button class="ib" type="button" id="pcopy">Скопировать</button></div></div></div>';

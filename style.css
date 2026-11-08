@@ -854,15 +854,15 @@ form.wz-off .wz-step[hidden]{display:block!important}
   .bc{white-space:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
   .bc::-webkit-scrollbar{display:none}
 
-  /* выпадающее меню бургера — горизонтальная лента чипов */
-  #menu[data-open]{padding:12px 16px 14px}
-  #menu[data-open] ul{flex-direction:row;flex-wrap:nowrap;gap:8px;overflow-x:auto;
-    scrollbar-width:none;scroll-snap-type:x proximity;padding-bottom:4px}
-  #menu[data-open] ul::-webkit-scrollbar{display:none}
-  #menu[data-open] ul>li{flex:0 0 auto;scroll-snap-align:start}
-  #menu[data-open] ul>li>a{display:inline-flex;align-items:center;min-height:42px;padding:8px 15px;
-    border:1px solid var(--line);border-bottom:1px solid var(--line);border-radius:var(--r-pill);white-space:nowrap}
-  #menu[data-open] ul>li>a[aria-current=page]{background:var(--ac);border-color:var(--ac);color:#141516}
+  /* выпадающее меню — вертикальные блоки в 2 ряда, без обрезков */
+  #menu[data-open]{padding:14px 16px 18px}
+  #menu[data-open] ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;overflow:visible}
+  #menu[data-open] ul>li{width:100%}
+  #menu[data-open] ul>li:last-child:nth-child(odd){grid-column:1/-1}
+  #menu[data-open] ul>li>a{display:flex;align-items:center;justify-content:center;min-height:46px;padding:9px 10px;
+    border:1px solid var(--line);border-radius:var(--r-md);white-space:normal;text-align:center;
+    line-height:1.2;font-size:.9rem}
+  #menu[data-open] ul>li>a[aria-current=page]{background:var(--ac);border-color:var(--ac);color:#141516;font-weight:700}
 
   /* таблицы и спецификации прокручиваются внутри своей области */
   .tw,.tbl,.ld-item,.qres{max-width:100%}
@@ -876,6 +876,8 @@ form.wz-off .wz-step[hidden]{display:block!important}
 
 /* очень узкие телефоны: шапка не должна вылезать за 320 px */
 @media(max-width:360px){
+#menu[data-open] ul{grid-template-columns:1fr}
+#menu[data-open] ul>li:last-child:nth-child(odd){grid-column:auto}
 .logo small{display:none}
 .logo .mark{font-size:1.5rem}
 .tools{gap:4px}
@@ -928,3 +930,34 @@ header .w{gap:8px}
 }
 @media(min-width:761px){.dk-swipe{display:none}}
 @media(prefers-reduced-motion:reduce){.dk-swipe{animation:none}}
+
+/* ============================================================
+   Чистый интерфейс: без видимых полос прокрутки, аккуратные элементы
+   ============================================================ */
+*:not(html):not(body){scrollbar-width:none;-ms-overflow-style:none}
+*:not(html):not(body)::-webkit-scrollbar{width:0;height:0;display:none}
+@media(max-width:760px){
+html,body{scrollbar-width:none;-ms-overflow-style:none}
+html::-webkit-scrollbar,body::-webkit-scrollbar{width:0;height:0;display:none}
+}
+
+/* быстрый вход в каталог и освещение */
+.catjump{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 28px}
+.catjump a{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 18px;
+  border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);color:var(--fg);
+  text-decoration:none;font-weight:600;box-shadow:var(--sh-1);transition:border-color .2s,transform .2s}
+.catjump a:hover{border-color:var(--ac);transform:translateY(-2px)}
+.catjump b{display:block;font-size:.8rem;color:var(--mut);font-weight:500}
+.catjump span{font-size:1.3rem;color:var(--ac)}
+@media(max-width:560px){.catjump{grid-template-columns:1fr;gap:8px}.catjump a{padding:13px 15px}}
+
+/* карточки услуг открываются по нажатию */
+.bento-a{display:block;color:inherit;text-decoration:none;border-radius:var(--r-lg)}
+.bento-go{display:block;margin-top:6px;font-size:.8rem;color:var(--ac);font-weight:700;
+  opacity:0;transform:translateY(-4px);transition:opacity .2s,transform .2s}
+.bento-a:hover .bento-go,.bento-a:focus-visible .bento-go{opacity:1;transform:none}
+@media(hover:none){.bento-go{opacity:1;transform:none}}
+
+/* кнопки «В лист подбора» больше не переносятся в кривой кружок */
+.addlist,#qList{width:auto;min-width:0;max-width:100%;height:44px;white-space:nowrap;
+  border-radius:var(--r-pill);padding:0 15px;background:var(--surface2)}
