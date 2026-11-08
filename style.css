@@ -291,3 +291,23 @@ ol.steps.s4{grid-template-columns:1fr}@media(min-width:900px){ol.steps.s4{grid-t
 /* 8 пунктов меню: чуть плотнее на средних ширинах, бургер включается как прежде */
 @media(min-width:1181px){nav a{font-size:.95rem}}
 @media(min-width:1181px){header .w{gap:12px}nav ul{gap:14px}header .btn{padding:0 16px}}
+
+/* раздел «Спортивные покрытия»: таблицы, примечания, списки */
+.intro{max-width:76ch;color:var(--mut);font-size:1.08rem;margin:0 0 32px}
+.tw{overflow-x:auto;margin:0 0 18px;border:1px solid var(--line);background:var(--bg)}
+.tbl{width:100%;min-width:660px;border-collapse:collapse;font-size:.94rem}
+.tbl th,.tbl td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl thead th{background:var(--pan);font:700 .8rem var(--hd);text-transform:uppercase;letter-spacing:.04em}
+.tbl tbody tr:last-child td{border-bottom:0}
+.tbl tbody tr:hover{background:var(--pan)}
+.tbl td:first-child{font-weight:700;color:var(--fg)}
+.tnote{margin:0 0 8px;color:var(--mut);font-size:.88rem}
+.srcnote{font-size:.78em;color:var(--mut);font-weight:400;letter-spacing:0;text-transform:none;white-space:normal}
+.why .srcnote{color:inherit;opacity:.72}
+.note-box{border-left:4px solid var(--ac);background:var(--pan);padding:24px 26px;max-width:90ch}
+.note-box h3{margin-bottom:12px}
+.note-box p{color:var(--mut);margin-bottom:12px}
+.note-box ul{margin:0}
+.nlist{list-style:none;padding:0;display:grid;gap:16px 24px;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));counter-reset:n}
+.nlist li{counter-increment:n;border-top:2px solid var(--fg);padding-top:12px;font-size:.95rem;color:var(--mut);max-width:none}
+.nlist li::before{content:counter(n,decimal-leading-zero);display:block;font:700 1.4rem var(--hd);color:var(--fg);margin-bottom:6px}
