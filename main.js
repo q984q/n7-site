@@ -37,7 +37,15 @@ function show(t,bad){st.hidden=false;st.className=bad?'bad':'';st.textContent=t}
 function chk(id,bad,msg,s){var el=d.getElementById(id),e=d.getElementById(id+'-e');el.setAttribute('aria-invalid',bad);e.textContent=bad?msg:'';if(bad&&s.ok){el.focus();s.ok=false}}
 function leadText(){
 var name=$('#fname').value.trim(),phone=$('#phone').value.trim(),work=$('#work').value,msg=$('#msg').value.trim();
-return 'Заявка с сайта N7 Construction\nИмя: '+name+'\nТелефон: '+phone+'\nНаправление: '+work+(msg?'\nКомментарий: '+msg:'');
+var t='Заявка с сайта N7 Construction\nИмя: '+name+'\nТелефон: '+phone+'\nНаправление: '+work+(msg?'\nКомментарий: '+msg:'');
+/* если посетитель собрал лист подбора / прошёл квиз — прикладываем к заявке */
+try{
+  if(window.n7List&&window.n7List.count&&window.n7List.count()){
+    var ls=window.n7List.all().map(function(x,i){return (i+1)+'. '+x.title+'\n'+String(x.text||'').slice(0,220)}).join('\n');
+    t+='\n\nЛист подбора:\n'+ls.slice(0,1600);
+  }
+}catch(e){}
+return t;
 }
 function fallback(){
 var text=leadText(),url='https://wa.me/'+WA+'?text='+encodeURIComponent(text);
@@ -70,4 +78,11 @@ fetch(ENDPOINT,{method:'POST',body:new FormData(f),headers:{Accept:'application/
 .catch(function(){btn.disabled=false;fallback()})
 .then(function(){btn.disabled=false});
 });
+
+/* PWA: офлайн без внешних сервисов. Network-first, без прекэша и без подмены свежей версии. */
+if('serviceWorker' in navigator&&/^https:/.test(location.protocol)){
+  addEventListener('load',function(){
+    try{navigator.serviceWorker.register('n7-sw.js',{scope:'./'}).catch(function(){})}catch(e){}
+  });
+}
 })();

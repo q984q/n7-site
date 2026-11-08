@@ -1,0 +1,18 @@
+{
+  "name": "N7 Construction — строительство и спортивные покрытия",
+  "short_name": "N7",
+  "description": "Строительство, спортивные покрытия, освещение площадок. Казахстан и СНГ.",
+  "lang": "ru",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#ecece8",
+  "theme_color": "#141516",
+  "icons": [
+    { "src": "img/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "img/favicon-32.png", "sizes": "32x32", "type": "image/png", "purpose": "any" },
+    { "src": "img/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" }
+  ]
+}

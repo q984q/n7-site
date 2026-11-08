@@ -5,6 +5,7 @@
 (function(){
 'use strict';
 var d=document,w=window;
+window.n7Snapshot=window.n7Snapshot||{};
 var $=function(s,c){return (c||d).querySelector(s)};
 var $$=function(s,c){return Array.prototype.slice.call((c||d).querySelectorAll(s))};
 var reduce=false,fine=false;
@@ -176,6 +177,7 @@ function lightCalc(){
       'Ориентир: '+fmt(n)+' светильников × '+watts+' Вт ('+(kw<10?kw.toFixed(2):fmt(kw))+' кВт), поток ≈ '+fmt(flux)+' лм\n'+
       'Исполнение: '+t.kind+'; '+t.ip+'\n'+
       'Прошу выполнить светотехнический расчёт и подготовить коммерческое предложение.';
+    window.n7Snapshot.light={title:'Освещение · '+t.name,text:state.text};
     pulse();
   }
   [T,C,A,H,W].forEach(function(el){el.addEventListener('input',update);el.addEventListener('change',update)});

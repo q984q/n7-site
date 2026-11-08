@@ -8,6 +8,7 @@ var $=function(s,c){return (c||d).querySelector(s)};
 var $$=function(s,c){return Array.prototype.slice.call((c||d).querySelectorAll(s))};
 var reduce=false;try{reduce=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
 var WA='77778848818';
+window.n7Snapshot=window.n7Snapshot||{};
 
 /* ---------- тост ---------- */
 var toastEl=null,toastTimer=null;
@@ -117,11 +118,13 @@ var state={text:''};
 function update(){
 var L=parseFloat(len.value),W=parseFloat(wid.value),w=parseFloat(waste.value);
 wrap.hidden=type.value!=='tile';
-if(!(L>0&&W>0)){areaEl.textContent='—';mat.textContent='—';desc.textContent='';note.textContent='Введите длину и ширину больше нуля.';state.text='';return}
+if(!(L>0&&W>0)){areaEl.textContent='—';mat.textContent='—';desc.textContent='';note.textContent='Введите длину и ширину больше нуля.';state.text='';window.n7Snapshot.calc=null;return}
 var a=L*W,r=compute(a,isNaN(w)?0:Math.max(0,Math.min(30,w)),type.value,parseInt(size.value,10)||0);
 areaEl.textContent=a.toLocaleString('ru-RU',{maximumFractionDigits:1});mat.textContent=r.main;desc.textContent=r.desc;note.textContent='Ориентировочно. '+r.note;
 big.classList.remove('pulse');void big.offsetWidth;big.classList.add('pulse');
 state.text='Расчёт материала с сайта N7 Construction\nПлощадка: '+L+' × '+W+' м = '+a.toLocaleString('ru-RU',{maximumFractionDigits:1})+' м²\nТип: '+type.options[type.selectedIndex].text+'\nРезультат: '+r.main+' ('+r.desc+')';
+
+window.n7Snapshot.calc={title:'Расчёт материала · '+a.toLocaleString('ru-RU',{maximumFractionDigits:1})+' м²',text:state.text};
 }
 [len,wid,type,size,waste].forEach(function(el){el.addEventListener('input',update);el.addEventListener('change',update)});
 $('#cr-send').onclick=function(){if(state.text)send(state.text);else toast('Заполните размеры площадки')};
@@ -157,6 +160,8 @@ var rows=[['Площадка','20 × 10 м, высота сетки 0,88 м'],['
 ['Стандарт','T/WQTB 1002-2021 (по данным каталога)']];
 spec.innerHTML=rows.map(function(r){return '<li><b>'+r[0]+':</b> '+r[1]+'</li>'}).join('');
 state.text='Конфигурация падел-корта с сайта N7 Construction\n'+rows.map(function(r){return r[0]+': '+r[1]}).join('\n');
+
+window.n7Snapshot.padel={title:'Падел-корт · '+model.value,text:state.text};
 }
 $$('.sw').forEach(function(b){b.onclick=function(){var k=b.getAttribute('data-k');state[k]=parseInt(b.getAttribute('data-i'),10);
 $$('.sw[data-k="'+k+'"]').forEach(function(x){x.classList.toggle('on',x===b)});update()}});
@@ -185,7 +190,9 @@ var out=$('.pick-r',slot),active=0;
 function render(){
 var s=SPORTS[active];
 out.innerHTML='<h3>'+s[0]+'</h3><p>'+s[1]+'</p><div class="fbtns">'+s[2].map(function(l){return '<a class="ib" href="'+l[0]+'">'+l[1]+' →</a>'}).join('')+'<a class="ib" href="produktsiya.html#osveshhenie">Освещение →</a><button class="btn" type="button" id="pick-send">Запросить КП</button></div>';
-$('#pick-send',out).onclick=function(){send('Подбор покрытия с сайта N7 Construction\nВид спорта: '+s[0]+'\nРекомендация: '+s[1])};
+var ptext='Подбор покрытия с сайта N7 Construction\nВид спорта: '+s[0]+'\nРекомендация: '+s[1];
+window.n7Snapshot.picker={title:'Подбор покрытия · '+s[0],text:ptext};
+$('#pick-send',out).onclick=function(){send(ptext)};
 out.classList.remove('pulse');void out.offsetWidth;out.classList.add('pulse');
 }
 $$('.chip',slot).forEach(function(b){b.onclick=function(){active=parseInt(b.getAttribute('data-i'),10);
