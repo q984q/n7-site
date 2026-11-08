@@ -826,13 +826,14 @@ form.wz-off .wz-step[hidden]{display:block!important}
   .dock{display:grid;animation:dockIn .45s cubic-bezier(.2,.8,.2,1) both}
   body.has-dock{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
   .hero{padding-bottom:100px}
-  .to-top{bottom:calc(100px + env(safe-area-inset-bottom,0px));right:12px;width:44px;height:44px}
+  .to-top{display:none}  /* dock уже возвращает наверх, жёлтая кнопка перекрывала текст */
   .toast{bottom:calc(104px + env(safe-area-inset-bottom,0px))}
   .cmpbar{bottom:calc(96px + env(safe-area-inset-bottom,0px));flex-wrap:nowrap;overflow-x:auto;max-width:calc(100% - 24px);scrollbar-width:none}
   .cmpbar::-webkit-scrollbar{display:none}
   .cmpbar>*{flex:0 0 auto}
 
-  /* фильтры, чипы, кнопки инструментов — одной прокручиваемой строкой */
+  /* ГОРИЗОНТАЛЬНО только короткие управляющие элементы:
+     меню, фильтры, чипы, кнопки, крошки, панель сравнения */
   .filters,.lfilters,.chips,.fbtns,.wz-dots,.qmeta{
     display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;overflow-y:hidden;
     scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none;
@@ -843,21 +844,11 @@ form.wz-off .wz-step[hidden]{display:block!important}
   .chips span,.filters button,.lfilters button{padding:10px 16px}
   .fbtns .btn,.fbtns .ib{min-height:44px;padding:0 16px}
 
-  /* карточки направлений и услуги на главной — горизонтальная карусель */
-  .pcats,.grid.bento,.lgrid{
-    display:flex;flex-wrap:nowrap;gap:14px;overflow-x:auto;overflow-y:hidden;
-    scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;
-    padding:2px 2px 12px;overscroll-behavior-x:contain}
-  .pcats::-webkit-scrollbar,.grid.bento::-webkit-scrollbar{display:none}
-  .pcats>.pcat,.grid.bento>figure,.lgrid>.lcard{flex:0 0 min(78vw,290px);scroll-snap-align:start}
-  .pcats>.pcat .ph,.grid.bento>figure .ph{aspect-ratio:4/3}
+  /* КОНТЕНТ остаётся вертикальным: карточки, услуги, освещение и этапы работ
+     читаются целиком. Базовые правила .grid/.pcats/.lgrid/ol.steps сами дают
+     одну колонку на узком экране — никаких «обрубков» карусели. */
+  .pcats>.pcat .ph,.grid.bento>figure .ph{aspect-ratio:16/10}
   .lgrid>.lcard .lvis{min-height:150px}
-
-  /* этапы работ и шаги мастера — лента со snap */
-  ol.steps{display:flex;flex-wrap:nowrap;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
-    scrollbar-width:none;padding-bottom:10px}
-  ol.steps::-webkit-scrollbar{display:none}
-  ol.steps>li{flex:0 0 min(80vw,300px);scroll-snap-align:start}
 
   /* крошки не переносятся */
   .bc{white-space:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
@@ -892,3 +883,48 @@ form.wz-off .wz-step[hidden]{display:block!important}
 header .w{gap:8px}
 .dock-i{min-height:46px}
 }
+
+/* ============================================================
+   Презентация на телефоне: слайд читается целиком, панель — в одну строку
+   ============================================================ */
+@media(max-width:760px){
+.slide{align-content:start;gap:16px;padding:20px 18px calc(80px + env(safe-area-inset-bottom,0px));
+  overflow-y:auto;-webkit-overflow-scrolling:touch}
+.slide h1{font-size:clamp(1.55rem,7vw,2.1rem);max-width:none}
+.slide h2{font-size:1.4rem}
+.slide .mark{font-size:clamp(3.4rem,17vw,5.4rem)}
+.slide .sub{font-size:.6rem;letter-spacing:.38em;margin-bottom:12px}
+.slide p{font-size:.95rem;max-width:none}
+.slide .two{gap:18px}
+.slide .two .ph{max-height:30vh}
+.slide .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.slide .grid .ph{aspect-ratio:4/3}
+.slide .grid figcaption{padding-top:7px}
+.slide .grid figcaption b{font-size:.78rem}
+.slide .grid figcaption span{font-size:.7rem;line-height:1.35}
+.slide .cols{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.slide .cols h3{font-size:.9rem}
+.slide .cols p{font-size:.82rem}
+.slide .cols b{font-size:1.35rem}
+.slide .bars li{grid-template-columns:minmax(80px,110px) minmax(0,1fr) 26px;gap:8px;font-size:.74rem}
+.slide .bars{gap:10px;margin:14px 0}
+.slide .mapimg{max-height:22vh}
+.slide .note{font-size:.8rem}
+.slide .fmt{gap:12px}.slide .fmt>div{padding:16px}.slide .fmt h3{font-size:1rem;padding-bottom:8px;margin-bottom:8px}
+.dk-ui{flex-wrap:nowrap;gap:8px;bottom:0;
+  padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));
+  background:linear-gradient(0deg,var(--bg) 82%,transparent)}
+.dk-ui .dk-p,.dk-ui .dk-x{min-width:44px;width:44px;padding:0;font-size:1rem}
+.dk-ui .dk-n{font-size:.82rem;white-space:nowrap;margin-left:2px}
+.dk-ui .dk-pdf,.dk-ui .dk-f{display:none}
+.dk-ui a[download]{font-size:0;min-width:44px;width:44px;padding:0}
+.dk-ui a[download]::after{content:'⤓';font-size:20px;color:var(--fg)}
+.dk-swipe{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(70px + env(safe-area-inset-bottom,0px));
+  z-index:3;padding:8px 14px;border:1px solid var(--line);border-radius:var(--r-pill);
+  background:rgba(20,21,22,.86);color:var(--mut);font:500 .75rem var(--bd);
+  white-space:nowrap;pointer-events:none;animation:swipeOut .5s 4.5s forwards}
+.dk-swipe.hide{display:none}
+@keyframes swipeOut{to{opacity:0;visibility:hidden}}
+}
+@media(min-width:761px){.dk-swipe{display:none}}
+@media(prefers-reduced-motion:reduce){.dk-swipe{animation:none}}
