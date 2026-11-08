@@ -336,15 +336,7 @@ ol.steps.s4{grid-template-columns:1fr}@media(min-width:900px){ol.steps.s4{grid-t
 .to-top{position:fixed;right:20px;bottom:20px;z-index:30;width:48px;height:48px;display:grid;place-items:center;background:var(--ac);color:#141516;border:0;border-radius:2px;font:700 1.4rem var(--bd);cursor:pointer;opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .25s,transform .25s,visibility .25s}
 .to-top.on{opacity:1;visibility:visible;transform:none}
 .mbar{display:none}
-@media(max-width:640px){
-.mbar{position:fixed;inset:auto 0 0;z-index:40;display:grid;grid-template-columns:repeat(3,1fr);background:var(--bg);border-top:1px solid var(--line);box-shadow:0 -6px 20px rgba(0,0,0,.18)}
-.mbar a{display:grid;place-items:center;min-height:56px;font:700 .85rem var(--bd);text-decoration:none;color:var(--fg);border-right:1px solid var(--line)}
-.mbar a:last-child{border-right:0}
-.mbar .mb-wa{background:var(--ac);color:#141516}
-.has-mbar{padding-bottom:56px}
-.to-top{bottom:70px;right:14px}
-.toast{bottom:76px}
-}
+/* мобильная навигация теперь «островком» .dock — правила в конце файла */
 .zoom{cursor:zoom-in}
 .lb{position:fixed;inset:0;z-index:70;display:grid;place-items:center;background:rgba(10,11,12,.92);opacity:0;transition:opacity .25s;padding:60px 20px}
 .lb.on{opacity:1}
@@ -471,7 +463,7 @@ ol.steps.s4{grid-template-columns:1fr}@media(min-width:900px){ol.steps.s4{grid-t
 .lb-x,.lb-p,.lb-n{border-radius:var(--r-md);backdrop-filter:blur(8px)}
 .lb-img{border-radius:var(--r-lg);box-shadow:0 30px 80px rgba(0,0,0,.6)}
 .toast{border-radius:var(--r-pill);box-shadow:var(--sh-2)}
-.mbar{border-radius:var(--r-lg) var(--r-lg) 0 0;overflow:hidden;box-shadow:0 -8px 30px rgba(0,0,0,.22)}
+.dock{border-radius:var(--r-pill);box-shadow:var(--sh-3)}
 .filters button,.lfilters button,.ltoggle,.chip,.fpill,.chips span{border-radius:var(--r-pill)}
 .fpill{box-shadow:var(--sh-2)}
 .chips span{border-radius:var(--r-pill);padding:8px 16px}
@@ -752,3 +744,98 @@ form.wz-off .wz-step[hidden]{display:block!important}
 .waiting .wtag{display:inline-block;padding:5px 10px;margin-bottom:12px;border-radius:var(--r-pill);border:1px solid var(--line);color:var(--mut);font:700 10px/1 var(--bd);text-transform:uppercase;letter-spacing:.07em}
 .waiting b{display:block;font:700 16px/1.3 var(--hd);margin-bottom:7px}
 .waiting p{margin:0;font-size:13px;line-height:1.55;color:var(--mut)}
+
+/* ============================================================
+   Мобильная версия: плавающий «островок» навигации + горизонтальные ленты
+   ============================================================ */
+.dock{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);
+  z-index:45;display:none;width:min(calc(100% - 24px),430px);
+  grid-template-columns:repeat(5,1fr);align-items:end;gap:2px;padding:7px 8px;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-pill);
+  box-shadow:var(--sh-3);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+[data-theme=dark] .dock{background:rgba(34,35,38,.92)}
+.dock-i{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  min-height:52px;padding:6px 2px;border:0;border-radius:var(--r-lg);background:transparent;color:var(--mut);
+  font:600 .64rem/1.1 var(--bd);letter-spacing:.01em;text-decoration:none;cursor:pointer;
+  transition:color .2s,background .2s,transform .16s;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+.dock-i svg{flex:0 0 21px;transition:transform .2s}
+.dock-t{display:block}
+.dock-i:hover{color:var(--fg)}
+.dock-i:active{transform:scale(.93)}
+.dock-i.on{color:#141516;background:var(--ac);box-shadow:var(--sh-1)}
+.dock-i.on svg{transform:translateY(-1px)}
+.dock-main{color:#141516;background:var(--ac);box-shadow:var(--sh-2);
+  min-height:58px;margin-top:-14px;border-radius:var(--r-pill);border:3px solid var(--bg)}
+.dock-main svg{width:23px;height:23px}
+.dock-main .dock-t{font-weight:700}
+.dock-main:hover{background:#ffd633;color:#141516}
+@keyframes dockIn{from{opacity:0;transform:translate(-50%,22px) scale(.94)}to{opacity:1;transform:translate(-50%,0) scale(1)}}
+
+/* горизонтальные ленты вместо вертикальных «простыней» на узком экране */
+.hscroll{display:flex;flex-wrap:nowrap;gap:10px;overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+  padding:2px 2px 8px;overscroll-behavior-x:contain}
+.hscroll::-webkit-scrollbar{display:none}
+.hscroll>*{flex:0 0 auto;scroll-snap-align:start}
+.hscroll:focus-within{scroll-snap-type:none}
+.hscroll>a,.hscroll>button,.hscroll>li{white-space:nowrap}
+
+@media(max-width:760px){
+  .dock{display:grid;animation:dockIn .45s cubic-bezier(.2,.8,.2,1) both}
+  body.has-dock{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+  .to-top{bottom:calc(100px + env(safe-area-inset-bottom,0px));right:12px;width:44px;height:44px}
+  .toast{bottom:calc(104px + env(safe-area-inset-bottom,0px))}
+  .cmpbar{bottom:calc(96px + env(safe-area-inset-bottom,0px));flex-wrap:nowrap;overflow-x:auto;max-width:calc(100% - 24px);scrollbar-width:none}
+  .cmpbar::-webkit-scrollbar{display:none}
+  .cmpbar>*{flex:0 0 auto}
+
+  /* фильтры, чипы, кнопки инструментов — одной прокручиваемой строкой */
+  .filters,.lfilters,.chips,.fbtns,.wz-dots,.qmeta{
+    display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;overflow-y:hidden;
+    scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+    padding:2px 2px 8px;overscroll-behavior-x:contain}
+  .filters::-webkit-scrollbar,.lfilters::-webkit-scrollbar,.chips::-webkit-scrollbar,
+  .fbtns::-webkit-scrollbar,.wz-dots::-webkit-scrollbar,.qmeta::-webkit-scrollbar{display:none}
+  .filters>*,.lfilters>*,.chips>*,.fbtns>*,.wz-dots>*,.qmeta>*{flex:0 0 auto;scroll-snap-align:start;white-space:nowrap}
+  .chips span,.filters button,.lfilters button{padding:10px 16px}
+  .fbtns .btn,.fbtns .ib{min-height:44px;padding:0 16px}
+
+  /* карточки направлений и услуги на главной — горизонтальная карусель */
+  .pcats,.grid.bento,.lgrid{
+    display:flex;flex-wrap:nowrap;gap:14px;overflow-x:auto;overflow-y:hidden;
+    scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+    padding:2px 2px 12px;overscroll-behavior-x:contain}
+  .pcats::-webkit-scrollbar,.grid.bento::-webkit-scrollbar{display:none}
+  .pcats>.pcat,.grid.bento>figure,.lgrid>.lcard{flex:0 0 min(78vw,290px);scroll-snap-align:start}
+  .pcats>.pcat .ph,.grid.bento>figure .ph{aspect-ratio:4/3}
+  .lgrid>.lcard .lvis{min-height:150px}
+
+  /* этапы работ и шаги мастера — лента со snap */
+  ol.steps{display:flex;flex-wrap:nowrap;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
+    scrollbar-width:none;padding-bottom:10px}
+  ol.steps::-webkit-scrollbar{display:none}
+  ol.steps>li{flex:0 0 min(80vw,300px);scroll-snap-align:start}
+
+  /* крошки не переносятся */
+  .bc{white-space:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+  .bc::-webkit-scrollbar{display:none}
+
+  /* выпадающее меню бургера — горизонтальная лента чипов */
+  nav[data-open]{padding:12px 16px 14px}
+  nav[data-open] ul{flex-direction:row;flex-wrap:nowrap;gap:8px;overflow-x:auto;
+    scrollbar-width:none;scroll-snap-type:x proximity;padding-bottom:4px}
+  nav[data-open] ul::-webkit-scrollbar{display:none}
+  nav[data-open] ul>li{flex:0 0 auto;scroll-snap-align:start}
+  nav[data-open] ul>li>a{display:inline-flex;align-items:center;min-height:42px;padding:8px 15px;
+    border:1px solid var(--line);border-bottom:1px solid var(--line);border-radius:var(--r-pill);white-space:nowrap}
+  nav[data-open] ul>li>a[aria-current=page]{background:var(--ac);border-color:var(--ac);color:#141516}
+
+  /* таблицы и спецификации прокручиваются внутри своей области */
+  .tw,.tbl,.ld-item,.qres{max-width:100%}
+  .kb details,.waiting>div{break-inside:avoid}
+  section{padding:clamp(48px,10vw,80px) 0}
+}
+@media(max-width:380px){.dock-t{font-size:.58rem}.dock-i{min-height:48px}.dock-main{min-height:54px}}
+@media(prefers-reduced-motion:reduce){.dock{animation:none}.dock-i,.dock-i svg{transition:none}}
+@media(prefers-contrast:more){.dock{border-width:2px}}
+@media print{.dock{display:none!important}}

@@ -41,12 +41,34 @@ function onScroll(){topBtn.classList.toggle('on',scrollY>600)}
 addEventListener('scroll',onScroll,{passive:true});onScroll();
 topBtn.onclick=function(){try{scrollTo({top:0,behavior:reduce?'auto':'smooth'})}catch(e){scrollTo(0,0)}};
 
-/* ---------- мобильная плашка быстрых действий ---------- */
+/* ---------- мобильный «островок» навигации ---------- */
 if(!$('#deck')){
-var bar=d.createElement('div');bar.className='mbar';bar.setAttribute('role','group');bar.setAttribute('aria-label','Быстрые действия');
-var kp=$('#lead')?'#lead':'kontakty.html';
-bar.innerHTML='<a class="mb-call" href="tel:+77778848818">Позвонить</a><a class="mb-wa" href="https://wa.me/'+WA+'" target="_blank" rel="noopener">WhatsApp</a><a class="mb-kp" href="'+kp+'">Получить КП</a>';
-d.body.appendChild(bar);d.body.classList.add('has-mbar');
+var path=(location.pathname.split('/').filter(Boolean).pop()||'index.html').toLowerCase();
+var grp='';
+if(path==='index.html'||path==='404.html')grp='home';
+else if(/^(sportivnye-pokrytiya|produktsiya|modulnye-pokrytiya|pvh-pokrytiya|begovye-dorozhki|sportivnyj-parket|padel-korty|kak-vybrat)\.html$/.test(path))grp='cat';
+else if(path==='kontakty.html')grp='contact';
+var I={
+ home:'<path d="M2 9 10 2l8 7"/><path d="M4 8v10h12V8"/><path d="M8 18v-6h4v6"/>',
+ cat:'<rect x="2" y="3" width="7" height="7" rx="1"/><rect x="11" y="3" width="7" height="7" rx="1"/><rect x="2" y="12" width="7" height="6" rx="1"/><rect x="11" y="12" width="7" height="6" rx="1"/>',
+ quiz:'<path d="M10 1.5 11.9 7 17.5 9 11.9 11 10 16.5 8.1 11 2.5 9 8.1 7Z"/><path d="M15.5 15.5l1 2.5 2.5 1-2.5 1-1 2.5"/>',
+ search:'<circle cx="9" cy="9" r="6"/><path d="M13.5 13.5 18 18"/>',
+ contact:'<path d="M3 5.5A2.5 2.5 0 0 1 5.5 3h9A2.5 2.5 0 0 1 17 5.5v9a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 3 14.5Z"/><path d="M4 6l6 4.5L16 6"/>'
+};
+function svg(k){return '<svg width="21" height="21" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+I[k]+'</svg>'}
+var items=[['home','index.html','Главная'],['cat','sportivnye-pokrytiya.html','Покрытия'],
+ ['quiz','sportivnye-pokrytiya.html#quiz','Квиз'],['search','','Поиск'],['contact','kontakty.html','Контакты']];
+var dock=d.createElement('nav');dock.className='dock';dock.id='n7Dock';dock.setAttribute('aria-label','Мобильная навигация');
+dock.innerHTML=items.map(function(it){
+  var k=it[0],on=(grp===k&&k!=='quiz'),main=(k==='quiz');
+  var cls='dock-i'+(main?' dock-main':'')+(on?' on':'');
+  var inner=svg(k)+'<span class="dock-t">'+it[2]+'</span>';
+  if(k==='search')return '<button type="button" class="'+cls+'" data-k="search" aria-label="Поиск по сайту">'+inner+'</button>';
+  return '<a class="'+cls+'" data-k="'+k+'" href="'+it[1]+'" aria-label="'+it[2]+'"'+(on?' aria-current="page"':'')+'>'+inner+'</a>';
+}).join('');
+d.body.appendChild(dock);d.body.classList.add('has-dock');
+var sb=dock.querySelector('[data-k="search"]');
+if(sb)sb.onclick=function(){if(w.n7Search)w.n7Search.open();else location.href='index.html?q='};
 }
 
 /* ---------- лайтбокс ---------- */
