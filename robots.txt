@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: [https://адрес-сайта]/sitemap.xml
+Sitemap: https://q984q.github.io/n7-site/sitemap.xml

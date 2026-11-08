@@ -34,10 +34,10 @@ chk('phone',$('#phone').value.replace(/\D/g,'').length<10,'Введите тел
 chk('agree',!$('#agree').checked,'Нужно согласие на обработку данных',s);
 if(!s.ok){show('Проверьте поля, отмеченные ошибкой.',true);return}
 var btn=$('#send');btn.disabled=true;
-if(ENDPOINT.charAt(0)==='['){btn.disabled=false;f.reset();show('Спасибо! Мы позвоним в течение [срок]. [Демо: отправка не подключена, заявка не ушла.]');return}
+if(ENDPOINT.charAt(0)==='['){btn.disabled=false;show('Онлайн-отправка пока не подключена. Позвоните нам: +7 (777) 884-88-18 или +7 (747) 534-40-14 — подготовим расчёт.',true);return}
 fetch(ENDPOINT,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}})
-.then(function(x){if(!x.ok)throw 0;f.reset();show('Спасибо! Заявка отправлена. Мы позвоним в течение [срок].')})
-.catch(function(){show('Не удалось отправить заявку. Позвоните нам: [телефон] или напишите в мессенджер.',true)})
+.then(function(x){if(!x.ok)throw 0;f.reset();show('Спасибо! Заявка отправлена. Мы свяжемся с вами в ближайшее время.')})
+.catch(function(){show('Не удалось отправить заявку. Позвоните нам: +7 (777) 884-88-18 или +7 (747) 534-40-14.',true)})
 .then(function(){btn.disabled=false});
 });
 })();
