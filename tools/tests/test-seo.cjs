@@ -45,6 +45,18 @@ for (const f of files) {
   }
   if (f !== 'index.html') ok(s.includes('BreadcrumbList'), f + ': нет BreadcrumbList');
   for (const phrase of FORBID) ok(!s.includes(phrase), f + ': неподтверждённая фраза «' + phrase + '»');
+  /* Никаких голословных сертификатов, олимпиад, гарантий и сроков службы */
+  const claims = [
+    /\b(?:ITTF|IAAF|ITF|FIBA|FIVB|IHF)\s+Approved\b/i,
+    /Олимпиада в Париже|Олимпийские игры|Официальный корт FIBA/i,
+    /Гарантия\s+\d+\s*(?:лет|год)/i,
+    /[Сс]рок службы\s+(?:от\s+)?\d+/,
+    /по каталог(?:ам|у) производителя|по спецификации производителя/i
+  ];
+  for (const re of claims) {
+    if (f === 'o-kompanii.html') continue; /* там список ожидаемых документов, не утверждение */
+    ok(!re.test(s), f + ': неподтверждённое утверждение ' + re);
+  }
 }
 
 /* Разделение покрытий и освещения */
