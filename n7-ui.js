@@ -37,9 +37,8 @@ function toc(){
  el.innerHTML='<div class="tp"><b>Управление</b><span id="tocNow">'+(site?'Сайт':'1 / '+items.length)+'</span></div>'+
   '<ol>'+items.map(function(x,i){
    return '<li><a href="'+x.href+'"'+(site?'':' data-i="'+i+'"'+(i===0?' class="on"':''))+
-    '><i></i><span>'+esc(x.text.length>19?x.text.slice(0,18)+'…':x.text)+'</span></a></li>';
+    '><span>'+esc(x.text.length>19?x.text.slice(0,18)+'…':x.text)+'</span></a></li>';
   }).join('')+'</ol>'+
-  '<div class="tprog"><i></i></div>'+
   '<div class="tc-acts">'+
    '<button type="button" data-act="quiz"><span aria-hidden="true">✦</span> Подобрать за 60 сек</button>'+
    '<button type="button" data-act="search"><span aria-hidden="true">⌕</span> Поиск по сайту</button>'+
@@ -48,7 +47,7 @@ function toc(){
   '</div>';
  d.body.appendChild(el);
 
- var links=$$('.toc ol a[data-i]'),now=$('#tocNow'),prog=$('.tprog i',el);
+ var links=$$('.toc ol a[data-i]'),now=$('#tocNow');
  function set(i){links.forEach(function(a,k){a.classList.toggle('on',k===i)});if(now&&links.length)now.textContent=(i+1)+' / '+links.length}
  links.forEach(function(a){a.onclick=function(){set(parseInt(a.getAttribute('data-i'),10))}});
  if(!site&&typeof w.IntersectionObserver==='function'){
@@ -57,12 +56,6 @@ function toc(){
   })},{rootMargin:'-25% 0px -65% 0px'});
   secs.forEach(function(s){io.observe(s)});
  }
- function progress(){
-  if(!prog)return;
-  var h=d.documentElement.scrollHeight-w.innerHeight;
-  prog.style.width=(h>0?Math.min(100,Math.max(0,w.scrollY/h*100)):100)+'%';
- }
- w.addEventListener('scroll',progress,{passive:true});progress();
  $$('.tc-acts button',el).forEach(function(btn){
   btn.onclick=function(){
    var a=btn.getAttribute('data-act');
