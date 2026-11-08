@@ -1,24 +1,26 @@
-/* Единые листаемые ленты N7.
-   Один и тот же компонент на всех страницах: услуги, продукция, проекты,
-   этапы, списки, преимущества. Листание ТОЛЬКО по действию пользователя —
-   стрелки, свайп, клавиатура. Автоплей и бегущие строки отсутствуют.
-   Карточки показываются целиком: 3 на широком экране, 2 на планшете,
-   1 на телефоне — без «обрубков» соседних блоков. */
+/* Листаемые ленты ТОЛЬКО на телефоне (≤ 760 px).
+   На ПК и планшете сохраняется исходная статичная сетка сайта — как была:
+   без стрелок, счётчиков и сужения карточек. Один и тот же компонент на всех
+   страницах, поэтому на телефоне поведение везде одинаковое.
+   Листание — только по действию пользователя: стрелки, свайп, клавиши ← →.
+   Карточки видны целиком (1 на телефоне), без обрезанных «хвостов». */
 (function(){
 'use strict';
 var d=document,w=window;
 var $=function(s,c){return (c||d).querySelector(s)};
 var $$=function(s,c){return Array.prototype.slice.call((c||d).querySelectorAll(s))};
 var reduce=false;try{reduce=w.matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
-var all=[];
+var MQ='(max-width:760px)',mq=null;
+try{mq=w.matchMedia(MQ)}catch(e){}
+function mobile(){return mq?mq.matches:(w.innerWidth||1024)<=760}
+var all=[],inited=false,bound=false;
 
 /* Слайды презентации листаются своим deck.js — сюда не попадают. */
 function skip(box){
   if(box.closest('#deck')||box.closest('.slide'))return true;
   if(box.id==='catalog'||box.closest('#catalog'))return true;
   if(box.classList.contains('cat')||box.querySelector('.lcard'))return true;
-  /* Каталог покрытий (#catalog, 13 SKU с фильтрами) остаётся сеткой;
-     остальные ленты, включая проекты с фильтрами, листаются одинаково. */
+  /* Каталог покрытий (#catalog, 13 SKU с фильтрами) остаётся сеткой. */
   return false;
 }
 function name(box){
@@ -59,7 +61,6 @@ function rail(box){
   prev.onclick=function(){go(-1)};
   next.onclick=function(){go(1)};
   box.addEventListener('scroll',update,{passive:true});
-  w.addEventListener('resize',update);
   [box,ui].forEach(function(el){el.addEventListener('keydown',function(e){
     if(e.key==='ArrowLeft'){go(-1);e.preventDefault()}
     else if(e.key==='ArrowRight'){go(1);e.preventDefault()}
@@ -77,19 +78,44 @@ function groupSrows(){
   p.insertBefore(g,rows[0]);
   rows.forEach(function(r){g.appendChild(r)});
 }
-
-function updateAll(){all.forEach(function(f){f()})}
-function boot(){
-  if($('#deck'))return;                          /* презентация листается сама */
-  groupSrows();
-  $$('.grid.bento, .pcats, .grid:not(.cat):not(.bento):not(.lgrid), ol.steps, ul.tl, .why .g, .n7rail-group')
-    .forEach(rail);
-  /* фильтры скрывают карточки — пересчитываем счётчики после клика */
-  d.addEventListener('click',function(e){
-    if(e.target&&e.target.closest&&e.target.closest('.filters'))setTimeout(updateAll,80);
+/* Полный возврат к исходной разметке при переходе на широкий экран. */
+function teardown(){
+  $$('.n7rail-ui').forEach(function(u){if(u.parentNode)u.parentNode.removeChild(u)});
+  $$('.n7rail').forEach(function(r){
+    r.classList.remove('n7rail');r.removeAttribute('tabindex');r.removeAttribute('aria-label');
+    try{r.scrollLeft=0}catch(e){}
   });
-  w.addEventListener('load',updateAll,{once:true});
-  w.addEventListener('resize',updateAll);
+  $$('.n7rail-group').forEach(function(g){
+    var p=g.parentNode;if(!p)return;
+    while(g.firstChild)p.insertBefore(g.firstChild,g);
+    p.removeChild(g);
+  });
+  all=[];
 }
-if(d.readyState==='loading')d.addEventListener('DOMContentLoaded',boot);else boot();
+function updateAll(){all.forEach(function(f){f()})}
+function sync(){
+  if($('#deck'))return;                          /* презентация листается сама */
+  if(mobile()&&!inited){
+    groupSrows();
+    $$('.grid.bento, .pcats, .grid:not(.cat):not(.bento):not(.lgrid), ol.steps, ul.tl, .why .g, .n7rail-group')
+      .forEach(rail);
+    inited=true;
+  } else if(!mobile()&&inited){
+    teardown();inited=false;
+  }
+  if(!bound){
+    bound=true;
+    /* фильтры скрывают карточки — пересчитываем счётчики после клика */
+    d.addEventListener('click',function(e){
+      if(e.target&&e.target.closest&&e.target.closest('.filters'))setTimeout(updateAll,80);
+    });
+    w.addEventListener('load',updateAll,{once:true});
+    w.addEventListener('resize',function(){sync();updateAll()});
+    if(mq){
+      if(mq.addEventListener)mq.addEventListener('change',sync);
+      else if(mq.addListener)mq.addListener(sync);
+    } else w.addEventListener('resize',sync);
+  }
+}
+if(d.readyState==='loading')d.addEventListener('DOMContentLoaded',sync);else sync();
 })();

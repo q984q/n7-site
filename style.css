@@ -988,10 +988,11 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{width:0;height:0;display:none}
 .svc-card .more{display:inline-block;margin-top:6px;padding:10px 0}
 }
 
-/* ============ Единые листаемые ленты (n7-rail.js) ============
-   Одинаково на всех страницах: стрелки, счётчик, свайп, клавиатура.
-   Карточки видны целиком — 3 / 2 / 1, без обрезанных «хвостов». */
-.n7rail-ui{display:flex;align-items:center;justify-content:flex-start;gap:8px;margin:0 0 14px}
+/* ============ Листаемые ленты ТОЛЬКО на телефоне (n7-rail.js) ============
+   На ПК и планшете (≥ 761 px) сохраняется исходная статичная сетка сайта:
+   без стрелок, счётчиков, сужения карточек и горизонтальной прокрутки. */
+@media(max-width:760px){
+.n7rail-ui{display:flex;align-items:center;justify-content:flex-start;gap:8px;margin:0 0 12px}
 .n7rail-ui button{width:40px;height:40px;display:grid;place-items:center;flex:0 0 40px;
   border:1px solid var(--line);border-radius:var(--r-pill);background:var(--surface);color:inherit;
   font:700 1.15rem var(--bd);line-height:1;cursor:pointer;
@@ -1000,20 +1001,12 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{width:0;height:0;display:none}
 .n7rail-ui button:active:not(:disabled){transform:scale(.94)}
 .n7rail-ui button:disabled{opacity:.35;cursor:default}
 .n7rail-num{min-width:58px;text-align:center;font:700 .85rem var(--bd);color:var(--mut);font-variant-numeric:tabular-nums}
-.n7rail{display:flex!important;gap:16px!important;grid-template-columns:none!important;
+.n7rail{display:flex!important;gap:12px!important;grid-template-columns:none!important;
   overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;
   overscroll-behavior-x:contain;scrollbar-width:none;padding-bottom:8px;width:100%;min-width:0;max-width:100%}
 .n7rail::-webkit-scrollbar{display:none}
-.n7rail>*{flex:0 0 calc((100% - 32px)/3);min-width:0;scroll-snap-align:start}
+.n7rail>*{flex:0 0 100%;min-width:0;scroll-snap-align:start}
 .n7rail>.w{width:auto;margin-inline:0}
 .n7rail:focus-visible{outline-offset:6px}
-/* Справа висит панель управления — не даём ленте уходить под неё */
-@media(min-width:1311px){.n7rail{max-width:calc(100% - 216px)}}
-@media(min-width:761px) and (max-width:1310px){.n7rail{max-width:calc(100% - 74px)}}
-@media(max-width:1100px){.n7rail>*{flex-basis:calc((100% - 16px)/2)}}
-@media(max-width:760px){
-  .n7rail{gap:12px!important}
-  .n7rail>*{flex-basis:100%}
-  .n7rail-ui{justify-content:flex-start;margin-bottom:12px}
 }
-@media(prefers-reduced-motion:reduce){.n7rail{scroll-behavior:auto}.n7rail-ui button{transition:none}}
+@media(max-width:760px) and (prefers-reduced-motion:reduce){.n7rail{scroll-behavior:auto}.n7rail-ui button{transition:none}}

@@ -6,6 +6,7 @@ const { JSDOM } = require('jsdom');
 const fs = require('fs'), path = require('path');
 const R = path.resolve(__dirname, '..', '..');
 const HTML = fs.readdirSync(R).filter(f => f.endsWith('.html')).sort();
+/* Тест поднят в «телефонном» контексте: листание включается только ≤ 760 px. */
 let bad = 0;
 const ok = (c, m) => { if (!c) { bad++; console.log('  FAIL ' + m); } };
 
@@ -20,7 +21,7 @@ for (const f of HTML) {
     url: 'https://q984q.github.io/n7-site/' + f, runScripts: 'outside-only', pretendToBeVisual: true
   });
   const w = dom.window, d = w.document;
-  w.matchMedia = () => ({ matches: false, addEventListener() {}, addListener() {} });
+  w.matchMedia = q => ({ matches: /max-width:760px/.test(q), media: q, addEventListener() {}, addListener() {} });
   w.scrollTo = () => {}; w.open = () => null; w.print = () => {};
   w.HTMLElement.prototype.scrollIntoView = function () {};
   w.HTMLElement.prototype.scrollBy = function (o) { this.scrollLeft += (o.left || 0); this.dispatchEvent(new w.Event('scroll')); };
@@ -54,7 +55,7 @@ for (const f of HTML) {
     url: 'https://q984q.github.io/n7-site/index.html', runScripts: 'outside-only', pretendToBeVisual: true
   });
   const w = dom.window, d = w.document;
-  w.matchMedia = () => ({ matches: false, addEventListener() {}, addListener() {} });
+  w.matchMedia = q => ({ matches: /max-width:760px/.test(q), media: q, addEventListener() {}, addListener() {} });
   w.HTMLElement.prototype.scrollBy = function (o) { this.scrollLeft += (o.left || 0); this.dispatchEvent(new w.Event('scroll')); };
   w.eval(fs.readFileSync(path.join(R, 'n7-rail.js'), 'utf8'));
   d.dispatchEvent(new w.Event('DOMContentLoaded', { bubbles: true }));
@@ -67,10 +68,29 @@ for (const f of HTML) {
   ok(num.textContent !== '1 / 6', 'клик «→» меняет счётчик: ' + num.textContent);
 }
 
+/* На ПК листания нет: исходная статичная сетка */
+{
+  const dom = new JSDOM(fs.readFileSync(path.join(R, 'index.html'), 'utf8'), {
+    url: 'https://q984q.github.io/n7-site/index.html', runScripts: 'outside-only', pretendToBeVisual: true
+  });
+  const w = dom.window, d = w.document;
+  w.matchMedia = q => ({ matches: false, media: q, addEventListener() {}, addListener() {} });
+  for (const sc of [...d.querySelectorAll('script[src]')]) {
+    const p = sc.getAttribute('src').split('?')[0];
+    try { w.eval(fs.readFileSync(path.join(R, p), 'utf8')); } catch (e) { ok(false, 'ПК: ' + p + ' → ' + e.message); }
+  }
+  d.dispatchEvent(new w.Event('DOMContentLoaded', { bubbles: true }));
+  ok(d.querySelectorAll('.n7rail').length === 0, 'ПК: листание не инициализировано');
+  ok(d.querySelectorAll('.n7rail-ui').length === 0, 'ПК: стрелок и счётчиков нет');
+  ok(!d.querySelector('.grid.bento').classList.contains('n7rail'), 'ПК: сетка услуг осталась статичной');
+}
+
 /* CSS: единые правила, точка в dock удалена */
 const css = fs.readFileSync(path.join(R, 'style.css'), 'utf8');
 ok(/\.n7rail\{display:flex!important/.test(css), 'CSS: лента = flex');
 ok(!/\.dock-i\.on::before/.test(css), 'CSS: точка под названием в dock удалена');
+ok(/@media\(max-width:760px\)\{\n\.n7rail-ui/.test(css), 'CSS: листание обёрнуто в мобильный media-запрос');
+ok(!/@media\(min-width:1311px\)\{\.n7rail/.test(css), 'CSS: сужение лент на ПК удалено');
 ok(!/\.toc \.tprog/.test(css), 'CSS: полоска-точка в панели удалена');
 ok(!/@keyframes mq\{/.test(css), 'CSS: бегущая строка удалена');
 ok(/\.n7tags\{/.test(css), 'CSS: статичные чипы вместо бегущей строки');
@@ -79,5 +99,5 @@ ok(/\.n7tags\{/.test(css), 'CSS: статичные чипы вместо бег
 const about = fs.readFileSync(path.join(R, 'o-kompanii.html'), 'utf8');
 ok((about.match(/id="sec-3"/g) || []).length === 1, 'o-kompanii.html: дубль id="sec-3" устранён');
 
-console.log('Проверено страниц: ' + HTML.length + (bad ? '\nОШИБОК: ' + bad : '\nВСЕ ПРОВЕРКИ ПРОЙДЕНЫ'));
+console.log('Проверено страниц (телефон + ПК): ' + HTML.length + (bad ? '\nОШИБОК: ' + bad : '\nВСЕ ПРОВЕРКИ ПРОЙДЕНЫ'));
 process.exit(bad ? 1 : 0);
