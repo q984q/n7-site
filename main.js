@@ -79,10 +79,13 @@ fetch(ENDPOINT,{method:'POST',body:new FormData(f),headers:{Accept:'application/
 .then(function(){btn.disabled=false});
 });
 
-/* PWA: офлайн без внешних сервисов. Network-first, без прекэша и без подмены свежей версии. */
+/* Регистрация service worker отключена: он перехватывал навигацию и мог вернуть
+   заглушку вместо сайта / закрепить старый CSS после деплоя. Очищаем уже установленные SW. */
 if('serviceWorker' in navigator&&/^https:/.test(location.protocol)){
   addEventListener('load',function(){
-    try{navigator.serviceWorker.register('n7-sw.js',{scope:'./'}).catch(function(){})}catch(e){}
+    try{navigator.serviceWorker.getRegistrations().then(function(rs){
+      rs.forEach(function(r){if(r.scope.indexOf(location.origin)===0)r.unregister()})
+    }).catch(function(){})}catch(e){}
   });
 }
 })();

@@ -580,7 +580,6 @@ header.s{box-shadow:0 10px 30px rgba(0,0,0,.14)}
 .dimmer{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 20px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface2);box-shadow:var(--sh-1)}
 .dim-t{font:700 13px/1.2 var(--bd);white-space:nowrap}
 .dl{flex:1;min-width:180px;max-width:360px;accent-color:var(--ac)}
-.lgrid .lcard img,.lgrid .lcard .lph,.lgrid .lcard .ph{filter:brightness(var(--dim,1)) contrast(calc(.88 + var(--dim,1) * .12))}
 .lgrid{--dim:1}
 
 /* Before / After */
@@ -594,7 +593,6 @@ header.s{box-shadow:0 10px 30px rgba(0,0,0,.14)}
 .ba-lbl.a{left:14px}.ba-lbl.b{right:14px;background:var(--ac);color:#141516}
 .ba-handle{position:absolute;top:0;bottom:0;width:2px;background:var(--ac);box-shadow:0 0 0 1px rgba(0,0,0,.2);pointer-events:none}
 .ba-handle::after{content:"⇄";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:var(--ac);color:#141516;font-size:19px;font-weight:700;box-shadow:var(--sh-2)}
-.tnote{font-size:12px;color:var(--mut);margin:10px 0 0;line-height:1.55}
 
 /* сравнение */
 .cmpbar{position:fixed;left:50%;bottom:88px;transform:translateX(-50%);z-index:40;display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;max-width:calc(100% - 24px);padding:10px 14px;border:1px solid var(--line);border-radius:var(--r-pill);background:var(--surface);box-shadow:var(--sh-3);font-size:13px}
@@ -634,8 +632,6 @@ header.s{box-shadow:0 10px 30px rgba(0,0,0,.14)}
 .qres p{margin:8px 0 10px;font-size:14px;line-height:1.55;color:var(--mut)}
 .qmeta{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
 .qmeta span{padding:9px 14px;border-radius:var(--r-pill);background:var(--surface2);border:1px solid var(--line);font-size:13px}
-.fbtns{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
-.fbtns .btn,.fbtns .ib{font-size:13px}
 
 /* мастер заявки */
 .wz-head{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px}
@@ -656,12 +652,8 @@ form.wz-off .wz-step[hidden]{display:block!important}
 [data-theme=dark] .field-ok{color:#7bd8a0}
 
 /* bento на главной */
-.bento{grid-template-columns:repeat(4,1fr)!important;grid-auto-rows:minmax(150px,auto)}
-.bento figure:nth-child(1),.bento figure:nth-child(6){grid-column:span 2}
-.bento figure:nth-child(1){grid-row:span 2}
-.bento figure:nth-child(1) .ph{height:100%;min-height:300px}
-@media(max-width:900px){.bento{grid-template-columns:repeat(2,1fr)!important}.bento figure:nth-child(1){grid-row:auto}.bento figure:nth-child(1) .ph{min-height:0}}
-@media(max-width:520px){.bento{grid-template-columns:1fr!important}.bento figure:nth-child(n){grid-column:auto}}
+/* мягкая bento: базовая сетка .grid остаётся прежней, только акцент на первой карточке */
+@media(min-width:1100px){.bento figure:first-child{grid-column:span 2}.bento figure:first-child .ph{aspect-ratio:16/9}}
 
 /* база знаний / FAQ-аккордеон */
 .kb{display:grid;gap:10px;max-width:900px;margin-top:22px}
@@ -707,7 +699,10 @@ form.wz-off .wz-step[hidden]{display:block!important}
 .ba-lbl.l{left:14px}
 .ba-lbl.r{right:14px;background:var(--ac);color:#141516}
 
-/* приведение разметки к стилям */
+/* приведение разметки к стилям (только внутри новых модулей) */
+.quiz .tnote,.mp-side .tnote,.ba-wrap .tnote{font-size:12px;margin:10px 0 0;line-height:1.55}
+.quiz .fbtns,.ld-acts .fbtns,.cmp-in .fbtns{gap:9px;font-size:13px}
+
 .ld-head b{font:700 22px/1.25 var(--hd)}
 .ld-item p{margin:4px 0 0;color:var(--mut);font-size:12px;line-height:1.45}
 .ld-item>div{min-width:0}
