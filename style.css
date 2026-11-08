@@ -30,28 +30,30 @@ h3{font-size:1.15rem}
 .btn[disabled]{opacity:.6;cursor:wait}
 /* header */
 header{position:fixed;inset:0 0 auto;z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
-header .w{display:flex;align-items:center;gap:20px;height:64px}
-.logo{display:flex;flex-direction:column;align-items:center;text-decoration:none;line-height:1}
+header .w{display:flex;align-items:center;gap:16px;height:64px;min-height:64px;width:min(1520px,100% - 40px)}
+.logo{display:flex;flex-direction:column;align-items:center;text-decoration:none;line-height:1;flex:0 0 auto;white-space:nowrap}
 .mark{font-family:var(--lg);background:linear-gradient(180deg,var(--s1),var(--s2) 52%,var(--s3));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 .logo .mark{font-size:1.7rem}
 .logo small{font:400 .45rem var(--lg);letter-spacing:.5em;margin-right:-.5em;margin-top:3px}
-nav{margin-left:auto}
-nav ul{display:flex;gap:22px;list-style:none;padding:0}
-nav a{text-decoration:none;font-weight:500;padding:8px 0;border-bottom:2px solid transparent;transition:border-color .2s}
+nav{margin-left:auto;min-width:0;flex:0 1 auto}
+nav ul{display:flex;flex-wrap:nowrap;gap:clamp(10px,1.1vw,18px);list-style:none;padding:0}
+nav a{text-decoration:none;font-weight:500;padding:8px 0;border-bottom:2px solid transparent;transition:border-color .2s;white-space:nowrap}
 nav a:hover{border-color:var(--ac)}
-.tools{display:flex;gap:12px;align-items:center}
+.tools{display:flex;gap:10px;align-items:center;flex:0 0 auto}
+.tools>.ib{flex:0 0 44px}
 .ib{width:44px;height:44px;display:grid;place-items:center;background:none;border:1px solid var(--line);border-radius:2px;color:inherit;cursor:pointer}
 .ib:hover{border-color:var(--fg)}
 #burger{display:none}
-header .btn{min-height:44px;padding:0 20px}
-@media(max-width:1180px){
+header .btn{min-height:44px;padding:0 20px;white-space:nowrap;flex:0 0 auto}
+/* бургер до 1600px: 8 пунктов + 4 иконки + CTA не влезают в узкий контейнер */
+@media(max-width:1600px){
 #burger{display:grid}
 nav{position:absolute;inset:64px 0 auto;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 20px 20px;display:none}
-nav[data-open]{display:block}
+nav[data-open]{display:block;max-height:calc(100vh - 64px);overflow-y:auto}
 nav ul{flex-direction:column;gap:0}
 nav a{display:block;padding:14px 0;border-bottom:1px solid var(--line)}
 .tools{margin-left:auto}}
-@media(max-width:640px){header .btn{display:none}}
+@media(max-width:640px){header .btn{display:none}.tools{gap:6px}.tools>.ib{width:40px;height:40px;flex-basis:40px}}
 /* hero */
 .hero{min-height:100svh;padding:112px 0 56px;display:flex;align-items:center}
 .hero .w{display:grid;gap:40px;align-items:center}
@@ -503,7 +505,7 @@ details[open]{background:var(--pan);border-radius:var(--r-md);border-color:trans
 .lcalc-r .fbtns .btn{border-radius:var(--r-pill)}
 
 /* шапка: мягкое выпадающее меню на мобильных */
-@media(max-width:1180px){nav[data-open]{border-radius:0 0 var(--r-lg) var(--r-lg);box-shadow:var(--sh-2)}}
+@media(max-width:1600px){nav[data-open]{border-radius:0 0 var(--r-lg) var(--r-lg);box-shadow:var(--sh-2)}}
 header.s{box-shadow:0 10px 30px rgba(0,0,0,.14)}
 
 /* фокус аккуратно повторяет форму элемента */
