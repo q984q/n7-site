@@ -63,7 +63,7 @@ for (const f of files) {
 const cover = fs.readFileSync(path.join(R, 'produktsiya.html'), 'utf8');
 const light = fs.readFileSync(path.join(R, 'osveshhenie.html'), 'utf8');
 ok(!cover.includes('id="lgrid"') && !cover.includes('#light-slot'), 'produktsiya.html ещё содержит освещение');
-ok(light.includes('id="lgrid"') && (light.match(/<article class="lcard"/g) || []).length === 14,
+ok(light.includes('id="lgrid"') && (light.match(/<article class="lcard[^"]*"/g) || []).length === 14,
   'osveshhenie.html: нет 14 типов освещения');
 ok(cover.includes('class="splitnav"') && light.includes('class="splitnav"'), 'нет переключателя разделов');
 ok(light.includes('"numberOfItems":14'), 'osveshhenie.html: ItemList без 14 позиций');

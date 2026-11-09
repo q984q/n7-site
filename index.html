@@ -9,10 +9,9 @@
 <meta property="og:title" content="N7 Construction: строительство, развитие, инфраструктура в Казахстане">
 <meta property="og:description" content="N7 Construction: жилые, коммерческие и промышленные объекты, инфраструктура, проектирование и реконструкция. Работаем по Казахстану и проектам СНГ.">
 <meta property="og:image" content="https://q984q.github.io/n7-site/img/og/index.webp">
-<meta name="theme-color" content="#0B1016">
+<meta name="theme-color" content="#05080F">
 <link rel="manifest" href="manifest.json">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<link rel="preload" as="image" href="img/hero.webp" fetchpriority="high">
 <link rel="preload" as="font" type="font/woff2" href="fonts/manrope-cyrillic-400-normal.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="fonts/manrope-cyrillic-700-normal.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="fonts/inter-tight-cyrillic-wght-normal.woff2" crossorigin>
@@ -28,9 +27,9 @@
 <meta property="og:locale" content="ru_RU">
 <meta name="twitter:card" content="summary_large_image">
 <noscript></noscript>
-<link rel="stylesheet" href="fonts.css?v=20261108z1">
-<link rel="stylesheet" href="style.css?v=20261108z1">
-<link rel="stylesheet" href="n7-bold.css?v=20261108z1">
+<link rel="stylesheet" href="fonts.css?v=20261109b">
+<link rel="stylesheet" href="style.css?v=20261109b">
+<link rel="stylesheet" href="n7-bold.css?v=20261109b">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"GeneralContractor","name":"N7 Construction","description":"Строительство, развитие, инфраструктура: жилые, коммерческие и промышленные объекты, проектирование, реконструкция","url":"https://q984q.github.io/n7-site","telephone":["+7 777 884-88-18","+7 747 534-40-14"],"areaServed":["Казахстан","СНГ"]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"N7 Construction","url":"https://q984q.github.io/n7-site/","inLanguage":"ru","potentialAction":{"@type":"SearchAction","target":"https://q984q.github.io/n7-site/?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
 <meta property="og:site_name" content="N7 Construction">
@@ -61,8 +60,17 @@
 
 <main id="top">
 
-<!-- 01 · ГЕРОЙ -->
+<!-- 01 · ГЕРОЙ · интерактивная WebGL2-сцена + HUD -->
 <section class="hero n7-hero" id="sec-1" aria-labelledby="hero-h">
+<canvas id="n7Scene" aria-hidden="true"></canvas>
+<div class="n7-fallback" data-depth="0.10" aria-hidden="true"></div>
+<div class="n7-hud" aria-hidden="true">
+<div class="hud-t"><span>N7 / CONSTRUCTION · DEPTH ENGINE</span><span>KZ · CIS / 50+ ГОРОДОВ</span></div>
+<div class="hud-frame" data-depth="0.08"></div>
+<div class="hud-tag">FIG. 01 · СБОРНЫЙ ОБЪЕКТ / 07 УРОВНЕЙ</div>
+<div class="hud-axis"><i></i>ОСЬ Z · ПРОЕКТИРОВАНИЕ → СДАЧА</div>
+<div class="hud-b"><span>N7 · DEPTH ENGINE</span><span>20+ ЛЕТ / 250+ ПРОЕКТОВ</span></div>
+</div>
 <div class="w v2-hero-grid">
 <div class="v2-hero-copy">
 <span class="v2-eyebrow">N7 Construction · Казахстан и СНГ</span>
@@ -78,14 +86,6 @@
 <div><dt>2000+</dt><dd>специалистов</dd></div>
 </dl>
 </div>
-<div class="v2-hero-visual">
-<span class="v2-hero-corner" aria-hidden="true"></span>
-<div class="v2-hero-frame">
-<img src="img/hero.webp" alt="Современный жилой дом с панорамным остеклением в вечернем освещении" width="1540" height="1540" fetchpriority="high" decoding="async">
-<div class="v2-hero-tag"><span>Проектирование / СМР</span><span>KZ · CIS</span></div>
-</div>
-<div class="v2-hero-badge" aria-hidden="true"><span><b>50+</b>городов</span></div>
-</div>
 </div>
 </section>
 
@@ -97,12 +97,12 @@
 <p class="v2-head-note">Шесть направлений — от проектной документации до ввода объекта в эксплуатацию.</p>
 </div>
 <div class="v2-row v2-row--3">
-<a class="v2-card v2-card--link" href="uslugi.html#u-zhiloe"><span class="v2-num">01</span><span class="v2-card-ic" aria-hidden="true">01</span><h3>Жилое строительство</h3><p>Жилые комплексы и сопутствующая инженерия. Пример участия: ЖК Cosmic City, Астана, 2022.</p><span class="more">Подробнее</span></a>
-<a class="v2-card v2-card--link" href="uslugi.html#u-kommercheskoe"><span class="v2-num">02</span><span class="v2-card-ic" aria-hidden="true">02</span><h3>Коммерческое строительство</h3><p>Торговые центры и коммерческие объекты. Пример: ТРЦ Asia Park, Астана.</p><span class="more">Подробнее</span></a>
-<a class="v2-card v2-card--link" href="uslugi.html#u-promyshlennye"><span class="v2-num">03</span><span class="v2-card-ic" aria-hidden="true">03</span><h3>Промышленные объекты</h3><p>Производственные и складские здания, инженерные сети, электроснабжение, КТП, пусконаладка.</p><span class="more">Подробнее</span></a>
-<a class="v2-card v2-card--link" href="uslugi.html#u-infrastruktura"><span class="v2-num">04</span><span class="v2-card-ic" aria-hidden="true">04</span><h3>Инфраструктура и дороги</h3><p>Дороги, развязки, наружные сети, благоустройство, монтаж освещения и инженерных систем.</p><span class="more">Подробнее</span></a>
-<a class="v2-card v2-card--link" href="uslugi.html#u-proektirovanie"><span class="v2-num">05</span><span class="v2-card-ic" aria-hidden="true">05</span><h3>Проектирование и инжиниринг</h3><p>Проектная документация и согласования, затем строительно-монтажные работы на объекте.</p><span class="more">Подробнее</span></a>
-<a class="v2-card v2-card--link" href="uslugi.html#u-rekonstruktsiya"><span class="v2-num">06</span><span class="v2-card-ic" aria-hidden="true">06</span><h3>Реконструкция</h3><p>Капитальный ремонт и реконструкция. Пример: зона фуд-корта ТРЦ Asia Park, 2000 м².</p><span class="more">Подробнее</span></a>
+<a class="v2-card v2-card--link v3-tilt" href="uslugi.html#u-zhiloe"><span class="v2-num">01</span><span class="v2-card-ic v3-tilt" aria-hidden="true">01</span><h3>Жилое строительство</h3><p>Жилые комплексы и сопутствующая инженерия. Пример участия: ЖК Cosmic City, Астана, 2022.</p><span class="more">Подробнее</span></a>
+<a class="v2-card v2-card--link v3-tilt" href="uslugi.html#u-kommercheskoe"><span class="v2-num">02</span><span class="v2-card-ic v3-tilt" aria-hidden="true">02</span><h3>Коммерческое строительство</h3><p>Торговые центры и коммерческие объекты. Пример: ТРЦ Asia Park, Астана.</p><span class="more">Подробнее</span></a>
+<a class="v2-card v2-card--link v3-tilt" href="uslugi.html#u-promyshlennye"><span class="v2-num">03</span><span class="v2-card-ic v3-tilt" aria-hidden="true">03</span><h3>Промышленные объекты</h3><p>Производственные и складские здания, инженерные сети, электроснабжение, КТП, пусконаладка.</p><span class="more">Подробнее</span></a>
+<a class="v2-card v2-card--link v3-tilt" href="uslugi.html#u-infrastruktura"><span class="v2-num">04</span><span class="v2-card-ic v3-tilt" aria-hidden="true">04</span><h3>Инфраструктура и дороги</h3><p>Дороги, развязки, наружные сети, благоустройство, монтаж освещения и инженерных систем.</p><span class="more">Подробнее</span></a>
+<a class="v2-card v2-card--link v3-tilt" href="uslugi.html#u-proektirovanie"><span class="v2-num">05</span><span class="v2-card-ic v3-tilt" aria-hidden="true">05</span><h3>Проектирование и инжиниринг</h3><p>Проектная документация и согласования, затем строительно-монтажные работы на объекте.</p><span class="more">Подробнее</span></a>
+<a class="v2-card v2-card--link v3-tilt" href="uslugi.html#u-rekonstruktsiya"><span class="v2-num">06</span><span class="v2-card-ic v3-tilt" aria-hidden="true">06</span><h3>Реконструкция</h3><p>Капитальный ремонт и реконструкция. Пример: зона фуд-корта ТРЦ Asia Park, 2000 м².</p><span class="more">Подробнее</span></a>
 </div>
 </div>
 </section>
@@ -148,9 +148,9 @@
 <p class="v2-head-note">Отдельное направление: спортивные покрытия, каталог материалов и освещение площадок.</p>
 </div>
 <div class="pcats">
-<a class="pcat" href="sportivnye-pokrytiya.html"><div class="pcat-b"><b>Спортивные покрытия</b><span>Пять направлений: модульная плитка, ПВХ, паркет, беговые дорожки, падел-корты.</span><em>Открыть раздел ↗</em></div></a>
-<a class="pcat" href="produktsiya.html"><div class="pcat-b"><b>Каталог материалов</b><span>Рулонные ПВХ-покрытия, модульная плитка и сборные беговые дорожки. Цена по запросу.</span><em>Открыть каталог ↗</em></div></a>
-<a class="pcat" href="osveshhenie.html"><div class="pcat-b"><b>Освещение площадок</b><span>14 типов светильников, фильтр по назначению и предварительный расчёт.</span><em>Открыть раздел ↗</em></div></a>
+<a class="pcat v3-tilt" href="sportivnye-pokrytiya.html"><div class="pcat-b v3-tilt"><b>Спортивные покрытия</b><span>Пять направлений: модульная плитка, ПВХ, паркет, беговые дорожки, падел-корты.</span><em>Открыть раздел ↗</em></div></a>
+<a class="pcat v3-tilt" href="produktsiya.html"><div class="pcat-b v3-tilt"><b>Каталог материалов</b><span>Рулонные ПВХ-покрытия, модульная плитка и сборные беговые дорожки. Цена по запросу.</span><em>Открыть каталог ↗</em></div></a>
+<a class="pcat v3-tilt" href="osveshhenie.html"><div class="pcat-b v3-tilt"><b>Освещение площадок</b><span>14 типов светильников, фильтр по назначению и предварительный расчёт.</span><em>Открыть раздел ↗</em></div></a>
 </div>
 <p class="n7-stub" data-n7-stub="prices-kzt" style="margin-top:22px">Прайс в ₸ не опубликован: нужны цены и условия от заказчика.</p>
 </div>
@@ -190,9 +190,9 @@
 <p class="v2-head-note">Модель работы под задачу, бюджет и сроки.</p>
 </div>
 <div class="v2-row v2-row--3">
-<div class="v2-card"><span class="v2-num">A</span><h3>Генподряд</h3><p>Управление стройкой, снабжение и логистика, единый договор, отчётность по этапам.</p></div>
-<div class="v2-card"><span class="v2-num">B</span><h3>Проект + стройка</h3><p>Проектная документация, согласования, СМР и гарантийное сопровождение.</p></div>
-<div class="v2-card"><span class="v2-num">C</span><h3>Субподряд</h3><p>Отдельные виды работ: монолит, фасады, отделка, инженерные сети, интеграция в график.</p></div>
+<div class="v2-card v3-tilt"><span class="v2-num">A</span><h3>Генподряд</h3><p>Управление стройкой, снабжение и логистика, единый договор, отчётность по этапам.</p></div>
+<div class="v2-card v3-tilt"><span class="v2-num">B</span><h3>Проект + стройка</h3><p>Проектная документация, согласования, СМР и гарантийное сопровождение.</p></div>
+<div class="v2-card v3-tilt"><span class="v2-num">C</span><h3>Субподряд</h3><p>Отдельные виды работ: монолит, фасады, отделка, инженерные сети, интеграция в график.</p></div>
 </div>
 <p style="margin-top:28px"><a class="more" href="sotrudnichestvo.html">Все форматы сотрудничества</a></p>
 </div>
@@ -253,16 +253,18 @@
 <div class="w fbottom"><span>© N7 Construction · Казахстан и СНГ</span><span>Строим. Сдаём. Отвечаем.</span></div>
 </footer>
 
-<script src="main.js?v=20261108z1" defer></script>
-<script src="fx.js?v=20261108z1" defer></script>
-<script src="features.js?v=20261108z1" defer></script>
-<script src="catalog-fx.js?v=20261108z1" defer></script>
-<script src="n7-list.js?v=20261108z1" defer></script>
-<script src="n7-search.js?v=20261108z1" defer></script>
-<script src="n7-ui.js?v=20261108z1" defer></script>
-<script src="n7-rail.js?v=20261108z1" defer></script>
-<script src="n7-quiz.js?v=20261108z1" defer></script>
-<script src="n7-wizard.js?v=20261108z1" defer></script>
-<script src="n7-bold.js?v=20261108z1" defer></script>
+<script src="main.js?v=20261109b" defer></script>
+<script src="fx.js?v=20261109b" defer></script>
+<script src="features.js?v=20261109b" defer></script>
+<script src="catalog-fx.js?v=20261109b" defer></script>
+<script src="n7-list.js?v=20261109b" defer></script>
+<script src="n7-search.js?v=20261109b" defer></script>
+<script src="n7-ui.js?v=20261109b" defer></script>
+<script src="n7-rail.js?v=20261109b" defer></script>
+<script src="n7-quiz.js?v=20261109b" defer></script>
+<script src="n7-wizard.js?v=20261109b" defer></script>
+<script src="n7-scene.js?v=20261109b" defer></script>
+<script src="n7-depth.js?v=20261109b" defer></script>
+<script src="n7-bold.js?v=20261109b" defer></script>
 </body>
 </html>

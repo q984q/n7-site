@@ -1,6 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-<rect width="64" height="64" rx="14" fill="#0B1016"/>
-<path d="M8 50 38 12h9L17 50z" fill="#1E3448"/>
-<text x="32" y="43" text-anchor="middle" font-family="DejaVu Sans,Arial,sans-serif" font-weight="bold" font-size="32" fill="#EAF0F5">N<tspan fill="#4EA8FF">7</tspan></text>
-<rect x="14" y="54" width="36" height="3" rx="1.5" fill="#4EA8FF"/>
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4DE8DC"/><stop offset="1" stop-color="#FFB45C"/></linearGradient></defs>
+<rect width="64" height="64" rx="14" fill="#05080F"/>
+<path d="M6 52 44 8h10L16 52z" fill="#12283A" opacity=".85"/>
+<path d="M8 52h48M14 44h36M20 36h24" stroke="#22BFC4" stroke-width="1.5" opacity=".55"/>
+<text x="32" y="43" text-anchor="middle" font-family="DejaVu Sans,Arial,sans-serif" font-weight="bold" font-size="32" fill="#EAF3FA">N<tspan fill="#4DE8DC">7</tspan></text>
+<rect x="14" y="54" width="36" height="3" rx="1.5" fill="url(#g)"/>
 </svg>

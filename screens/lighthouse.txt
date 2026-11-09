@@ -1,27 +1,36 @@
-Lighthouse 12.8.2 · версия 2 «Сталь» · ?v=20261108z1 · 2026-11-08
-Локальный предпросмотр http://127.0.0.1:8765, Chromium headless без сети.
+Lighthouse 12.8.2 · версия 3 «ГЛУБИНА» · ?v=20261109b · 2026-11-09
+Локальный предпросмотр http://127.0.0.1:8765, Chromium headless, WebGL2.
 
-ГЛАВНАЯ index.html
+ГЛАВНАЯ index.html — интерактивная WebGL2-сцена + CSS-3D
   Desktop (--preset=desktop) : performance 99 / accessibility 100 / best-practices 100 / SEO 100
-    FCP 0.6 s · LCP 0.9 s · CLS 0.001 · TBT 0 ms · Speed Index 0.6 s
-  Mobile (default throttling) : performance 82 / accessibility 100 / best-practices 100 / SEO 100
-    FCP 2.6 s · LCP 4.2 s · CLS 0.002 · TBT 0 ms · Speed Index 2.6 s
-  Binary fails: нет. Цветовой контраст исправлен: подписи на светлом — #125BB8
-  (>= 5.4:1), акценты на тёмном — #4EA8FF / #83C6FF (>= 6.7:1).
+    FCP 0.6 s · LCP 0.8 s · CLS 0.006 · TBT 0 ms · Speed Index 0.6 s
+  Mobile (default throttling) : performance 84 / accessibility 100 / best-practices 100 / SEO 100
+    FCP 2.6 s · LCP 3.9 s · CLS 0.008 · TBT 0 ms · Speed Index 2.6 s
+  Binary fails: нет.
 
 ВСЕ 19 СТРАНИЦ · Desktop
-  accessibility 100 · best-practices 100 · SEO 100 на 18 страницах;
-  404.html — SEO 63 (намеренный noindex,follow + абсолютный <base>).
-  performance 90–100, минимум у osveshhenie.html (90).
+  accessibility 100 · best-practices 100 · SEO 100 на 18 страницах.
+  404.html: best-practices 96, SEO 63, accessibility 100 — это намеренный
+  noindex,follow и закрытый в песочнице хост q984q.github.io (абсолютный
+  <base> нужен для GitHub Pages). На реальном Pages хост тот же, запросы успешны.
+  performance 90–100 (минимум у osveshhenie.html = 90).
   Бинарных провалов audits нет нигде, кроме 404.html: errors-in-console и
-  is-crawlable — артефакт песочницы (запросы к q984q.github.io закрыты,
-  noindex для страницы ошибки задан специально).
+  is-crawlable (артефакт песочницы + noindex).
 
-СРАВНЕНИЕ С v1 (18f6a6f)
-  Desktop  : 98 / 100 / 100 / 100  ->  99 / 100 / 100 / 100
-  Mobile   : 79 / 100 / 100 / 100  ->  82 / 100 / 100 / 100
-  LCP mob  : 4.6 s -> 4.2 s · CLS mob 0.011 -> 0.002
-  Заставка 2800/1700 ms удалена полностью; первый экран больше не блокируется.
+ПОЧЕМУ TBT = 0 ПРИ ЖИВОМ 3D
+  Первый замер с непрерывным requestAnimationFrame на программном рендерере
+  (SwiftShader) дал TBT 14 880 ms и performance 68. Рендерер теперь определяет
+  software-WebGL по WEBGL_debug_renderer_info, рисует один собранный кадр и не
+  запускает цикл; на аппаратном GPU сцена анимируется с FPS-cap 30 и паузой по
+  IntersectionObserver / visibilitychange. Мобильные ≤900 px, reduced-motion и
+  отсутствие WebGL2 получают CSS-фолбэк без инициализации контекста.
 
-Скриншоты: screens/v2/ (14 PNG, 7 пар ПК/МОБ), коллаж screens/v2-final.png
+СРАВНЕНИЕ С v2 «СТАЛЬ» (8e3844e)
+  Desktop  : 99 / 100 / 100 / 100  ->  99 / 100 / 100 / 100
+  Mobile   : 82 / 100 / 100 / 100  ->  84 / 100 / 100 / 100
+  LCP mob  : 4.2 s -> 3.9 s · CLS mob 0.002 -> 0.008 (в пределах нормы)
+  Заставка удалена ещё в v2; в v3 первый экран не блокируется ничем:
+  LCP-элемент — текст h1, canvas не участвует в LCP.
+
+Скриншоты: screens/v3/ (14 PNG, 7 пар ПК/МОБ), коллаж screens/v3-final.png
 Браузерный отчёт: screens/redesign-check.txt

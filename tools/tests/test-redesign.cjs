@@ -1,6 +1,6 @@
-/* N7 v2 «Сталь»: полная замена визуального языка на 19 страницах.
-   Проверяем палитру, новую IA, единый каркас, честные тексты, заглушки,
-   целые ссылки/якоря и сохранённую SEO-разметку. */
+/* N7 v3 «ГЛУБИНА»: полная замена визуального языка на 19 страницах.
+   Проверяем тёмную палитру, WebGL-сцену, CSS-3D, новую IA, единый каркас,
+   честные тексты, заглушки, целые ссылки/якоря и сохранённую SEO-разметку. */
 const fs = require('fs'), path = require('path');
 const R = path.resolve(__dirname, '..', '..');
 const files = fs.readdirSync(R).filter(f => f.endsWith('.html')).sort();
@@ -12,9 +12,10 @@ ok(files.length === 19, 'ровно 19 HTML-страниц');
 
 for (const f of files) {
   const s = read(f);
-  ok(/<html lang="ru">/.test(s), f + ': v2 без data-theme');
+  ok(/<html lang="ru">/.test(s), f + ': нет lang="ru"');
   ok(/<link rel="stylesheet" href="n7-bold\.css\?v=[^"]+">/.test(s), f + ': нет n7-bold.css');
   ok(/<script src="n7-bold\.js\?v=[^"]+" defer><\/script>/.test(s), f + ': нет n7-bold.js');
+  ok(/<script src="n7-depth\.js\?v=[^"]+" defer><\/script>/.test(s), f + ': нет 3D-слоя');
   ok(!/fonts\.googleapis\.com|fonts\.gstatic\.com/.test(s), f + ': внешние шрифты');
   ok(/<title>/.test(s) && /name="description"/.test(s), f + ': потеряны title/description');
   if (f === '404.html') ok(/name="robots" content="noindex/.test(s), f + ': нет noindex');
@@ -25,7 +26,8 @@ for (const f of files) {
   ok(/<script type="application\/ld\+json">/.test(s), f + ': потерян JSON-LD');
   ok(/class="skip"/.test(s) && /id="top"/.test(s), f + ': нет skip-link или #top');
   ok(!/n7intro|n7-intro\.js|data-theme=|id="theme"/.test(s), f + ': артефакт v1');
-  ok(/<header class="n7-head">/.test(s) && /<footer class="n7-foot">/.test(s), f + ': нет каркаса v2');
+  ok(/<header class="n7-head">/.test(s) && /<footer class="n7-foot">/.test(s), f + ': нет каркаса');
+  ok(/theme-color" content="#05080F"/.test(s), f + ': theme-color не v3');
   /* только видимый текст: метаописания сохраняем дословно */
   const body = s.slice(s.indexOf('<body>'));
   const banned = ['комплексн', 'современные технологии', 'надёжн', 'высокое качество',
@@ -35,39 +37,44 @@ for (const f of files) {
   for (const b of banned) ok(!body.toLowerCase().includes(b.toLowerCase()), f + ': штамп «' + b + '»');
   const imgs = body.match(/<img\b[^>]*>/g) || [];
   ok(imgs.every(t => /\balt="[^"]*"/.test(t)), f + ': img без alt');
-  /* ни одного жёстко зашитого цвета v1 */
-  ok(!/#f2c200|#ffd633|#ecece8|#0e0f10|#141516/i.test(s), f + ': жёсткий цвет v1 в HTML');
+  /* ни одного жёстко зашитого цвета v1/v2 */
+  ok(!/#f2c200|#ffd633|#ecece8|#0e0f10|#141516|#4EA8FF|#EAF0F5/i.test(s),
+     f + ': жёсткий цвет v1/v2 в HTML');
 }
 
-/* ---------- Дизайн-система ---------- */
+/* ---------- Дизайн-система v3 ---------- */
 const css = read('n7-bold.css'), base = read('style.css'), fc = read('fonts.css');
 ok((css.match(/{/g) || []).length === (css.match(/}/g) || []).length, 'n7-bold.css: баланс скобок');
 ok((base.match(/{/g) || []).length === (base.match(/}/g) || []).length, 'style.css: баланс скобок');
-for (const t of ['--graphite:#0B1016', '--steel:#EAF0F5', '--azure:#4EA8FF',
-  '--v2-display:', '--v2-mono:', '--n7-r:', '--n7-r-pill:',
-  '@media(prefers-reduced-motion:reduce)', '[data-n7-stub]', 'v2-hero-grid', 'v2-card'])
+for (const t of ['--void:#05080F', '--ink:#070B14', '--cyan:#4DE8DC', '--amber:#FFB45C',
+  '--fg:#EAF3FA', '--mut:#A8BCD0', '--geo:', '--display:', '--mono:',
+  '--n7-r:', '--n7-r-pill:', '@media(prefers-reduced-motion:reduce)', '[data-n7-stub]',
+  'transform-style:preserve-3d', '[data-depth]', '.v3-tilt', '.v3-iso', '#n7Scene',
+  '.n7-fallback', '.n7-hud', 'n7-webgl-on'])
   ok(css.includes(t), 'n7-bold.css: нет ' + t);
-ok(css.includes('ЕДИНЫЙ МЕХАНИЗМ СКРУГЛЕНИЙ'), 'n7-bold.css: нет единой системы скруглений');
-/* Нулевой радиус допустим только у edge-to-edge фона hero, у контейнеров
-   hero-кнопок/счётчиков и у внутреннего фото, которое обрезает карточка. */
-const zeroRules = [...css.matchAll(/([^{}]+)\{([^{}]*border-radius:\s*0[^{}]*)\}/g)]
+ok(css.includes('ВЕРСИЯ 3'), 'n7-bold.css: не помечен как v3');
+ok(css.includes('.cp svg') || css.includes('[data-depth]'), 'n7-bold.css: нет параллакса');
+/* Ни одного нулевого радиуса у карточек и панелей */
+const zeroRules = [...css.matchAll(/([^{}]+)\{([^{}]*border-radius:\s*0\s*[;}][^{}]*)\}/g)]
   .map(m => m[1].trim().replace(/\s+/g, ' '));
-ok(zeroRules.length > 0 && zeroRules.every(sel => /\.hero-photo|\.acts|\.stats|figure \.ph/.test(sel)),
+ok(zeroRules.every(sel => /\.hero-photo|figure \.ph|\[aria-hidden/.test(sel)),
    'n7-bold.css: нулевой радиус у карточки или панели: ' + zeroRules.join(' | '));
-ok(css.includes('.ph,.prod-ph,.pj-ph,.mapimg,.lb-img'),
-   'n7-bold.css: фото не подключены к единому радиусу');
-ok(/:root\{--bg:#EAF0F5/.test(base), 'style.css: базовая палитра не сталь');
-ok(!/#f2c200|#ffd633|rgba\(242,194,0/i.test(base), 'style.css: остался жёлтый v1');
+ok(/:root\{--bg:#070B14/.test(base), 'style.css: базовая палитра не v3');
+ok(!/#f2c200|#ffd633|rgba\(242,194,0|#4EA8FF|#EAF0F5/i.test(base), 'style.css: остался цвет v1/v2');
 ok(/--hd:'Inter Tight'/.test(base), 'style.css: заголовки не Inter Tight');
 ok((fc.match(/@font-face/g) || []).length === 15, 'fonts.css: 15 локальных @font-face');
-ok(fc.includes("'Inter Tight'") && fc.includes("'IBM Plex Mono'"), 'fonts.css: нет новых шрифтов');
+ok(fc.includes("'Inter Tight'") && fc.includes("'IBM Plex Mono'") && fc.includes("'Unbounded'"),
+   'fonts.css: нет шрифтов v3');
 
-/* ---------- Манифест и иконки ---------- */
+/* ---------- Манифест, иконки, OG ---------- */
 const man = JSON.parse(read('manifest.json'));
-ok(man.theme_color === '#0B1016' && man.background_color === '#EAF0F5',
-   'manifest.json: цвета не v2');
-ok(read('img/favicon.svg').includes('#4EA8FF'), 'favicon.svg: нет лазури');
+ok(man.theme_color === '#05080F' && man.background_color === '#05080F',
+   'manifest.json: цвета не v3');
+ok(read('img/favicon.svg').includes('#4DE8DC'), 'favicon.svg: нет циана');
 ok(!read('img/favicon.svg').includes('#f2c200'), 'favicon.svg: остался жёлтый');
+ok(read('tools/make_og.py').includes('ГЛУБИНА'), 'make_og.py: генератор не v3');
+ok(fs.readdirSync(path.join(R, 'img', 'og')).filter(f => f.endsWith('.webp')).length === 19,
+   'img/og: не 19 превью');
 
 /* ---------- Все локальные ссылки и якоря целы ---------- */
 const ids = {};
@@ -88,15 +95,15 @@ for (const f of files) {
   }
 }
 
-/* ---------- Главная: новая IA ---------- */
+/* ---------- Главная: новая IA + сцена ---------- */
 const i = read('index.html');
-ok(/Строим\./.test(i) && /Сдаём\./.test(i) && /Отвечаем\./.test(i), 'index: нет нового героя');
+ok(/Строим\./.test(i) && /Сдаём\./.test(i) && /Отвечаем\./.test(i), 'index: нет героя');
 ok(!/СТРОИМ\. СДАЁМ\. ОТВЕЧАЕМ\./.test(i), 'index: остался uppercase-герой v1');
 for (const id of ['sec-1', 'sec-2', 'sec-3', 'sec-4', 'sec-5', 'sec-6', 'sec-7'])
   ok(i.includes('id="' + id + '"'), 'index: потерян #' + id);
-ok((i.match(/class="v2-card/g) || []).length >= 9, 'index: мало карточек новой сетки');
-ok((i.match(/class="v2-row v2-row--3"/g) || []).length >= 2, 'index: нет новой модульной сетки');
-ok((i.match(/class="pcat"/g) || []).length === 3, 'index: не 3 раздела поставок');
+ok((i.match(/class="v2-card/g) || []).length >= 9, 'index: мало карточек сетки');
+ok((i.match(/class="v2-row v2-row--3"/g) || []).length >= 2, 'index: нет модульной сетки');
+ok((i.match(/class="pcat(?:\s|")/g) || []).length === 3, 'index: не 3 раздела поставок');
 ok((i.match(/<figure>/g) || []).length === 4, 'index: не 4 карточки проектов');
 ok((i.match(/<li><span>/g) || []).length >= 8, 'index: нет географии по городам');
 ok(i.includes('20+') && i.includes('250+') && i.includes('2000+'), 'index: потеряны счётчики');
@@ -108,6 +115,7 @@ ok(/wa\.me\/77778848818/.test(i) && /data-n7-stub="requisites"/.test(i),
    'index: нет WhatsApp или заглушки реквизитов');
 ok(!i.includes('US$'), 'index: остались USD-цены');
 ok(!/n7-marquee|n7intro|n7-foot-line/.test(i), 'index: остался визуальный язык v1');
+ok(/id="n7Scene"/.test(i) && /n7-hud/.test(i) && /n7-fallback/.test(i), 'index: нет 3D-первого экрана');
 
 /* ---------- Заглушки и факты на остальных страницах ---------- */
 const stubs = files.reduce((n, f) => n + (read(f).match(/data-n7-stub=/g) || []).length, 0);
@@ -119,6 +127,6 @@ for (const f of files) {
   ok(s.includes('+7 (777) 884-88-18') && s.includes('+7 (747) 534-40-14'), f + ': потерян телефон');
 }
 
-console.log(bad ? 'V2 «СТАЛЬ»: ПРОВАЛ (' + bad + ')'
-  : 'V2 «Сталь»: ВСЕ ПРОВЕРКИ ПРОЙДЕНЫ · страниц: ' + files.length + ' · заглушек: ' + stubs);
+console.log(bad ? 'V3 «ГЛУБИНА»: ПРОВАЛ (' + bad + ')'
+  : 'V3 «ГЛУБИНА»: ВСЕ ПРОВЕРКИ ПРОЙДЕНЫ · страниц: ' + files.length + ' · заглушек: ' + stubs);
 process.exit(bad ? 1 : 0);
