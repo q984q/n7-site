@@ -114,7 +114,7 @@ for path in sorted(glob.glob(os.path.join(ROOT, '*.html'))):
     # логотип
     dr.rectangle([64, 52, 78, 66], fill=CYAN)
     dr.text((92, 44), 'N7', font=ImageFont.truetype(BOLD, 54), fill=FG)
-    dr.text((96, 110), 'C O N S T R U C T I O N   ·   D E P T H',
+    dr.text((96, 110), 'C O N S T R U C T I O N',
             font=ImageFont.truetype(REG, 18), fill=MUT)
     # заголовок
     f = ImageFont.truetype(BOLD, 54)
@@ -127,7 +127,7 @@ for path in sorted(glob.glob(os.path.join(ROOT, '*.html'))):
     dr.line([(64, ly), (300, ly)], fill=CYAN, width=4)
     dr.text((64, min(ly + 22, 532)), 'Строительство · Спортивные покрытия · Казахстан и СНГ',
             font=ImageFont.truetype(REG, 22), fill=MUT)
-    dr.text((64, 578), 'FIG. 01 · 3D / 07 УРОВНЕЙ', font=ImageFont.truetype(REG, 16), fill=CYAN_D)
+    dr.text((64, 578), '20+ ЛЕТ · 250+ ПРОЕКТОВ', font=ImageFont.truetype(REG, 16), fill=CYAN_D)
 
     out = os.path.join(ROOT, 'img', 'og', os.path.splitext(os.path.basename(path))[0] + '.webp')
     os.makedirs(os.path.dirname(out), exist_ok=True)

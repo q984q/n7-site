@@ -272,13 +272,12 @@ header.n7-head .n7-head-cta{min-height:44px;padding:0 20px;font-size:.86rem}
   border:2px solid var(--cyan);opacity:.75}
 .n7-hud .hud-frame::before{top:-2px;left:-2px;border-right:0;border-bottom:0;border-radius:6px 0 0 0}
 .n7-hud .hud-frame::after{bottom:-2px;right:-2px;border-left:0;border-top:0;border-radius:0 0 6px 0}
+.n7-webgl-on .hud-frame{border-color:rgba(77,232,220,.26)}
 .n7-hud .hud-tag{position:absolute;right:6%;top:calc(19% + min(52vh,480px) + 12px);
   font:500 .62rem/1 var(--mono);letter-spacing:.14em;color:var(--cyan);text-transform:uppercase}
 .n7-hud .hud-axis{position:absolute;left:var(--v2-pad);bottom:64px;display:flex;align-items:center;gap:10px;
   font:500 .6rem/1 var(--mono);letter-spacing:.14em;color:var(--mut-2)}
 .n7-hud .hud-axis i{display:block;width:46px;height:1px;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
-.n7-webgl-on .n7-hud .hud-b::after{content:"LIVE · WEBGL";color:var(--cyan)}
-.n7-no-webgl .n7-hud .hud-b::after{content:"3D · STATIC"}
 @media(max-width:900px){.n7-hud .hud-frame,.n7-hud .hud-tag,.n7-hud .hud-axis{display:none}}
 
 /* ---------- 5. Стеклянные карточки и CSS-3D ---------- */

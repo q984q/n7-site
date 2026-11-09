@@ -1,11 +1,11 @@
-Lighthouse 12.8.2 · версия 3 «ГЛУБИНА» · ?v=20261109b · 2026-11-09
+Lighthouse 12.8.2 · версия 3 «ГЛУБИНА» · ?v=20261109c · 2026-11-09
 Локальный предпросмотр http://127.0.0.1:8765, Chromium headless, WebGL2.
 
 ГЛАВНАЯ index.html — интерактивная WebGL2-сцена + CSS-3D
   Desktop (--preset=desktop) : performance 99 / accessibility 100 / best-practices 100 / SEO 100
-    FCP 0.6 s · LCP 0.8 s · CLS 0.006 · TBT 0 ms · Speed Index 0.6 s
+    FCP 0.6 s · LCP 0.8 s · CLS 0.005 · TBT 0 ms · Speed Index 0.6 s
   Mobile (default throttling) : performance 84 / accessibility 100 / best-practices 100 / SEO 100
-    FCP 2.6 s · LCP 3.9 s · CLS 0.008 · TBT 0 ms · Speed Index 2.6 s
+    FCP 2.7 s · LCP 3.9 s · CLS 0.008 · TBT 0 ms · Speed Index 2.6 s
   Binary fails: нет.
 
 ВСЕ 19 СТРАНИЦ · Desktop
