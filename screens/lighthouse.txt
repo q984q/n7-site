@@ -1,0 +1,18 @@
+Lighthouse 12.8.2 · index.html · 2026-11-08
+Режим: стандартный троттлинг Chrome, локальный просмотр :8765
+
+ПК: performance 98 · accessibility 100 · best-practices 100 · SEO 100
+  first-contentful-paint: 0.6 s
+  largest-contentful-paint: 1.0 s
+  cumulative-layout-shift: 0.03
+  total-blocking-time: 0 ms
+  speed-index: 1.2 s
+
+Мобильный: performance 79 · accessibility 100 · best-practices 100 · SEO 100
+  first-contentful-paint: 2.7 s
+  largest-contentful-paint: 4.5 s
+  cumulative-layout-shift: 0.011
+  total-blocking-time: 20 ms
+  speed-index: 3.2 s
+
+Примечание: мобильный LCP 4.5 s — следствие имитации медленной сети и заставки «Включение света»; на реальном соединении и при повторном входе заметно быстрее. CLS и TBT в норме.

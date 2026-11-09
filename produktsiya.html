@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,9 +24,11 @@
 <meta property="og:locale" content="ru_RU">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" as="font" type="font/woff2" href="fonts/manrope-cyrillic-400-normal.woff2" crossorigin>
-<link rel="stylesheet" href="fonts.css?v=20261108n">
-<link rel="stylesheet" href="style.css?v=20261108n">
-<script>try{document.documentElement.dataset.theme=localStorage.getItem("n7-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}catch(e){}</script>
+<noscript></noscript>
+<link rel="stylesheet" href="fonts.css?v=20261108w">
+<link rel="stylesheet" href="style.css?v=20261108w">
+<link rel="stylesheet" href="n7-bold.css?v=20261108w">
+<script>try{var n7t=localStorage.getItem("n7-theme");if(n7t)document.documentElement.dataset.theme=n7t}catch(e){}</script>
 <script>if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&"IntersectionObserver" in window){document.documentElement.classList.add("fx");setTimeout(function(){if(!window.__fx)document.documentElement.classList.remove("fx")},2500)}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"ItemList","name":"Каталог спортивных покрытий N7 Construction","description":"13 позиций: рулонные ПВХ-покрытия, модульная плитка и сборные беговые дорожки","numberOfItems":13}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная","item":"https://q984q.github.io/n7-site/index.html"},{"@type":"ListItem","position":2,"name":"Спортивные покрытия","item":"https://q984q.github.io/n7-site/sportivnye-pokrytiya.html"},{"@type":"ListItem","position":3,"name":"Каталог покрытий","item":"https://q984q.github.io/n7-site/produktsiya.html"}]}</script>
@@ -44,7 +46,7 @@
 <a class="skip" href="#top">Перейти к содержимому</a>
 <header>
 <div class="w">
-<a class="logo" href="index.html" aria-label="N7 Construction, наверх"><span class="mark">N7</span><small>CONSTRUCTION</small></a>
+<a class="logo" href="index.html"><span class="mark">N7</span><small>CONSTRUCTION</small></a>
 <nav id="menu" aria-label="Основное меню"><ul><li><a href="o-kompanii.html">О компании</a></li><li><a href="uslugi.html">Услуги</a></li><li><a href="sportivnye-pokrytiya.html" aria-current="page">Покрытия</a></li><li><a href="osveshhenie.html">Освещение</a></li><li><a href="proekty.html">Проекты</a></li><li><a href="sotrudnichestvo.html">Сотрудничество</a></li><li><a href="geografiya.html">География</a></li><li><a href="prezentatsiya.html">Презентация</a></li><li><a href="kontakty.html">Контакты</a></li></ul></nav>
 <div class="tools">
 <button class="ib" id="theme" type="button" aria-label="Сменить тему"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 2a8 8 0 0 0 0 16z" fill="currentColor"/></svg></button>
@@ -65,12 +67,13 @@
 <a class="pcat" href="#catalog" data-go="track"><div class="ph prod-ph"><img decoding="async" src="img/products/running-track.webp" alt="Сборная беговая дорожка" width="900" height="900" loading="lazy"></div><div class="pcat-b"><b>Беговые дорожки</b><span>1 позиция · стадионы и легкоатлетические манежи</span><em>от US$22.00 / м²</em></div></a>
 </div>
 <p class="pnote" style="margin:32px 0 0"><b>О цене.</b> Указан ориентир «от» по категории в USD за м² на условиях FOB Tianjin. В него не входят доставка в Казахстан, растаможка, подготовка основания и монтаж. Точную стоимость под ваш объект, объём и цвет рассчитаем по запросу — публичный прайс-лист не размещаем.</p>
+<p class="n7-stub" data-n7-stub="prices-kzt">Прайс в ₸ не опубликован: нужны цены, условия поставки и разрешение от заказчика.</p>
 </div></section>
 
 
 <section id="catalog" class="amb" style="background:var(--pan)"><div class="w">
 <h2>Каталог</h2>
-<div class="filters" role="group" aria-label="Фильтр по типу продукции"><button type="button" data-f="all" aria-pressed="true">Все · 13</button><button type="button" data-f="roll" aria-pressed="false">Рулонные покрытия · 7</button><button type="button" data-f="tile" aria-pressed="false">Модульная плитка · 5</button><button type="button" data-f="track" aria-pressed="false">Беговые дорожки · 1</button></div>
+<div class="filters" role="group" aria-label="Фильтр по типу продукции"><button type="button" data-f="all" aria-pressed="true">Все · 13</button><button id="roll" type="button" data-f="roll" aria-pressed="false">Рулонные покрытия · 7</button><button id="tile" type="button" data-f="tile" aria-pressed="false">Модульная плитка · 5</button><button id="track" type="button" data-f="track" aria-pressed="false">Беговые дорожки · 1</button></div>
 <div class="grid">
 
 <figure class="pcard" data-t="roll"><div class="ph prod-ph"><img decoding="async" src="img/products/y14155s.webp" alt="Красный рулон покрытия для настольного тенниса Y14155S" width="900" height="900" loading="lazy"></div><figcaption><span class="art">Артикул Y14155S</span><b>Покрытие для настольного тенниса</b><span class="badge">Для настольного тенниса</span><ul class="pspec"><li>Плетёный рисунок (Weaving Pattern)</li><li>Толщина 5,5 мм</li><li>Ширина 1,8 м · длина 15–25 м</li></ul><div class="pfoot"><span class="ponreq">Цена по запросу</span><a href="kontakty.html?p=Y14155S">Запросить расчёт →</a></div></figcaption></figure>
@@ -114,18 +117,19 @@
 
 <section class="cta" id="sec-3"><div class="w"><h2>Нужно покрытие под ваш объект?</h2><p>Расскажите о площадке — подберём материал и подготовим расчёт с учётом доставки и монтажа.</p><a class="btn" href="kontakty.html">Получить расчёт</a></div></section>
 </main>
-<footer><div class="w fg"><div><span class="mark" aria-hidden="true">N7</span><small aria-hidden="true">CONSTRUCTION</small><p>Строительство, развитие, инфраструктура. Казахстан и СНГ.</p></div><div><b>Разделы</b><ul><li><a href="o-kompanii.html">О компании</a></li><li><a href="uslugi.html">Услуги</a></li><li><a href="sportivnye-pokrytiya.html">Спортивные покрытия</a></li><li><a href="produktsiya.html">Каталог покрытий</a></li><li><a href="osveshhenie.html">Освещение площадок</a></li><li><a href="kak-vybrat.html">Как выбрать покрытие</a></li><li><a href="proekty.html">Проекты</a></li><li><a href="sotrudnichestvo.html">Сотрудничество</a></li><li><a href="geografiya.html">География</a></li><li><a href="prezentatsiya.html">Презентация</a></li><li><a href="kontakty.html">Контакты</a></li></ul></div><div><b>Контакты</b><ul><li><a href="tel:+77778848818">+7 (777) 884-88-18</a></li><li><a href="tel:+77475344014">+7 (747) 534-40-14</a></li><li><a href="kontakty.html">Форма заявки</a></li><li>Казахстан и СНГ</li></ul></div><div><b>Информация</b><p>Реквизиты предоставляются по запросу.<br><a href="privacy.html">Политика конфиденциальности</a><br><a href="prezentatsiya.html">Презентация компании</a></p></div></div></footer>
+<footer><div class="w fg"><div><span class="mark" aria-hidden="true">N7</span><small aria-hidden="true">CONSTRUCTION</small><p>Строительство, развитие, инфраструктура. Казахстан и СНГ.</p></div><div><b>Разделы</b><ul><li><a href="o-kompanii.html">О компании</a></li><li><a href="uslugi.html">Услуги</a></li><li><a href="sportivnye-pokrytiya.html">Спортивные покрытия</a></li><li><a href="produktsiya.html">Каталог покрытий</a></li><li><a href="osveshhenie.html">Освещение площадок</a></li><li><a href="kak-vybrat.html">Как выбрать покрытие</a></li><li><a href="proekty.html">Проекты</a></li><li><a href="sotrudnichestvo.html">Сотрудничество</a></li><li><a href="geografiya.html">География</a></li><li><a href="prezentatsiya.html">Презентация</a></li><li><a href="kontakty.html">Контакты</a></li></ul></div><div><b>Контакты</b><ul><li><a href="tel:+77778848818">+7 (777) 884-88-18</a></li><li><a href="tel:+77475344014">+7 (747) 534-40-14</a></li><li><a href="kontakty.html">Форма заявки</a></li><li>Казахстан и СНГ</li></ul></div><div><b>Информация</b><p><span class="n7-stub" data-n7-stub="requisites">Реквизиты предоставляются по запросу.</span><br><a href="privacy.html">Политика конфиденциальности</a><br><a href="prezentatsiya.html">Презентация компании</a></p></div></div></footer>
 <script>addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".pcat[data-go]").forEach(function(a){a.addEventListener("click",function(){var b=document.querySelector('.filters button[data-f="'+a.dataset.go+'"]');if(b)b.click()})});var h=location.hash.slice(1);if(h){var b=document.querySelector('.filters button[data-f="'+h+'"]');if(b){b.click();document.getElementById('catalog').scrollIntoView()}}});</script>
-<script src="n7-intro.js?v=20261108n" defer></script>
-<script src="main.js?v=20261108n" defer></script>
-<script src="fx.js?v=20261108n" defer></script>
-<script src="features.js?v=20261108n" defer></script>
-<script src="catalog-fx.js?v=20261108n" defer></script>
-<script src="n7-list.js?v=20261108n" defer></script>
-<script src="n7-search.js?v=20261108n" defer></script>
-<script src="n7-ui.js?v=20261108n" defer></script>
-<script src="n7-rail.js?v=20261108n" defer></script>
-<script src="n7-quiz.js?v=20261108n" defer></script>
-<script src="n7-wizard.js?v=20261108n" defer></script>
+<script src="n7-intro.js?v=20261108w" defer></script>
+<script src="main.js?v=20261108w" defer></script>
+<script src="fx.js?v=20261108w" defer></script>
+<script src="features.js?v=20261108w" defer></script>
+<script src="catalog-fx.js?v=20261108w" defer></script>
+<script src="n7-list.js?v=20261108w" defer></script>
+<script src="n7-search.js?v=20261108w" defer></script>
+<script src="n7-ui.js?v=20261108w" defer></script>
+<script src="n7-rail.js?v=20261108w" defer></script>
+<script src="n7-quiz.js?v=20261108w" defer></script>
+<script src="n7-wizard.js?v=20261108w" defer></script>
+<script src="n7-bold.js?v=20261108w" defer></script>
 </body>
 </html>

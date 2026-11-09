@@ -19,7 +19,7 @@ n = 0
 for path in sorted(glob.glob(os.path.join(ROOT, '*.html'))):
     s = open(path, encoding='utf-8').read()
     o = s
-    s = re.sub(r'(<link rel="stylesheet" href="(?:style|fonts)\.css)(\?v=[^"]*)?(")',
+    s = re.sub(r'(<link rel="stylesheet" href="(?:style|fonts|n7-bold)\.css)(\?v=[^"]*)?(")',
                lambda m: m.group(1) + '?v=' + V + m.group(3), s)
     s = re.sub(r'(<script src="[^"?]+\.js)(\?v=[^"]*)?(" defer>)',
                lambda m: m.group(1) + '?v=' + V + m.group(3), s)

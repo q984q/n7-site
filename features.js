@@ -90,7 +90,7 @@ if(!items.length)return;
 var data=items.map(function(ph){var im=ph.querySelector('img'),fig=ph.closest('figure'),b=fig&&fig.querySelector('figcaption b');
 return {src:im.getAttribute('src'),alt:im.getAttribute('alt')||'',cap:b?b.textContent:''}});
 var lb=d.createElement('div');lb.className='lb';lb.hidden=true;lb.setAttribute('role','dialog');lb.setAttribute('aria-modal','true');lb.setAttribute('aria-label','Просмотр изображения');
-lb.innerHTML='<button class="lb-x" type="button" aria-label="Закрыть">×</button><button class="lb-p" type="button" aria-label="Предыдущее">‹</button><img class="lb-img" alt=""><button class="lb-n" type="button" aria-label="Следующее">›</button><div class="lb-cap"></div>';
+lb.innerHTML='<button class="lb-x" type="button" aria-label="Закрыть">×</button><button class="lb-p" type="button" aria-label="Предыдущее">‹</button><img class="lb-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt=""><button class="lb-n" type="button" aria-label="Следующее">›</button><div class="lb-cap"></div>';
 d.body.appendChild(lb);
 var img=$('.lb-img',lb),cap=$('.lb-cap',lb),i=0,lastFocus=null,sx=null;
 function render(){var it=data[i];img.src=it.src;img.alt=it.alt;cap.textContent=(i+1)+' / '+data.length+(it.cap?' · '+it.cap:'');$('.lb-p',lb).disabled=data.length<2;$('.lb-n',lb).disabled=data.length<2}

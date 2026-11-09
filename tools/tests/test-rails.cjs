@@ -11,7 +11,7 @@ let bad = 0;
 const ok = (c, m) => { if (!c) { bad++; console.log('  FAIL ' + m); } };
 
 const expect = {
-  'index.html': 6, '404.html': 1, 'kak-vybrat.html': 2, 'o-kompanii.html': 4,
+  'index.html': 5, '404.html': 1, 'kak-vybrat.html': 2, 'o-kompanii.html': 4,
   'produktsiya.html': 2, 'proekty.html': 1, 'sotrudnichestvo.html': 3,
   'sportivnye-pokrytiya.html': 2, 'uslugi.html': 1, 'osveshhenie.html': 1, 'prezentatsiya.html': 0
 };

@@ -3,7 +3,7 @@
 var d=document,r=d.documentElement,$=function(s){return d.querySelector(s)};
 /* тема */
 var saved=null;try{saved=localStorage.getItem('n7-theme')}catch(e){}
-r.dataset.theme=saved||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+r.dataset.theme=saved||'dark';
 $('#theme').onclick=function(){var t=r.dataset.theme==='dark'?'light':'dark';r.dataset.theme=t;try{localStorage.setItem('n7-theme',t)}catch(e){}};
 addEventListener('scroll',function(){$('header').classList.toggle('s',scrollY>8)},{passive:true});
 /* меню */

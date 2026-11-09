@@ -39,5 +39,5 @@
   window.addEventListener('keydown', onKey, true);
   window.addEventListener('pagehide', finish);
   try { if (skip) skip.focus({ preventScroll: true }); } catch (e) {}
-  timer = setTimeout(finish, 2800); /* страховка, если animationend не пришёл */
+  timer = setTimeout(finish, 1700); /* страховка, если animationend не пришёл */
 })();

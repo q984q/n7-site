@@ -16,7 +16,7 @@ const FORBID = ['по данным каталога производителя',
 
 for (const f of files) {
   const s = fs.readFileSync(path.join(R, f), 'utf8');
-  ok(/<html lang="ru">/.test(s), f + ': lang=ru');
+  ok(/<html lang="ru"(?:\s[^>]*)?>/.test(s), f + ': lang=ru');
   ok((s.match(/<title>/g) || []).length === 1, f + ': ровно один <title>');
   ok((s.match(/<h1/g) || []).length === 1, f + ': ровно один <h1>');
   ok((s.match(/<meta name="description"/g) || []).length === 1, f + ': ровно один description');
