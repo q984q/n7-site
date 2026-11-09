@@ -174,7 +174,7 @@ OG/Twitter, `BreadcrumbList` (кроме главной), sitemap на 18 инд
   LCP 4,5 с при имитации медленной сети — оставлено в TODO.
 - Финальный браузерный обход: 19 страниц × ПК/МОБ, 104 локальных URL + 4 доп.,
   0 битых, 0 JS-ошибок, 0 битых изображений, моб-листание и форма работают,
-  `prefers-reduced-motion` respected. Отчёт `screens/redesign-check.txt`,
+  `prefers-reduced-motion` учитывается. Отчёт `screens/redesign-check.txt`,
   14 PNG (7 пар) в `screens/redesign/`, коллаж `screens/redesign-final.png`.
 - `404.html`: абсолютный `<base>` для Pages сохранён, но для localhost и
   `*.e2b.app` инлайн-скрипт подменяет его на текущий хост — локальные CSS/JS
@@ -182,6 +182,10 @@ OG/Twitter, `BreadcrumbList` (кроме главной), sitemap на 18 инд
   axe `label-content-name-mismatch`), заставка ускорена до ~1,5 с.
 - Добавлены `.gitignore`, `package-lock.json`, OFL-лицензия на Inter Tight и
   IBM Plex Mono, `img/grain.webp` вместо двух inline SVG-шумов.
+- Деплой: коммит `0139ef0` запушен в `arena/328b9b34-n7-site`; Pages build
+  `built`, `error=null`. После деплоя live-проверены `index.html?v=20261108w`,
+  `uslugi.html?v=20261108w`, `404.html`, `n7-bold.css?v=w`, `n7-bold.js?v=w`,
+  `sitemap.xml` — все `status: success`, `404.html` отдаёт корректные ссылки.
 - TODO: мобильный LCP, `srcset`, Telegram Worker (`TELEGRAM_TOKEN`,
   `TELEGRAM_CHAT_ID`, публичный `N7_LEAD_ENDPOINT`), аналитика, e-mail/адрес/БИН,
   ₸-прайс, реальные фото/кейсы/отзывы/сертификаты, юрист `privacy.html`,
