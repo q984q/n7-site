@@ -169,6 +169,13 @@ function extras(){
   });
  });
 }
-function boot(){toc();dimmer();beforeAfter();cmpBar();sync();extras()}
+/* Подпись к усечённому тексту в select: полное значение видно по наведению */
+function selectTitles(){
+  $$('select').forEach(function(s){
+    function set(){try{var o=s.options[s.selectedIndex];s.title=o?o.text:''}catch(e){}}
+    set();s.addEventListener('change',set);
+  });
+}
+function boot(){toc();dimmer();beforeAfter();cmpBar();sync();extras();selectTitles()}
 if(d.readyState==='loading')d.addEventListener('DOMContentLoaded',boot);else boot();
 })();

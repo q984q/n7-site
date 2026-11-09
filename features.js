@@ -142,7 +142,7 @@ slot.innerHTML='<h2>Калькулятор материала</h2><p class="intr
 '<div><label for="ctype">Тип покрытия</label><select id="ctype">'+opts+'</select></div>'+
 '<div id="csize-wrap"><label for="csize">Размер плитки</label><select id="csize">'+sizes+'</select></div>'+
 '<div><label for="cwaste">Запас на раскрой, %</label><input id="cwaste" type="number" min="0" max="30" step="1" value="5" inputmode="numeric"></div>'+
-'</div><div class="calc-r" aria-live="polite"><div class="cr-big"><span id="cr-area">200</span><small>м² площади</small></div>'+
+'<p class="calc-hint">Раскрой по периметру, разметку и подрезку уточняем при подготовке коммерческого предложения.</p></div><div class="calc-r" aria-live="polite"><div class="cr-big"><span id="cr-area">200</span><small>м² площади</small></div>'+
 '<div class="cr-line"><b id="cr-mat">—</b><span id="cr-desc"></span></div><p class="tnote" id="cr-note"></p>'+
 '<div class="fbtns"><button class="btn" type="button" id="cr-send">Отправить расчёт в WhatsApp</button><button class="ib" type="button" id="cr-copy">Скопировать</button></div>'+
 '</div></div>';

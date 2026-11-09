@@ -2,6 +2,6 @@
   "name": "n7-site-ui-tests",
   "private": true,
   "description": "jsdom-проверки единого листания и панели управления на всех страницах",
-  "scripts": { "test": "node test-rails.cjs && node test-seo.cjs" },
+  "scripts": { "test": "node test-rails.cjs && node test-seo.cjs && node test-intro.cjs" },
   "devDependencies": { "jsdom": "^31.0.0" }
 }
