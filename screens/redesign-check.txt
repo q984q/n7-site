@@ -1,43 +1,43 @@
-ПРОВЕРКА РЕДИЗАЙНА · 2026-11-09T01:44:40.254Z
+ПРОВЕРКА РЕДИЗАЙНА · 2026-11-09T07:50:25.851Z
 Chromium: /tmp/chromium
-ПК  404.html                     bg=rgb(14, 15, 16) h1=122.4px overflow=  0 rails=0 img=0/0 err=0
-ПК  begovye-dorozhki.html        bg=rgb(14, 15, 16) h1=122.4px overflow=  0 rails=0 img=1/0 err=0
-ПК  geografiya.html              bg=rgb(14, 15, 16) h1=122.4px overflow=  0 rails=0 img=1/0 err=0
-ПК  index.html                   bg=rgb(14, 15, 16) h1=  180px overflow=  0 rails=0 img=15/0 err=0
-ПК  kak-vybrat.html              bg=rgb(14, 15, 16) h1=122.4px overflow=  0 rails=0 img=0/0 err=0
-ПК  kontakty.html                bg=rgb(14, 15, 16) h1=122.4px overflow=  0 rails=0 img=1/0 err=0
-ПК  modulnye-pokrytiya.html      bg=rgb(14, 15, 16) h1=122.4px overflow=  0 rails=0 img=1/0 err=0
-ПК  o-kompanii.html              bg=rgb(14, 15, 16) h1=122.4px overflow=  0 rails=0 img=2/0 err=0
-ПК  osveshhenie.html             bg=rgb(14, 15, 16) h1=122.4px overflow=  0 rails=0 img=2/0 err=0
-ПК  padel-korty.html             bg=rgb(14, 15, 16) h1=122.4px overflow=  0 rails=0 img=1/0 err=0
-ПК  prezentatsiya.html           bg=rgb(14, 15, 16) h1=122.4px overflow=  0 rails=0 img=14/0 err=0
-ПК  privacy.html                 bg=rgb(14, 15, 16) h1=122.4px overflow=  0 rails=0 img=0/0 err=0
-ПК  produktsiya.html             bg=rgb(14, 15, 16) h1=122.4px overflow=  0 rails=0 img=17/0 err=0
-ПК  proekty.html                 bg=rgb(14, 15, 16) h1=122.4px overflow=  0 rails=0 img=5/0 err=0
-ПК  pvh-pokrytiya.html           bg=rgb(14, 15, 16) h1=122.4px overflow=  0 rails=0 img=1/0 err=0
-ПК  sotrudnichestvo.html         bg=rgb(14, 15, 16) h1=122.4px overflow=  0 rails=0 img=0/0 err=0
-ПК  sportivnye-pokrytiya.html    bg=rgb(14, 15, 16) h1=122.4px overflow=  0 rails=0 img=5/0 err=0
-ПК  sportivnyj-parket.html       bg=rgb(14, 15, 16) h1=122.4px overflow=  0 rails=0 img=1/0 err=0
-ПК  uslugi.html                  bg=rgb(14, 15, 16) h1=122.4px overflow=  0 rails=0 img=6/0 err=0
-МОБ 404.html                     bg=rgb(14, 15, 16) h1=44.85px overflow=  0 rails=1 img=0/0 err=0
-МОБ begovye-dorozhki.html        bg=rgb(14, 15, 16) h1=44.85px overflow=  0 rails=0 img=1/0 err=0
-МОБ geografiya.html              bg=rgb(14, 15, 16) h1=44.85px overflow=  0 rails=0 img=1/0 err=0
-МОБ index.html                   bg=rgb(14, 15, 16) h1= 50.7px overflow=  0 rails=5 img=15/0 err=0
-МОБ kak-vybrat.html              bg=rgb(14, 15, 16) h1=44.85px overflow=  0 rails=2 img=0/0 err=0
-МОБ kontakty.html                bg=rgb(14, 15, 16) h1=44.85px overflow=  0 rails=0 img=1/0 err=0
-МОБ modulnye-pokrytiya.html      bg=rgb(14, 15, 16) h1=44.85px overflow=  0 rails=0 img=1/0 err=0
-МОБ o-kompanii.html              bg=rgb(14, 15, 16) h1=44.85px overflow=  0 rails=4 img=2/0 err=0
-МОБ osveshhenie.html             bg=rgb(14, 15, 16) h1=44.85px overflow=  0 rails=1 img=2/0 err=0
-МОБ padel-korty.html             bg=rgb(14, 15, 16) h1=44.85px overflow=  0 rails=0 img=1/0 err=0
-МОБ prezentatsiya.html           bg=rgb(14, 15, 16) h1=44.85px overflow=  0 rails=0 img=14/0 err=0
-МОБ privacy.html                 bg=rgb(14, 15, 16) h1=44.85px overflow=  0 rails=0 img=0/0 err=0
-МОБ produktsiya.html             bg=rgb(14, 15, 16) h1=44.85px overflow=  0 rails=2 img=17/0 err=0
-МОБ proekty.html                 bg=rgb(14, 15, 16) h1=44.85px overflow=  0 rails=1 img=5/0 err=0
-МОБ pvh-pokrytiya.html           bg=rgb(14, 15, 16) h1=44.85px overflow=  0 rails=0 img=1/0 err=0
-МОБ sotrudnichestvo.html         bg=rgb(14, 15, 16) h1=44.85px overflow=  0 rails=3 img=0/0 err=0
-МОБ sportivnye-pokrytiya.html    bg=rgb(14, 15, 16) h1=44.85px overflow=  0 rails=2 img=5/0 err=0
-МОБ sportivnyj-parket.html       bg=rgb(14, 15, 16) h1=44.85px overflow=  0 rails=0 img=1/0 err=0
-МОБ uslugi.html                  bg=rgb(14, 15, 16) h1=44.85px overflow=  0 rails=1 img=6/0 err=0
+ПК  404.html                     bg=rgb(14, 15, 16) h1=122.4px overflow=  0 r=999/-1/999 rails=0 img=0/0 err=0
+ПК  begovye-dorozhki.html        bg=rgb(14, 15, 16) h1=122.4px overflow=  0 r=999/20/999 rails=0 img=1/0 err=0
+ПК  geografiya.html              bg=rgb(14, 15, 16) h1=122.4px overflow=  0 r=999/-1/999 rails=0 img=1/0 err=0
+ПК  index.html                   bg=rgb(14, 15, 16) h1=  180px overflow=  0 r=999/20/999 rails=0 img=15/0 err=0
+ПК  kak-vybrat.html              bg=rgb(14, 15, 16) h1=122.4px overflow=  0 r=999/-1/999 rails=0 img=0/0 err=0
+ПК  kontakty.html                bg=rgb(14, 15, 16) h1=122.4px overflow=  0 r=999/-1/999 rails=0 img=1/0 err=0
+ПК  modulnye-pokrytiya.html      bg=rgb(14, 15, 16) h1=122.4px overflow=  0 r=999/20/999 rails=0 img=1/0 err=0
+ПК  o-kompanii.html              bg=rgb(14, 15, 16) h1=122.4px overflow=  0 r=999/20/999 rails=0 img=2/0 err=0
+ПК  osveshhenie.html             bg=rgb(14, 15, 16) h1=122.4px overflow=  0 r=999/-1/999 rails=0 img=2/0 err=0
+ПК  padel-korty.html             bg=rgb(14, 15, 16) h1=122.4px overflow=  0 r=999/20/999 rails=0 img=1/0 err=0
+ПК  prezentatsiya.html           bg=rgb(14, 15, 16) h1=122.4px overflow=  0 r=999/20/999 rails=0 img=14/0 err=0
+ПК  privacy.html                 bg=rgb(14, 15, 16) h1=122.4px overflow=  0 r=999/-1/999 rails=0 img=0/0 err=0
+ПК  produktsiya.html             bg=rgb(14, 15, 16) h1=122.4px overflow=  0 r=999/20/999 rails=0 img=17/0 err=0
+ПК  proekty.html                 bg=rgb(14, 15, 16) h1=122.4px overflow=  0 r=999/20/999 rails=0 img=5/0 err=0
+ПК  pvh-pokrytiya.html           bg=rgb(14, 15, 16) h1=122.4px overflow=  0 r=999/20/999 rails=0 img=1/0 err=0
+ПК  sotrudnichestvo.html         bg=rgb(14, 15, 16) h1=122.4px overflow=  0 r=999/-1/999 rails=0 img=0/0 err=0
+ПК  sportivnye-pokrytiya.html    bg=rgb(14, 15, 16) h1=122.4px overflow=  0 r=999/20/999 rails=0 img=5/0 err=0
+ПК  sportivnyj-parket.html       bg=rgb(14, 15, 16) h1=122.4px overflow=  0 r=999/20/999 rails=0 img=1/0 err=0
+ПК  uslugi.html                  bg=rgb(14, 15, 16) h1=122.4px overflow=  0 r=999/20/999 rails=0 img=6/0 err=0
+МОБ 404.html                     bg=rgb(14, 15, 16) h1=44.85px overflow=  0 r=999/-1/999 rails=1 img=0/0 err=0
+МОБ begovye-dorozhki.html        bg=rgb(14, 15, 16) h1=44.85px overflow=  0 r=999/20/999 rails=0 img=1/0 err=0
+МОБ geografiya.html              bg=rgb(14, 15, 16) h1=44.85px overflow=  0 r=999/-1/999 rails=0 img=1/0 err=0
+МОБ index.html                   bg=rgb(14, 15, 16) h1= 50.7px overflow=  0 r=999/20/999 rails=5 img=15/0 err=0
+МОБ kak-vybrat.html              bg=rgb(14, 15, 16) h1=44.85px overflow=  0 r=999/-1/999 rails=2 img=0/0 err=0
+МОБ kontakty.html                bg=rgb(14, 15, 16) h1=44.85px overflow=  0 r=999/-1/999 rails=0 img=1/0 err=0
+МОБ modulnye-pokrytiya.html      bg=rgb(14, 15, 16) h1=44.85px overflow=  0 r=999/20/999 rails=0 img=1/0 err=0
+МОБ o-kompanii.html              bg=rgb(14, 15, 16) h1=44.85px overflow=  0 r=999/20/999 rails=4 img=2/0 err=0
+МОБ osveshhenie.html             bg=rgb(14, 15, 16) h1=44.85px overflow=  0 r=999/-1/999 rails=1 img=2/0 err=0
+МОБ padel-korty.html             bg=rgb(14, 15, 16) h1=44.85px overflow=  0 r=999/20/999 rails=0 img=1/0 err=0
+МОБ prezentatsiya.html           bg=rgb(14, 15, 16) h1=44.85px overflow=  0 r=999/20/999 rails=0 img=14/0 err=0
+МОБ privacy.html                 bg=rgb(14, 15, 16) h1=44.85px overflow=  0 r=999/-1/999 rails=0 img=0/0 err=0
+МОБ produktsiya.html             bg=rgb(14, 15, 16) h1=44.85px overflow=  0 r=999/20/999 rails=2 img=17/0 err=0
+МОБ proekty.html                 bg=rgb(14, 15, 16) h1=44.85px overflow=  0 r=999/20/999 rails=1 img=5/0 err=0
+МОБ pvh-pokrytiya.html           bg=rgb(14, 15, 16) h1=44.85px overflow=  0 r=999/20/999 rails=0 img=1/0 err=0
+МОБ sotrudnichestvo.html         bg=rgb(14, 15, 16) h1=44.85px overflow=  0 r=999/-1/999 rails=3 img=0/0 err=0
+МОБ sportivnye-pokrytiya.html    bg=rgb(14, 15, 16) h1=44.85px overflow=  0 r=999/20/999 rails=2 img=5/0 err=0
+МОБ sportivnyj-parket.html       bg=rgb(14, 15, 16) h1=44.85px overflow=  0 r=999/20/999 rails=0 img=1/0 err=0
+МОБ uslugi.html                  bg=rgb(14, 15, 16) h1=44.85px overflow=  0 r=999/20/999 rails=1 img=6/0 err=0
 КЛИК-ОБХОД: 104 локальных URL + 4 доп. → 0 битых
 МОБ листание: 1 / 6 → 2 / 6
 ФОРМА: 3 поля + согласие → статус «Заявка подготовлена. Отправьте её в WhatsApp или поз…», WhatsApp-ссылка = 1

@@ -170,8 +170,8 @@ OG/Twitter, `BreadcrumbList` (кроме главной), sitemap на 18 инд
   в `screens/redesign-final.png` и `screens/redesign-check.txt`.
 
 - Lighthouse 12.8.2 (`screens/lighthouse.txt`): ПК 98 / 100 / 100 / 100,
-  мобильный 79 / 100 / 100 / 100. CLS 0,03 и 0,011, TBT 0 и 20 мс. Мобильный
-  LCP 4,5 с при имитации медленной сети — оставлено в TODO.
+  мобильный 79 / 100 / 100 / 100. CLS 0,034 и 0,011, TBT 0 мс. Мобильный
+  LCP 4,6 с при имитации медленной сети — оставлено в TODO. Версия `?v=20261108x`.
 - Финальный браузерный обход: 19 страниц × ПК/МОБ, 104 локальных URL + 4 доп.,
   0 битых, 0 JS-ошибок, 0 битых изображений, моб-листание и форма работают,
   `prefers-reduced-motion` учитывается. Отчёт `screens/redesign-check.txt`,
@@ -182,6 +182,10 @@ OG/Twitter, `BreadcrumbList` (кроме главной), sitemap на 18 инд
   axe `label-content-name-mismatch`), заставка ускорена до ~1,5 с.
 - Добавлены `.gitignore`, `package-lock.json`, OFL-лицензия на Inter Tight и
   IBM Plex Mono, `img/grain.webp` вместо двух inline SVG-шумов.
+- Добавлена единая система скруглений «остров»: одни токены на ПК и телефоне,
+  панель/dock/кнопки — pill, карточки и все контентные фото — 20px;
+  `border-radius:0` убраны, edge-to-edge hero сохранён. Добавлены
+  `screens/rounding-final.png` и `screens/redesign/rounding-proof-*.png`.
 - Деплой: коммит `0139ef0` запушен в `arena/328b9b34-n7-site`; Pages build
   `built`, `error=null`. После деплоя live-проверены `index.html?v=20261108w`,
   `uslugi.html?v=20261108w`, `404.html`, `n7-bold.css?v=w`, `n7-bold.js?v=w`,

@@ -26,7 +26,13 @@
   --w-bold:min(1440px,100% - 2*var(--gut));
   --gap:clamp(12px,1.6vw,24px);
   --sec-pad:clamp(96px,12vw,180px);
-  --r:0px;                /* технический стиль: без скруглений */
+  /* Единая система скруглений «остров»: одни токены на ПК и телефоне.
+     Базовые значения заданы в style.css (--r-sm/md/lg/pill). */
+  --n7-r:var(--r-lg);
+  --n7-r-sm:var(--r-sm);
+  --n7-r-md:var(--r-md);
+  --n7-r-lg:var(--r-lg);
+  --n7-r-pill:var(--r-pill);
 }
 
 /* Тёмная база по умолчанию. Светлая тема остаётся доступной переключателем. */
@@ -73,20 +79,20 @@ header .w{width:min(1600px,100% - 2*var(--gut))}
 nav a{font:500 .76rem/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;
   border-bottom:2px solid transparent;padding:12px 0}
 nav a:hover,nav a[aria-current="page"]{border-color:var(--acid);color:var(--acid)}
-.tools>.ib,.ib{border-color:var(--grid);border-radius:0}
+.tools>.ib,.ib{border-color:var(--grid);border-radius:var(--n7-r-md)}
 .tools>.ib:hover{border-color:var(--acid);color:var(--acid)}
 
 /* ---------- Кнопки ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;
   padding:0 clamp(20px,2.4vw,36px);background:var(--acid);color:var(--acid-ink);
-  border:1px solid var(--acid);border-radius:0;
+  border:1px solid var(--acid);border-radius:var(--n7-r-pill);
   font:800 .88rem/1 var(--display);text-transform:uppercase;letter-spacing:.07em;
   text-decoration:none;cursor:pointer;
   transition:background .22s ease,color .22s ease,transform .22s ease,border-color .22s ease}
 .btn:hover{background:transparent;color:var(--acid);transform:translateY(-3px)}
 .btn:active{transform:none}
 .tc-go{background:var(--acid)!important;color:var(--acid-ink)!important;
-  border:1px solid var(--acid);border-radius:0;font:800 .8rem/1 var(--display);
+  border:1px solid var(--acid);border-radius:var(--n7-r-pill);font:800 .8rem/1 var(--display);
   text-transform:uppercase;letter-spacing:.06em}
 .more{font:500 .76rem/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;
   text-underline-offset:5px;color:var(--acid)}
@@ -255,7 +261,7 @@ figure{margin:0;min-width:0}
 .n7-quick label{font:500 .68rem/1.4 var(--mono);letter-spacing:.14em;
   text-transform:uppercase;color:var(--muted);margin-bottom:8px}
 .n7-quick input,.n7-quick select{width:100%;min-height:58px;padding:12px 16px;
-  background:var(--panel);color:var(--paper);border:1px solid var(--grid);border-radius:0;
+  background:var(--panel);color:var(--paper);border:1px solid var(--grid);border-radius:var(--n7-r-md);
   font:500 1rem/1.4 var(--body);box-shadow:none}
 .n7-quick input:focus,.n7-quick select:focus{border-color:var(--acid);outline:2px solid var(--acid);outline-offset:2px}
 .n7-quick .n7-quick-note{grid-column:1/-1;color:var(--muted);font-size:.8rem;line-height:1.5}
@@ -265,7 +271,7 @@ figure{margin:0;min-width:0}
 .n7-cta-big{grid-column:1/-1;width:100%;min-height:clamp(76px,9vw,132px);
   font:800 clamp(1.4rem,4.2vw,4.2rem)/1 var(--display);text-transform:uppercase;
   letter-spacing:-.02em;background:var(--acid);color:var(--acid-ink);border:1px solid var(--acid);
-  border-radius:0;cursor:pointer;transition:background .25s,color .25s,letter-spacing .25s}
+  border-radius:var(--n7-r-pill);cursor:pointer;transition:background .25s,color .25s,letter-spacing .25s}
 .n7-cta-big:hover{background:transparent;color:var(--acid);letter-spacing:.02em}
 .n7-cta-big[disabled]{opacity:.6;cursor:wait}
 
@@ -293,25 +299,25 @@ footer .mark{color:var(--acid)}
 .bc a:hover{color:var(--acid)}
 .pagehero .deco{opacity:.20}
 .splitnav-wrap{margin-top:26px}
-.splitnav-i{background:var(--panel);border-color:var(--grid);border-radius:0}
+.splitnav-i{background:var(--panel);border-color:var(--grid);border-radius:var(--n7-r-lg)}
 .splitnav-i.on{border-color:var(--acid);background:linear-gradient(135deg,rgba(242,194,0,.14),transparent 70%)}
 .splitnav-k{font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;color:var(--acid)}
 .splitnav-i>b{font-family:var(--display);font-weight:800;text-transform:uppercase;letter-spacing:-.03em}
 .splitnav-i>em{font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--acid)}
 .splitnav-i.on>em{color:var(--acid)}
 h2::after{content:"";display:block;width:48px;height:3px;background:var(--acid);margin-top:18px}
-.pcard,.lcard,.pcats .pcat,.grid figure{background:var(--panel);border:1px solid var(--grid);border-radius:0}
+.pcard,.lcard,.pcats .pcat,.grid figure{background:var(--panel);border:1px solid var(--grid);border-radius:var(--n7-r-lg);overflow:hidden}
 .pcard:hover,.lcard:hover{border-color:var(--acid)}
 .badge,.art,.ponreq,.lcount,.catcount,.fpill{font-family:var(--mono);letter-spacing:.06em}
 .badge{color:var(--acid)}
 .filters button,.lfilters button{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;
-  text-transform:uppercase;border-radius:0}
+  text-transform:uppercase;border-radius:var(--n7-r-pill)}
 .filters button[aria-pressed="true"],.lfilters button[aria-pressed="true"]{background:var(--acid);color:var(--acid-ink);border-color:var(--acid)}
 .tbl th,.tbl td{border-color:var(--grid)}
 .tbl thead th{background:var(--panel);font-family:var(--mono);color:var(--acid);font-size:.72rem}
-input,select,textarea{border-radius:0;background:var(--panel);color:var(--paper);border:1px solid var(--grid)}
+input,select,textarea{border-radius:var(--n7-r-md);background:var(--panel);color:var(--paper);border:1px solid var(--grid)}
 label{font:500 .72rem/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.toc.n7panel{background:var(--panel);border-color:var(--grid);border-radius:0}
+.toc.n7panel{background:var(--panel);border-color:var(--grid);border-radius:var(--n7-r-pill)}
 .toc .tp b{font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--acid)}
 .toc ol a{font-family:var(--mono);font-size:.7rem;letter-spacing:.04em}
 .toc ol a.on{color:var(--acid)}
@@ -448,7 +454,7 @@ footer .n7-foot-line .n7-stub::after{font-size:.6rem}
 /* Панель управления не перекрывает контент: узкая полоса иконок, появляется после hero */
 @media(min-width:1101px){
   .toc.n7panel{width:36px;right:6px;padding:6px 3px;max-height:none;overflow:visible;
-    border-radius:0;opacity:0;visibility:hidden;pointer-events:none;
+    border-radius:var(--n7-r-pill);opacity:0;visibility:hidden;pointer-events:none;
     transform:translateY(-50%) translateX(10px);
     transition:opacity .3s ease,transform .3s ease,visibility .3s}
   body.n7-scrolled .toc.n7panel{opacity:1;visibility:visible;pointer-events:auto;
@@ -456,7 +462,7 @@ footer .n7-foot-line .n7-stub::after{font-size:.6rem}
   .toc.n7panel .tp,.toc.n7panel ol{display:none}
   .toc.n7panel .tc-acts{margin:0;padding:0;border:0;gap:5px}
   .toc.n7panel .tc-acts button,.toc.n7panel .tc-acts a{width:30px;min-height:30px;
-    padding:0;justify-content:center;font-size:0;border-radius:0}
+    padding:0;justify-content:center;font-size:0;border-radius:var(--n7-r-pill)}
   .toc.n7panel .tc-acts button span{font-size:14px}
   .toc.n7panel .tc-go::after{content:'→';font-size:14px}
 }
@@ -471,4 +477,45 @@ footer .n7-foot-line .n7-stub::after{font-size:.6rem}
     gap:10px;margin-bottom:110px}
   .n7-hero .n7-stats dt{font-size:clamp(1.8rem,8.5vw,2.6rem)}
   .n7-hero .n7-stats dd{font-size:.58rem;letter-spacing:.08em}
+}
+
+
+/* ==========================================================================
+   ЕДИНЫЙ МЕХАНИЗМ СКРУГЛЕНИЙ «ОСТРОВ»
+   Одинаково на всех 19 страницах, на ПК и на телефоне.
+   Панель управления и кнопки — «остров» (pill), карточки и фото — мягкий радиус.
+   ========================================================================== */
+.btn,.tc-go,.n7-cta-big,.to-top,.dock,
+.filters button,.lfilters button,.ltoggle,.chip,.fpill,.chips span,.n7tags span,
+.skip,.toast,.n7-list-btn,.addlist,.addcmp,.lcount{
+  border-radius:var(--n7-r-pill)
+}
+.ib,.tools>.ib,.fbtns .ib,.dk-ui .ib,.lb-x,.lb-p,.lb-n,.cp,
+input,select,textarea,.n7-quick input,.n7-quick select,
+.ck input,.pnote,.note-box,#status,.pick-r,.calc-r,.pcfg-r,.lcalc-r,
+.note,.leadtext,details[open],.sitem,.ld-item,.ld-empty{
+  border-radius:var(--n7-r-md)
+}
+.badge,.pcat .badge,.pcard .badge{border-radius:var(--n7-r-sm)}
+.pcard,.lcard,.pcats .pcat,.grid figure,.n7-tiles figure,.n7-pj,.pcat,
+.splitnav-i,.n7-geo .n7-map,.map,.prod-ph,.pcfg-view,.sbox,.ld-panel,
+.tw,.tbl,.bars .b,.bars .b i{
+  border-radius:var(--n7-r-lg)
+}
+.n7-tiles figure,.splitnav-i,.n7-geo .n7-map,.map,.prod-ph,.pcfg-view,.sbox{overflow:hidden}
+.ph,.prod-ph,.pj-ph,.mapimg,.lb-img,.n7-geo .n7-map{border-radius:var(--n7-r-lg)}
+/* Фото внутри карточки с подписью: скруглены верхние углы, низ обрезает карточка */
+.pcard>.ph,.pcat>.ph,.grid>figure>.ph,
+.n7-tiles figure .ph,.n7-pj .pj-ph{
+  border-radius:var(--n7-r-lg) var(--n7-r-lg) 0 0
+}
+/* Полноэкранный hero остаётся edge-to-edge: это фон, а не контентная фотография */
+.n7-hero .hero-photo,.pagehero .hero-photo{border-radius:0}
+/* Узкая полоса TOC на ПК — тот же «остров», что и нижний dock на телефоне */
+@media(min-width:1101px){
+  .toc.n7panel{border-radius:var(--n7-r-pill)}
+  .toc.n7panel .tc-acts button,.toc.n7panel .tc-acts a{border-radius:var(--n7-r-pill)}
+}
+@media(max-width:1100px){
+  .toc.n7panel{border-radius:var(--n7-r-pill)}
 }

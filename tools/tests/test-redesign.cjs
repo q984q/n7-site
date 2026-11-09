@@ -41,6 +41,12 @@ ok((css.match(/{/g) || []).length === (css.match(/}/g) || []).length, 'n7-bold.c
 for (const t of ['--ink:', '--acid:', '--display:', '--mono:', '--w-bold:', '--sec-pad:',
   '@media(prefers-reduced-motion:reduce)', 'n7-marquee', 'n7-cta-big', '[data-n7-stub]'])
   ok(css.includes(t), 'n7-bold.css: нет ' + t);
+ok(css.includes('--n7-r:') && css.includes('--n7-r-pill:') && css.includes('ЕДИНЫЙ МЕХАНИЗМ СКРУГЛЕНИЙ'),
+   'n7-bold.css: нет единой системы скруглений «остров»');
+ok((css.match(/border-radius:\s*0/g) || []).length <= 1,
+   'n7-bold.css: остались нулевые скругления, кроме edge-to-edge hero');
+ok(css.includes('.ph,.prod-ph,.pj-ph,.mapimg,.lb-img'),
+   'n7-bold.css: фотографии не подключены к единому радиусу');
 ok((fc.match(/@font-face/g) || []).length === 15, 'fonts.css: 15 локальных @font-face');
 ok(fc.includes("'Inter Tight'") && fc.includes("'IBM Plex Mono'"), 'fonts.css: нет новых шрифтов');
 ok(js.includes('prefers-reduced-motion') && js.includes('N7_LEAD_ENDPOINT') && js.includes('wa.me'),
