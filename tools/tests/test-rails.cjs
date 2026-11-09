@@ -82,7 +82,8 @@ for (const f of HTML) {
   d.dispatchEvent(new w.Event('DOMContentLoaded', { bubbles: true }));
   ok(d.querySelectorAll('.n7rail').length === 0, 'ПК: листание не инициализировано');
   ok(d.querySelectorAll('.n7rail-ui').length === 0, 'ПК: стрелок и счётчиков нет');
-  ok(!d.querySelector('.grid.bento').classList.contains('n7rail'), 'ПК: сетка услуг осталась статичной');
+  const grid = d.querySelector('.grid');
+  ok(!!grid && !grid.classList.contains('n7rail'), 'ПК: сетка услуг осталась статичной');
 }
 
 /* CSS: единые правила, точка в dock удалена */

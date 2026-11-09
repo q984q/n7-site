@@ -97,7 +97,7 @@ function sync(){
   if($('#deck'))return;                          /* презентация листается сама */
   if(mobile()&&!inited){
     groupSrows();
-    $$('.grid.bento, .pcats, .grid:not(.cat):not(.bento):not(.lgrid), ol.steps, ul.tl, .why .g, .n7rail-group')
+    $$('.grid.bento, .pcats, .grid:not(.cat):not(.bento):not(.lgrid), ol.steps, ul.tl, .why .g, .n7rail-group, .v2-row')
       .forEach(rail);
     inited=true;
   } else if(!mobile()&&inited){

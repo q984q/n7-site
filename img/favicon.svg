@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-<rect width="64" height="64" fill="#141516"/>
-<path d="M3 53 40 11h8L11 53z" fill="#3c3c3c"/>
-<text x="32" y="43" text-anchor="middle" font-family="DejaVu Sans,Arial,sans-serif" font-weight="bold" font-size="34" fill="#f2c200">N7</text>
-<rect x="0" y="60" width="64" height="4" fill="#f2c200"/>
+<rect width="64" height="64" rx="14" fill="#0B1016"/>
+<path d="M8 50 38 12h9L17 50z" fill="#1E3448"/>
+<text x="32" y="43" text-anchor="middle" font-family="DejaVu Sans,Arial,sans-serif" font-weight="bold" font-size="32" fill="#EAF0F5">N<tspan fill="#4EA8FF">7</tspan></text>
+<rect x="14" y="54" width="36" height="3" rx="1.5" fill="#4EA8FF"/>
 </svg>

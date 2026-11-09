@@ -14,8 +14,8 @@ function build(){
  ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');ov.setAttribute('aria-label','Поиск по сайту');
  ov.innerHTML='<div class="sbox"><div class="sfield"><svg width="22" height="22" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="6"/><path d="M13.5 13.5 18 18"/></svg>'+
   '<input type="search" id="sq" autocomplete="off" spellcheck="false" placeholder="'+(is404?'Что вы искали?':'Поиск по разделам, покрытиям и услугам…')+'" aria-label="Поиск по сайту">'+
-  '<button type="button" class="ib sclose" aria-label="Закрыть поиск">esc</button></div>'+
-  '<div class="sres" id="sres" role="listbox"></div>'+
+  '<button type="button" class="ib sclose" aria-label="esc — закрыть поиск">esc</button></div>'+
+  '<div class="sres" id="sres" aria-label="Результаты поиска"></div>'+
   '<div class="sfoot"><span>↑ ↓ — выбрать · Enter — открыть · Esc — закрыть</span><span>N7 Construction</span></div></div>';
  d.body.appendChild(ov);
  input=$('#sq',ov);res=$('#sres',ov);
@@ -50,6 +50,8 @@ function query(q){
    '<b>'+esc(it.t)+'</b><small>'+esc(it.p)+(it.k?' · '+esc(String(it.k).slice(0,72)):'')+'</small></a>';
  }).join('');
  res.innerHTML=prefix+(html||'<p class="sempty">Ничего не нашли. Попробуйте «падел», «освещение», «плитка» или «контакты».</p>');
+ /* роль listbox допустима только когда есть варианты role=option */
+ if(found.length)res.setAttribute('role','listbox');else res.removeAttribute('role');
 }
 function mark(){var a=$$('.sitem',res);a.forEach(function(x,i){x.classList.toggle('on',i===active)});if(a[active])a[active].scrollIntoView({block:'nearest'})}
 function nav(e){

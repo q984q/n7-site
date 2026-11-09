@@ -1,95 +1,28 @@
 /* ==========================================================================
-   N7 BOLD — интерактив редизайна. Без библиотек, без внешних запросов.
-   Дополняет fx.js (reveal / счётчики / магнитные кнопки уже есть там):
-   здесь — бегущая строка, курсор-кольцо, параллакс, форма из 3 полей.
-   Всё тяжёлое отключается при prefers-reduced-motion и на тач-устройствах.
+   N7 v2 «СТАЛЬ» — интерактив без зависимостей.
+   Оставляем рабочую форму из 3 полей с честным WhatsApp-fallback и панель
+   управления, которая не мешает первому экрану. Из v1 убраны заставка,
+   кастомный курсор, бегущая строка и параллакс: они belonged к старому
+   визуальному языку и ухудшали LCP. Уважаем prefers-reduced-motion.
    ========================================================================== */
 (function(){
 'use strict';
 var d=document,r=d.documentElement,w=window;
 var $=function(s,c){return (c||d).querySelector(s)};
-var $$=function(s,c){return Array.prototype.slice.call((c||d).querySelectorAll(s))};
-var RM=false,FINE=false,WIDE=innerWidth>760;
-try{RM=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
-try{FINE=matchMedia('(hover:hover) and (pointer:fine)').matches}catch(e){}
+var RM=false;try{RM=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
 
-/* ---------- 1. Бегущая строка: дублируем группу для бесшовного цикла ---------- */
-$$('.n7-marquee-track').forEach(function(track){
-  var g=track.querySelector('.n7-marquee-group');
-  if(!g)return;
-  var clone=g.cloneNode(true);
-  clone.setAttribute('aria-hidden','true');
-  track.appendChild(clone);
-});
-
-/* ---------- 2. Кастомный курсор-кольцо (нативный курсор остаётся) ---------- */
-if(FINE&&WIDE&&!RM&&!$('#n7Cursor')){
-  var cur=d.createElement('div');cur.id='n7Cursor';cur.className='n7-cursor';
-  cur.setAttribute('aria-hidden','true');d.body.appendChild(cur);
-  var cx=0,cy=0,tx=0,ty=0,raf=0;
-  function tick(){
-    cx+=(tx-cx)*.22;cy+=(ty-cy)*.22;
-    cur.style.transform='translate3d('+cx.toFixed(1)+'px,'+cy.toFixed(1)+'px,0)';
-    if(Math.abs(tx-cx)>.4||Math.abs(ty-cy)>.4)raf=requestAnimationFrame(tick);else raf=0;
-  }
-  d.addEventListener('pointermove',function(e){
-    if(e.pointerType!=='mouse')return;
-    tx=e.clientX;ty=e.clientY;cur.classList.add('on');
-    if(!raf)raf=requestAnimationFrame(tick);
-  },{passive:true});
-  d.addEventListener('pointerover',function(e){
-    var t=e.target;
-    if(t&&t.closest&&t.closest('a,button,input,select,textarea,[role="button"]'))cur.classList.add('big');
-  },{passive:true});
-  d.addEventListener('pointerout',function(e){
-    var t=e.target;
-    if(t&&t.closest&&t.closest('a,button,input,select,textarea,[role="button"]'))cur.classList.remove('big');
-  },{passive:true});
-  d.addEventListener('pointerleave',function(){cur.classList.remove('on')});
-}
-
-/* ---------- 3. Лёгкий параллакс объектных фото ---------- */
-var px=[],hero=$('.n7-hero .hero-photo')||$('.hero-photo');
-function collect(){
-  px=$$('img[data-n7-parallax]').filter(function(img){
-    if(innerWidth<=760||RM)return false;
-    if(img.closest('.n7rail,.deck,.tbl'))return false;
-    var p=img.parentElement;if(!p)return false;
-    p.classList.add('n7-parallax');
-    img.style.setProperty('--n7py','0px');
-    return true;
-  });
-}
-var praf=0;
-function parallax(){
-  praf=0;
-  var h=innerHeight;
-  px.forEach(function(img){
-    var b=img.parentElement.getBoundingClientRect();
-    if(b.bottom<0||b.top>h)return;
-    var y=Math.max(-18,Math.min(18,((b.top+b.height/2-h/2)/h)*-26));
-    img.style.setProperty('--n7py',y.toFixed(1)+'px');
-  });
-  if(hero&&!RM&&innerWidth>760){
-    var hb=hero.getBoundingClientRect();
-    if(hb.bottom>0&&hb.top<h){
-      var hy=Math.max(-26,Math.min(26,((hb.top+hb.height/2-h/2)/h)*-18));
-      hero.style.transform='translate3d(0,'+hy.toFixed(1)+'px,0) scale(1.06)';
-    }
-  }
-}
-function onScroll(){if(!praf)praf=requestAnimationFrame(parallax)}
-if(!RM&&WIDE){collect();addEventListener('scroll',onScroll,{passive:true});
-  addEventListener('resize',function(){collect();onScroll()},{passive:true});onScroll()}
-
-/* Панель управления: не мешает первому экрану, появляется после прокрутки */
+/* ---------- 1. Панель управления: появляется после первого экрана ---------- */
 var tocRaf=0;
-function tocReveal(){tocRaf=0;var y=scrollY||d.documentElement.scrollTop||0;
-  d.body.classList.toggle('n7-scrolled',y>innerHeight*.65)}
+function tocReveal(){
+  tocRaf=0;
+  var y=scrollY||r.scrollTop||0;
+  d.body.classList.toggle('n7-scrolled',y>innerHeight*.65);
+}
 addEventListener('scroll',function(){if(!tocRaf)tocRaf=requestAnimationFrame(tocReveal)},{passive:true});
-addEventListener('resize',tocReveal,{passive:true});tocReveal();
+addEventListener('resize',tocReveal,{passive:true});
+tocReveal();
 
-/* ---------- 4. Форма из 3 полей: endpoint или честный WhatsApp-fallback ---------- */
+/* ---------- 2. Форма из 3 полей: endpoint или честный WhatsApp-fallback ---------- */
 var f=$('#n7Quick'),st=$('#q-status');
 if(f){
   var WA='77778848818';
@@ -97,8 +30,9 @@ if(f){
   var ENDPOINT=String((w.N7_LEAD_ENDPOINT||'')||(f.getAttribute('data-endpoint'))||'').trim();
   function val(id){var e=d.getElementById(id);return e?String(e.value||'').trim():''}
   function say(msg,bad){
-    if(!st)return;st.hidden=false;st.textContent=msg;
-    st.style.color=bad?'var(--err)':'var(--acid)';
+    if(!st)return;
+    st.hidden=false;st.textContent=msg;
+    st.style.color=bad?'var(--err)':'var(--azure-deep)';
   }
   function text(){
     return 'Заявка с сайта N7 Construction\nИмя: '+val('q-name')+
@@ -110,7 +44,7 @@ if(f){
     say('Заявка подготовлена. Отправьте её в WhatsApp или позвоните: '+TEL1+', '+TEL2+'.');
     if(st){
       var a=d.createElement('a');a.className='more';a.href=url;a.target='_blank';a.rel='noopener';
-      a.textContent='Открыть WhatsApp →';a.style.marginLeft='10px';st.appendChild(a);
+      a.textContent='Открыть WhatsApp →';st.appendChild(a);
     }
     try{w.open(url,'_blank','noopener')}catch(e){}
   }

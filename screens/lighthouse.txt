@@ -1,20 +1,27 @@
-Lighthouse 12.8.2 · index.html · 2026-11-08
-Режим: стандартный троттлинг Chrome, локальный просмотр :8765
+Lighthouse 12.8.2 · версия 2 «Сталь» · ?v=20261108z1 · 2026-11-08
+Локальный предпросмотр http://127.0.0.1:8765, Chromium headless без сети.
 
-Версия активов ?v=20261108x, единая система скруглений «остров»
+ГЛАВНАЯ index.html
+  Desktop (--preset=desktop) : performance 99 / accessibility 100 / best-practices 100 / SEO 100
+    FCP 0.6 s · LCP 0.9 s · CLS 0.001 · TBT 0 ms · Speed Index 0.6 s
+  Mobile (default throttling) : performance 82 / accessibility 100 / best-practices 100 / SEO 100
+    FCP 2.6 s · LCP 4.2 s · CLS 0.002 · TBT 0 ms · Speed Index 2.6 s
+  Binary fails: нет. Цветовой контраст исправлен: подписи на светлом — #125BB8
+  (>= 5.4:1), акценты на тёмном — #4EA8FF / #83C6FF (>= 6.7:1).
 
-ПК: performance 98 · accessibility 100 · best-practices 100 · SEO 100
-  first-contentful-paint: 0.6 s
-  largest-contentful-paint: 0.9 s
-  cumulative-layout-shift: 0.034
-  total-blocking-time: 0 ms
-  speed-index: 1.1 s
+ВСЕ 19 СТРАНИЦ · Desktop
+  accessibility 100 · best-practices 100 · SEO 100 на 18 страницах;
+  404.html — SEO 63 (намеренный noindex,follow + абсолютный <base>).
+  performance 90–100, минимум у osveshhenie.html (90).
+  Бинарных провалов audits нет нигде, кроме 404.html: errors-in-console и
+  is-crawlable — артефакт песочницы (запросы к q984q.github.io закрыты,
+  noindex для страницы ошибки задан специально).
 
-Мобильный: performance 79 · accessibility 100 · best-practices 100 · SEO 100
-  first-contentful-paint: 2.7 s
-  largest-contentful-paint: 4.6 s
-  cumulative-layout-shift: 0.011
-  total-blocking-time: 0 ms
-  speed-index: 3.0 s
+СРАВНЕНИЕ С v1 (18f6a6f)
+  Desktop  : 98 / 100 / 100 / 100  ->  99 / 100 / 100 / 100
+  Mobile   : 79 / 100 / 100 / 100  ->  82 / 100 / 100 / 100
+  LCP mob  : 4.6 s -> 4.2 s · CLS mob 0.011 -> 0.002
+  Заставка 2800/1700 ms удалена полностью; первый экран больше не блокируется.
 
-Примечание: мобильный LCP при имитации медленной сети остаётся основным резервом; CLS и TBT в норме.
+Скриншоты: screens/v2/ (14 PNG, 7 пар ПК/МОБ), коллаж screens/v2-final.png
+Браузерный отчёт: screens/redesign-check.txt
