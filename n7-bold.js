@@ -1,6 +1,6 @@
 /* ==========================================================================
    N7 v2 «СТАЛЬ» — интерактив без зависимостей.
-   Оставляем рабочую форму из 3 полей с честным WhatsApp-fallback и панель
+   Оставляем рабочую форму из 3 полей с отправкой через WhatsApp и панель
    управления, которая не мешает первому экрану. Из v1 убраны заставка,
    кастомный курсор, бегущая строка и параллакс: они belonged к старому
    визуальному языку и ухудшали LCP. Уважаем prefers-reduced-motion.
@@ -22,7 +22,7 @@ addEventListener('scroll',function(){if(!tocRaf)tocRaf=requestAnimationFrame(toc
 addEventListener('resize',tocReveal,{passive:true});
 tocReveal();
 
-/* ---------- 2. Форма из 3 полей: endpoint или честный WhatsApp-fallback ---------- */
+/* ---------- 2. Форма из 3 полей: endpoint или отправка через WhatsApp ---------- */
 var f=$('#n7Quick'),st=$('#q-status');
 if(f){
   var WA='77778848818';

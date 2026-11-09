@@ -27,7 +27,7 @@ var qp=new URLSearchParams(location.search).get('p'),mg=$('#msg');if(qp&&mg)mg.v
    в секретах Cloudflare Worker. Задать endpoint можно двумя способами:
      window.N7_LEAD_ENDPOINT = 'https://…workers.dev'
      <form id="lead" data-endpoint="https://…workers.dev">
-   Пока endpoint не задан, работает резервный сценарий без сервера:
+   Без endpoint заявка открывается в WhatsApp:
    браузер собирает текст заявки и открывает WhatsApp с готовым сообщением.   */
 var f=$('#lead'),st=$('#status');
 var ENDPOINT=String((window.N7_LEAD_ENDPOINT||'')||(f&&f.getAttribute('data-endpoint'))||'').trim();
