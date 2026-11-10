@@ -147,18 +147,6 @@ ok(/border-radius:2px!important/.test(css41), 'n7-bold.css: не единый я
 ok(/\.pagehero \+ section\{padding-top:clamp\(40px,5vw,72px\)/.test(css41),
    'n7-bold.css: первый контентный блок снова отделён пустым полем');
 
-/* ---------- Современный слой v4.2 ---------- */
-const css42 = read('n7-bold.css');
-const bold42 = read('n7-bold.js');
-ok(/@view-transition\{navigation:auto\}/.test(css42) && /view-transition-name:n7-title/.test(css42),
-   'n7-bold.css: нет нативных cross-document View Transitions');
-ok(/animation-timeline:scroll\(root block\)/.test(css42) && /n7-hero-camera/.test(css42),
-   'n7-bold.css: нет scroll-driven «камеры» hero');
-ok(/prefers-reduced-motion:reduce/.test(css42) && /view-transition-name:none/.test(css42),
-   'n7-bold.css: современный слой не отключается при reduced-motion');
-ok(/'prefetch'/.test(bold42) && /requestIdleCallback/.test(bold42),
-   'n7-bold.js: нет тихой предзагрузки внутренних HTML-страниц');
-
 /* ---------- Заглушки и факты на остальных страницах ---------- */
 const stubs = files.reduce((n, f) => n + (read(f).match(/data-n7-stub=/g) || []).length, 0);
 ok(stubs === 29, 'заглушек должно быть 29, получилось ' + stubs);
@@ -169,6 +157,25 @@ for (const f of files) {
   ok(s.includes('+7 (777) 884-88-18') && s.includes('+7 (747) 534-40-14'), f + ': потерян телефон');
 }
 
-console.log(bad ? 'V4 «РЕДАКЦИЯ»: ПРОВАЛ (' + bad + ')'
-  : 'V4.2 «РЕДАКЦИЯ»: ВСЕ ПРОВЕРКИ ПРОЙДЕНЫ · страниц: ' + files.length + ' · заглушек: ' + stubs);
+ok(!/view-transition|animation-timeline|@keyframes vo/.test(read('style.css')),
+   'style.css: вернулись нативные переходы / scroll-анимации');
+ok(!/view-transition|n7-hero-camera|rel=.prefetch|'prefetch'/.test(read('n7-bold.css') + read('n7-bold.js')),
+   'v4.2: современный слой снова добавлен поверх статичной подачи');
+
+/* ---------- ВЕРСИЯ 4.3 «КРАСОТА» · статичная архитектурная сетка ---------- */
+const css43 = read('n7-bold.css');
+ok((css43.match(/\{/g)||[]).length === (css43.match(/\}/g)||[]).length,
+   'n7-bold.css: несбалансированные фигурные скобки');
+ok(css43.includes('ВЕРСИЯ 4.3 «КРАСОТА»'), 'n7-bold.css: нет прохода статичной красоты');
+ok(css43.includes('counter-reset:n7-chapter'), 'n7-bold.css: нет фолио-нумерации разделов');
+ok(css43.includes('linear-gradient(90deg,#B83A18 0 72px,#D5D8D2 72px 100%)'),
+   'n7-bold.css: нет двухцветной линейки заголовков');
+ok(css43.includes('content:"№ 01 / 02"'), 'n7-bold.css: нет ярлыка на фотографии');
+ok(css43.includes('.v4-hero-media{') && css43.includes('border-top:3px solid #B83A18!important'),
+   'n7-bold.css: нет белой окантовки кадра с терракотовой кромкой');
+ok(/@media\(max-width:620px\)\{[\s\S]*?font-size:\.62rem;letter-spacing:\.08em;white-space:normal/.test(css43),
+   'n7-bold.css: рубрика hero снова обрезается на телефоне');
+
+console.log(bad ? 'V4.3 «КРАСОТА»: ПРОВАЛ (' + bad + ')'
+  : 'V4.3 «КРАСОТА»: ВСЕ ПРОВЕРКИ ПРОЙДЕНЫ · страниц: ' + files.length + ' · заглушек: ' + stubs);
 process.exit(bad ? 1 : 0);

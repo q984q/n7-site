@@ -1,5 +1,5 @@
 /* ==========================================================================
- N7 · ВЕРСИЯ 4.2 «РЕДАКЦИЯ» (v4 / editorial + modern layer)
+ N7 · ВЕРСИЯ 4 «РЕДАКЦИЯ» (v4 / editorial)
  --------------------------------------------------------------------------
  Полная смена визуального языка после бенчмарка казахстанских и мировых
  компаний: светлая бумажная сетка, крупная архитектурная фотография,
@@ -898,64 +898,87 @@ figure:hover{transform:none!important}
 
 
 /* ==========================================================================
-   СОВРЕМЕННЫЙ СЛОЙ v4.2
-   Нативные cross-document View Transitions и scroll-driven «камера» hero.
-   Никакого JS-рендера, HUD, 3D и скрытия контента: только браузерные API,
-   мягкий морфинг заголовка и движение объектива внутри уже видимого кадра.
-   В браузерах без поддержки остаётся обычная навигация и статичный диптих.
+   ВЕРСИЯ 4.3 «КРАСОТА» · СТАТИЧНАЯ АРХИТЕКТУРНАЯ СЕТКА
+   --------------------------------------------------------------------------
+   Ответ на «нужно сделать прям красиво»: никаких переходов, камер и
+   скролл-анимаций. Красота собрана из бумаги, тонкой чертёжной линейки,
+   фолио-нумерации, белой окантовки фотографии и одного терракотового акцента.
+   Слой v4.2 удалён; факты, телефоны, URL, формы и 29 заглушек не менялись.
    ========================================================================== */
-@view-transition{navigation:auto}
 
-header.n7-head{view-transition-name:n7-head}
-main h1{view-transition-name:n7-title}
-.v4-hero-media{view-transition-name:n7-hero}
-.slide h1{view-transition-name:none}
-
-::view-transition-old(root){animation:n7-vt-out .18s ease-in both}
-::view-transition-new(root){animation:n7-vt-in .34s cubic-bezier(.2,.8,.25,1) both}
-::view-transition-old(n7-title){animation:n7-title-out .26s cubic-bezier(.4,0,1,1) both}
-::view-transition-new(n7-title){animation:n7-title-in .46s cubic-bezier(.2,.8,.25,1) both}
-::view-transition-group(n7-head){animation-duration:.24s}
-::view-transition-old(n7-hero),
-::view-transition-new(n7-hero){animation-duration:.42s}
-
-@keyframes n7-vt-out{to{opacity:0;transform:translateY(-6px)}}
-@keyframes n7-vt-in{from{opacity:0;transform:translateY(10px)}}
-@keyframes n7-title-out{to{opacity:0;transform:translateY(-18px) scale(.985);filter:blur(2px)}}
-@keyframes n7-title-in{from{opacity:0;transform:translateY(22px) scale(1.015);filter:blur(2px)}}
-
-/* «Камера»: двигаем object-position и цвет, а не opacity/transform контента.
-   LCP-изображение остаётся видимым с первого кадра. */
-@supports (animation-timeline: scroll(root block)){
-  .v4-hero-media img{
-    animation:n7-hero-camera linear both;
-    animation-timeline:scroll(root block);
-    animation-range:0 100vh}
-  .v4-hero-media figcaption{
-    animation:n7-caption-drift linear both;
-    animation-timeline:scroll(root block);
-    animation-range:0 100vh}
-  .v2-eyebrow::before{
-    transform-origin:left center;
-    animation:n7-line-draw linear both;
-    animation-timeline:view();
-    animation-range:entry 0% cover 32%}
+/* 1. Чертёжная сетка: едва заметные вертикали и одна горизонталь.
+   Выровнена по контейнеру .w, поэтому линии совпадают с колонками макета. */
+.hero.n7-hero::before,.pagehero::before{
+  display:block!important;content:"";position:absolute;inset:0;z-index:1;
+  pointer-events:none;background-repeat:no-repeat;background-position:center top;
+  background-size:min(1400px,calc(100% - 2 * var(--v2-pad))) 100%;
+  background-image:
+    linear-gradient(90deg,transparent calc(25% - .5px),rgba(16,24,32,.05) 25%,transparent calc(25% + .5px)),
+    linear-gradient(90deg,transparent calc(50% - .5px),rgba(16,24,32,.04) 50%,transparent calc(50% + .5px)),
+    linear-gradient(90deg,transparent calc(75% - .5px),rgba(16,24,32,.05) 75%,transparent calc(75% + .5px)),
+    linear-gradient(0deg,transparent calc(50% - .5px),rgba(16,24,32,.03) 50%,transparent calc(50% + .5px));
 }
-@keyframes n7-hero-camera{
-  from{object-position:50% 40%;filter:saturate(.98) contrast(1.01)}
-  to{object-position:50% 60%;filter:saturate(.84) contrast(1.04)}
-}
-@keyframes n7-caption-drift{from{transform:translateY(0)}to{transform:translateY(-6px)}}
-@keyframes n7-line-draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.pagehero::before{z-index:0;background-size:min(1320px,calc(100% - 2 * var(--v2-pad))) 100%}
 
-/* Современный слой полностью уступает системной настройке и печати. */
-@media(prefers-reduced-motion:reduce){
-  header.n7-head,main h1,.v4-hero-media{view-transition-name:none}
-  .v4-hero-media img,.v4-hero-media figcaption,.v2-eyebrow::before{animation:none!important}
-  ::view-transition-old(root),::view-transition-new(root){animation:none!important}
+/* 2. Фотография как framed print: белая окантовка, терракотовая кромка,
+   фолио-ярлык и подпись, вписанная в поле кадра. */
+.v4-hero-media{
+  background:#FFFFFF!important;padding:10px;
+  border:1px solid #D5D8D2!important;border-top:3px solid #B83A18!important;
+  box-shadow:0 18px 44px -32px rgba(16,24,32,.35)!important;
 }
-@media print{
-  header.n7-head,main h1,.v4-hero-media{view-transition-name:none}
-  .v4-hero-media img,.v4-hero-media figcaption,.v2-eyebrow::before{animation:none!important}
-  ::view-transition-old(root),::view-transition-new(root){animation:none!important}
+.v4-hero-media::before{
+  content:"№ 01 / 02";position:absolute;top:10px;right:10px;z-index:4;
+  background:#FFFFFF;border:1px solid #D5D8D2;border-top:0;
+  padding:8px 12px;font:600 .64rem/1 var(--mono);letter-spacing:.12em;
+  color:#101820;text-transform:uppercase;
+}
+.v4-hero-media::after{z-index:2}
+.v4-hero-media figcaption{
+  left:10px;right:10px;bottom:10px;border:1px solid #D5D8D2!important;
+  border-left:4px solid #B83A18!important;border-top:0!important;
+  box-shadow:0 10px 26px -18px rgba(16,24,32,.3);
+}
+.v4-hero-media figcaption span{
+  align-self:center;border:1px solid #B83A18;padding:4px 8px;white-space:nowrap;
+}
+
+/* 3. Левая линейка первого экрана: тонкая граница и терракотовый квадрат. */
+.v2-hero-copy{position:relative;border-left:1px solid #D5D8D2;
+  padding:18px 0 18px clamp(20px,3vw,40px)!important}
+.v2-hero-copy::before{content:"";position:absolute;left:-1px;top:18px;
+  width:5px;height:5px;background:#B83A18}
+
+/* 4. Редакционная рубрикация: крупный водяной номер и двухцветная линейка. */
+body{counter-reset:n7-chapter}
+section.v2-sec,section.why,section.cta{counter-increment:n7-chapter}
+.v2-head{position:relative;isolation:isolate;border-bottom:0!important;
+  padding-bottom:26px!important}
+.v2-head>*{position:relative;z-index:1}
+.v2-head::before{
+  content:counter(n7-chapter,decimal-leading-zero);
+  position:absolute;right:0;top:-.34em;z-index:0;
+  font:750 clamp(4.5rem,8vw,7.5rem)/1 'Inter Tight','Manrope',system-ui,sans-serif;
+  letter-spacing:-.08em;color:rgba(16,24,32,.045);pointer-events:none;
+}
+.v2-head::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;z-index:0;
+  background:linear-gradient(90deg,#B83A18 0 72px,#D5D8D2 72px 100%);
+}
+
+/* 5. Адаптив: на узких экранах сетка и водяные номера не мешают тексту. */
+@media(max-width:900px){
+  .v2-hero-copy{border-left:0!important;padding-left:0!important}
+  .v2-hero-copy::before{display:none}
+}
+@media(max-width:760px){
+  .hero.n7-hero::before,.pagehero::before{display:none!important}
+  .v2-head::before{display:none}
+}
+@media(max-width:620px){
+  .hero .v2-eyebrow,.n7-hero .v2-eyebrow{
+    font-size:.62rem;letter-spacing:.08em;white-space:normal;line-height:1.5;
+  }
+  .v4-hero-media figcaption{flex-direction:column;align-items:flex-start;gap:8px}
+  .v4-hero-media figcaption span{align-self:auto}
 }

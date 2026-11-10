@@ -69,26 +69,4 @@ if(f){
       .then(function(){if(btn)btn.disabled=false});
   });
 }
-
-/* ---------- 3. Тихая предзагрузка внутренних страниц для View Transitions ----------
-   По наведению на внутреннюю HTML-ссылку один раз создаём <link rel=prefetch>.
-   Переход начинается быстрее, но без фонового рендера, без pointermove-цикла
-   и без запросов к внешним сервисам, PDF и якорям. */
-if(!RM&&typeof URL==='function'){
-  var seen=Object.create(null);
-  var idle=w.requestIdleCallback?w.requestIdleCallback.bind(w):function(fn){setTimeout(fn,1)};
-  d.addEventListener('pointerover',function(e){
-    var t=e.target,a=t&&t.closest?t.closest('a[href]'):null;
-    if(!a||a.target||a.hasAttribute('download'))return;
-    var u;try{u=new URL(a.getAttribute('href'),location.href)}catch(err){return}
-    if(u.origin!==location.origin||!/\.html?$/.test(u.pathname))return;
-    if(u.pathname===location.pathname||seen[u.pathname])return;
-    seen[u.pathname]=1;
-    try{if(navigator.connection&&navigator.connection.saveData)return}catch(err){}
-    idle(function(){
-      var l=d.createElement('link');l.rel='prefetch';l.setAttribute('as','document');l.href=u.pathname;
-      d.head.appendChild(l);
-    },{timeout:1200});
-  },{passive:true});
-}
 })();
