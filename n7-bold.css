@@ -568,40 +568,39 @@ header.n7-head .n7-head-cta{min-height:42px;padding:0 18px;font-size:.8rem}
 .v4-hero-media{position:relative;margin:0;min-height:560px;overflow:hidden;background:#E8E9E4;
   border-left:1px solid #D5D8D2;border-radius:0}
 .v4-hero-media img{display:block;width:100%;height:100%;object-fit:cover;
-  filter:saturate(.72) contrast(.96);transition:transform .8s cubic-bezier(.2,.8,.25,1)}
+  filter:saturate(.92) contrast(1.02);transition:transform .8s cubic-bezier(.2,.8,.25,1)}
 .v4-hero-media:hover img{transform:scale(1.025)}
 .v4-hero-media::after{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(244,243,239,.10),rgba(16,24,32,.16))}
+  background:linear-gradient(180deg,rgba(244,243,239,.06),rgba(16,24,32,.08))}
 .v4-hero-media figcaption{position:absolute;left:0;right:0;bottom:0;z-index:2;
   display:flex;justify-content:space-between;gap:12px;padding:16px 20px;
-  background:rgba(244,243,239,.95);border-top:1px solid #D5D8D2;
+  background:#FFFFFF;border-top:1px solid #D5D8D2;border-left:4px solid #B83A18;
   color:#101820;font:600 .68rem/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase}
 .v4-hero-media figcaption b{font-weight:700}
 .v4-hero-media figcaption span{color:#B83A18}
-.n7-proof{position:absolute;z-index:5;right:calc(var(--v2-pad) + 20px);bottom:clamp(84px,10vh,118px);
-  width:min(330px,30vw);display:flex;align-items:center;gap:12px;padding:12px;
-  border:1px solid #D5D8D2;border-left:4px solid #B83A18;border-radius:0;
-  background:#FFFFFF;box-shadow:0 12px 32px -22px rgba(16,24,32,.38);
-  color:#101820;text-decoration:none}
-.n7-proof:hover{border-color:#B83A18;color:#101820}
-.n7-proof img{width:96px;height:64px;object-fit:cover;border-radius:0;flex:0 0 auto;filter:saturate(.85)}
-.n7-proof span{display:flex;flex-direction:column;gap:3px;min-width:0}
-.n7-proof b{font:700 .9rem/1.2 var(--body);color:#101820}
-.n7-proof small{font:500 .62rem/1.3 var(--mono);letter-spacing:.08em;color:#5A6672;text-transform:uppercase}
 
-/* Внутренние заголовки: огромная типографика на белой бумаге */
+/* Внутренние заголовки: компактная редакционная шапка с правым мета-столбцом */
 .pagehero{--bg:#FFFFFF;--fg:#101820;--mut:#5A6672;--line:#D5D8D2;
   background:#FFFFFF!important;color:#101820!important;
-  padding:clamp(128px,15vh,190px) 0 clamp(56px,8vh,96px)!important;
+  padding:clamp(96px,10vh,132px) 0 clamp(40px,6vh,64px)!important;
   border-bottom:1px solid #D5D8D2!important}
-.pagehero::after{content:"N7 / KZ · CIS";position:absolute;right:var(--v2-pad);bottom:24px;
-  font:500 .7rem/1 var(--mono);letter-spacing:.18em;color:#5A6672;text-transform:uppercase}
-.pagehero .w{position:relative;z-index:2;display:grid;gap:20px}
-.pagehero h1{font-size:clamp(3.2rem,7.6vw,7.4rem);line-height:.94;max-width:16ch;letter-spacing:-.06em}
-.pagehero p{color:#5A6672;font-size:1.15rem;max-width:58ch;margin:0}
+.pagehero .w{position:relative;z-index:2;display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(170px,220px);
+  column-gap:clamp(24px,4vw,72px);row-gap:14px;align-items:start;
+  border-top:1px solid #D5D8D2;padding-top:22px}
+.pagehero .w>*{grid-column:1;min-width:0}
+.pagehero .w::after{content:"N7 / KZ · CIS\A СТРОИТЕЛЬСТВО · ИНФРАСТРУКТУРА";
+  grid-column:2;grid-row:1 / span 3;align-self:end;justify-self:end;text-align:right;
+  white-space:pre-line;max-width:220px;border-top:3px solid #B83A18;padding-top:12px;
+  font:500 .68rem/1.6 var(--mono);letter-spacing:.12em;color:#5A6672;text-transform:uppercase}
+.pagehero .bc{grid-row:1;margin-bottom:0}
+.pagehero h1{grid-row:2;font-size:clamp(2.8rem,5.4vw,5.6rem);line-height:.98;max-width:18ch;letter-spacing:-.055em}
+.pagehero p{grid-row:3;color:#5A6672;font-size:1.05rem;max-width:58ch;margin:0}
 .pagehero .deco{display:none!important}
-.bc{font:600 .7rem/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#5A6672;margin-bottom:18px}
-.bc a{color:#B83A18;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+.bc{font:600 .7rem/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#5A6672}
+.bc a{color:#101820;text-decoration:underline;text-decoration-color:#B83A18;
+  text-decoration-thickness:1px;text-underline-offset:4px}
+.bc a:hover,.bc a:focus-visible{color:#B83A18;text-decoration-color:#101820}
 
 /* Карточки и сетки: плоская редакционная таблица */
 .v2-card,.lcard,.pcard,.svc-card,.pcat{
@@ -788,15 +787,15 @@ figure:hover{transform:none!important}
 @media(max-width:1100px){
   .v2-row--4{grid-template-columns:repeat(2,minmax(0,1fr))!important}
   footer.n7-foot .w.fg{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .n7-proof{width:min(300px,38vw)}
 }
 @media(max-width:900px){
   .hero,.n7-hero{min-height:auto!important;padding:112px 0 64px!important}
   .hero .w.v4-hero-grid,.n7-hero .w.v4-hero-grid{grid-template-columns:1fr!important;gap:32px!important}
   .v4-hero-media{order:-1;min-height:420px;border-left:0;border-top:1px solid #D5D8D2}
   .hero h1,.n7-hero h1{font-size:clamp(3rem,12vw,4.8rem)!important}
-  .n7-proof{display:none}
-  .pagehero h1{font-size:clamp(2.8rem,11vw,4.6rem)!important}
+  .pagehero h1{font-size:clamp(2.5rem,10vw,3.8rem)!important}
+  .pagehero .w{grid-template-columns:1fr!important}
+  .pagehero .w::after{display:none}
   .n7-quick,.n7-lead{grid-template-columns:1fr}
   .grid,.v2-row--2,.v2-row--3,.v2-row--4,.pcats,.fmt{grid-template-columns:1fr!important}
   .srow,.split,.svc-card{grid-template-columns:1fr!important}
@@ -822,8 +821,8 @@ figure:hover{transform:none!important}
   .v4-hero-media figcaption{font-size:.6rem;padding:12px 14px}
   .n7-acts{flex-direction:column;align-items:stretch}
   .n7-acts .btn{width:100%}
-  .pagehero{padding:112px 0 56px!important}
-  .pagehero::after{display:none}
+  .pagehero{padding:86px 0 40px!important}
+  .pagehero .w{padding-top:16px}
   footer.n7-foot .w.fg{grid-template-columns:1fr 1fr}
   .toc.n7panel{display:none}
 }
@@ -844,7 +843,7 @@ figure:hover{transform:none!important}
 }
 @media print{
   header.n7-head,.toc.n7panel,.pb,.to-top,.qfab,#n7Scene,.n7-fallback,
-  .v4-hero-media,.n7-proof,.dk-ui,.dk-bar{display:none!important}
+  .v4-hero-media,.dk-ui,.dk-bar{display:none!important}
   body,html{background:#fff!important;color:#000!important}
   body *{color:#000!important;box-shadow:none!important;text-shadow:none!important}
   .hero,.n7-hero,.pagehero,.cta,.why,footer.n7-foot{background:#fff!important;border:0!important;
@@ -874,3 +873,25 @@ figure:hover{transform:none!important}
 .slide:not(.on){content-visibility:hidden}
 .slide.on{content-visibility:visible}
 @media print{.slide{content-visibility:visible!important}}
+
+/* ==========================================================================
+   ДИЗАЙНЕРСКИЙ ПРОХОД v4.1
+   Один язык углов: никаких pill-чипов и круглых степеров на бумажной сетке.
+   ========================================================================== */
+.filters button,.lfilters button,.ltoggle,.chip,.fpill,.chips span,.badge,.ponreq,.wtag,
+.n7-pill,.n7-tag,.v2-chip,.addlist,.addcmp,.qmeta span,.n7tags span,.cmpbar,.toast,
+.lcount,.n7-list-btn,.qprog,.bars .b,.bars .b i,.lcalc-r .fbtns .btn,.ba-lbl,
+.mp-info .mp-tag,.waiting .wtag,.toc,.qopt,.qopt em,.wz-dots span i,.sw,.sws .sw,
+.ld-close,.sclose,.cmp-x,.ld-x,.toc .tc-acts button,.toc .tc-acts a,
+.ba-handle::after,.lvis[data-s=down] .lamp,.toc.n7panel a,.n7rail-ui button,
+.v2-chip::before{border-radius:2px!important}
+.pcat,.pcats a,.n7rail-num,.n7-search-btn{border-radius:2px!important}
+
+/* Контент важнее анимации: карточки и секции видны сразу, без .rv-затемнения. */
+.reveal,.rv{opacity:1!important;transform:none!important;transition:none!important}
+.v2-card-ic,.lcard .v2-card-ic,.svc-card .v2-card-ic{display:none!important}
+.v2-row>.v2-card{box-shadow:inset 0 3px 0 #D5D8D2!important}
+.v2-row>.v2-card:hover,.v2-row>.v2-card:focus-visible{box-shadow:inset 0 3px 0 #B83A18!important}
+/* Первый контентный блок не отделён от шапки лишним пустым полем. */
+.pagehero + section{padding-top:clamp(40px,5vw,72px)!important}
+@media(max-width:620px){.pagehero + section{padding-top:36px!important}}

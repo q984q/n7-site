@@ -48,11 +48,11 @@ ok(/<canvas id="n7Scene"[^>]*aria-hidden="true">/.test(idx), 'index: нет canv
 ok(/<div class="n7-fallback"[^>]*aria-hidden="true">/.test(idx), 'index: нет CSS-фолбэка');
 ok(!/n7-hud|hud-frame|v3-iso/.test(idx), 'index: вернулся HUD/изометрия');
 ok(/class="w v2-hero-grid v4-hero-grid"/.test(idx), 'index: нет редакционной сетки hero');
-ok(/class="v4-hero-media"/.test(idx) && /img\/hero-editorial\.webp/.test(idx),
+ok(/class="v4-hero-media"/.test(idx) && /img\/hero-projects\.webp/.test(idx),
    'index: нет крупного архитектурного фото');
 ok(/fetchpriority="high"/.test(idx), 'index: у фото нет высокого приоритета');
 ok(/<script src="n7-scene\.js\?v=[^"]+" defer><\/script>/.test(idx), 'index: нет рендерера зерна');
-ok(!/rel="preload" as="image" href="img\/hero-editorial\.webp"/.test(idx), 'index: лишний preload фото');
+ok(!/rel="preload" as="image" href="img\/hero-projects\.webp"/.test(idx), 'index: лишний preload фото');
 for (const f of files.filter(f => f !== 'index.html'))
   ok(!/n7-scene\.js/.test(fs.readFileSync(path.join(R, f), 'utf8')), f + ': зерно грузится не на главной');
 
@@ -74,6 +74,8 @@ ok(bold.includes('prefers-reduced-motion') && bold.includes('N7_LEAD_ENDPOINT') 
 const fx = fs.readFileSync(path.join(R, 'fx.js'), 'utf8');
 ok(fx.includes('prefers-reduced-motion') && fx.includes('IntersectionObserver') &&
    !/innerHTML|\.wd\b/.test(fx), 'fx.js: заголовки снова разбиваются на слова');
+ok(!/classList\.add\(['"]rv['"]\)/.test(fx),
+   'fx.js: контент снова скрывается до скролла через .rv');
 const main = fs.readFileSync(path.join(R, 'main.js'), 'utf8');
 ok(!/n7-theme/.test(main), 'main.js: вернулась инверсия темы');
 ok(!fs.existsSync(path.join(R, 'n7-intro.js')), 'n7-intro.js всё ещё в репозитории');

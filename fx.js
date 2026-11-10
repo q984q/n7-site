@@ -1,8 +1,9 @@
 /* ==========================================================================
-   N7 v4 «РЕДАКЦИЯ» — сдержанная моторика страницы.
-   Никаких библиотек, параллакса, наклона карточек и разбиения заголовков
-   на слова: только спокойное появление блоков и тонкая полоса чтения.
-   Полностью отключается при prefers-reduced-motion и в jsdom.
+   N7 v4.1 «РЕДАКЦИЯ» — сдержанная моторика страницы.
+   Контент виден сразу и не зависит от IntersectionObserver: никаких скрытых
+   до скролла карточек, заголовков и изображений. Остаются только тонкая
+   полоса чтения и анимация явно размеченных счётчиков. Всё это полностью
+   отключается при prefers-reduced-motion и в jsdom.
    ========================================================================== */
 (function(){
 'use strict';
@@ -19,25 +20,17 @@ function up(){
 }
 if(!rm){addEventListener('scroll',up,{passive:true});addEventListener('resize',up,{passive:true});up()}
 
-/* Появление блоков: observer добавляет .in, CSS в n7-bold.css делает остальное */
+/* Счётчики: только явно размеченные data-count, текст «20+» не трогаем.
+   Карточки и секции больше не получают класс .rv и не исчезают до скролла. */
 if(!rm&&typeof IntersectionObserver==='function'){
   r.classList.add('v2-fx');
   var io=new IntersectionObserver(function(es){
     es.forEach(function(e){
       if(!e.isIntersecting)return;
-      e.target.classList.add('in');
       io.unobserve(e.target);
       if(e.target._c)e.target._c();
     });
   },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
-  $$('.v2-rise,.v2-card,.pcat,.svc-card,figure,ol.steps li,.stats>div,.fmt>div,.two>div,.info,.v2-panel')
-    .forEach(function(el,i){
-      if(el.closest('.deck')||el.closest('.lb'))return;
-      el.style.setProperty('--d',(i%6*70)+'ms');
-      el.classList.add('rv');
-      io.observe(el);
-    });
-  /* Счётчики: только явно размеченные data-count, текст «20+» не трогаем */
   $$('[data-count]').forEach(function(el){
     var n=parseInt(el.getAttribute('data-count'),10);
     if(!isFinite(n)||el.closest('.deck'))return;

@@ -2,7 +2,7 @@
 """Генерирует OG-превью 1200×630 для каждой страницы в палитре v4 «РЕДАКЦИЯ».
 
 Светлая редакционная сетка, один терракотовый акцент, крупная типографика и
-обработанное архитектурное фото из локального файла img/hero-editorial.webp.
+диптих проверенных проектов Almaty Arena и Tamos Space School из img/hero-projects.webp.
 Никаких изометрических башен, HUD-статусов и внешних запросов.
 
 Запуск: python3 tools/make_og.py  (нужны Pillow и DejaVuSans из системы).
@@ -11,7 +11,7 @@ import glob
 import os
 import re
 
-from PIL import Image, ImageDraw, ImageEnhance, ImageFont
+from PIL import Image, ImageDraw, ImageEnhance, ImageFont, ImageOps
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BOLD = '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
@@ -42,22 +42,16 @@ def wrap(dr, text, font, maxw):
 
 
 def editorial_photo():
-    """Портретный кадр уже имеющегося локального фото, приведённый к бумаге."""
-    src = Image.open(os.path.join(ROOT, 'img', 'hero-editorial.webp')).convert('RGB')
-    # OG uses a tall right-hand column: crop to 460×630 and keep the facade.
-    target_ratio = 460 / H
-    w, h = src.size
-    if w / h > target_ratio:
-        nw = int(h * target_ratio)
-        src = src.crop(((w - nw) // 2, 0, (w - nw) // 2 + nw, h))
-    else:
-        nh = int(w / target_ratio)
-        src = src.crop((0, (h - nh) // 2, w, (h - nh) // 2 + nh))
-    src = src.resize((460, H), Image.LANCZOS)
-    src = ImageEnhance.Color(src).enhance(.68)
-    src = ImageEnhance.Contrast(src).enhance(.94)
+    """Верх диптиха с реальными проектами, приведённый к правой колонке OG."""
+    src = Image.open(os.path.join(ROOT, 'img', 'hero-projects.webp')).convert('RGB')
+    # Берём верхнюю часть: Almaty Arena, тонкую бумажную разделительную полосу
+    # и край второго кадра. Так превью говорит о проектах, а не о «архитектуре вообще».
+    src = src.crop((0, 0, src.width, min(1000, src.height)))
+    src = ImageOps.fit(src, (460, H), method=Image.LANCZOS, centering=(0.28, 0.0))
+    src = ImageEnhance.Color(src).enhance(.92)
+    src = ImageEnhance.Contrast(src).enhance(1.02)
     paper = Image.new('RGB', src.size, PAPER)
-    return Image.blend(src, paper, .10)
+    return Image.blend(src, paper, .06)
 
 
 for path in sorted(glob.glob(os.path.join(ROOT, '*.html'))):
@@ -104,18 +98,18 @@ for path in sorted(glob.glob(os.path.join(ROOT, '*.html'))):
             font=ImageFont.truetype(REG, 17), fill=INK)
     dr.text((548, 586), 'N7 / 2026', font=ImageFont.truetype(REG, 17), fill=ACCENT_DARK)
 
-    # Фотография как главное доказательство: справа, без подписи о конкретном объекте.
+    # Фотография как главное доказательство: справа, с подписью реальных проектов.
     photo = editorial_photo()
     im.paste(photo, (740, 0))
     dr = ImageDraw.Draw(im)
     dr.rectangle([740, 0, 744, H], fill=ACCENT)
     dr.rectangle([744, 0, 1200, 92], fill=(244, 243, 239))
-    dr.text((772, 32), 'АРХИТЕКТУРА / ГОРОД',
+    dr.text((772, 32), 'ALMATY ARENA / TAMOS SPACE SCHOOL',
             font=ImageFont.truetype(REG, 19), fill=INK)
     dr.text((772, 60), 'N7 CONSTRUCTION',
             font=ImageFont.truetype(REG, 15), fill=ACCENT)
     dr.rectangle([744, H - 70, 1200, H], fill=(244, 243, 239))
-    dr.text((772, H - 48), 'Состав работ и сроки фиксируем в договоре',
+    dr.text((772, H - 48), 'Участие в проектах Казахстана и СНГ',
             font=ImageFont.truetype(REG, 16), fill=INK)
 
     out = os.path.join(ROOT, 'img', 'og', os.path.splitext(os.path.basename(path))[0] + '.webp')

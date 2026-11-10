@@ -1,43 +1,43 @@
-ПРОВЕРКА V4 «РЕДАКЦИЯ» · 2026-11-10T11:35:24.179Z
+ПРОВЕРКА V4.1 «РЕДАКЦИЯ» · 2026-11-10T17:34:50.647Z
 Chromium: /tmp/chromium
-ПК  404.html                     bg=rgb(244, 243, 239) accent=#B83A18 h1=109.44px r=0/0 rails=0 3D=0/0/false img=0/0 err=0
-ПК  begovye-dorozhki.html        bg=rgb(244, 243, 239) accent=#B83A18 h1=109.44px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
-ПК  geografiya.html              bg=rgb(244, 243, 239) accent=#B83A18 h1=109.44px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
-ПК  index.html                   bg=rgb(244, 243, 239) accent=#B83A18 h1=106.56px r=0/0 rails=0 3D=0/0/false img=7/0 err=0
-ПК  kak-vybrat.html              bg=rgb(244, 243, 239) accent=#B83A18 h1=109.44px r=0/0 rails=0 3D=0/0/false img=0/0 err=0
-ПК  kontakty.html                bg=rgb(244, 243, 239) accent=#B83A18 h1=109.44px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
-ПК  modulnye-pokrytiya.html      bg=rgb(244, 243, 239) accent=#B83A18 h1=109.44px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
-ПК  o-kompanii.html              bg=rgb(244, 243, 239) accent=#B83A18 h1=109.44px r=0/-1 rails=0 3D=0/0/false img=2/0 err=0
-ПК  osveshhenie.html             bg=rgb(244, 243, 239) accent=#B83A18 h1=109.44px r=0/-1 rails=0 3D=0/0/false img=2/0 err=0
-ПК  padel-korty.html             bg=rgb(244, 243, 239) accent=#B83A18 h1=109.44px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
+ПК  404.html                     bg=rgb(244, 243, 239) accent=#B83A18 h1=77.76px r=0/2 rails=0 3D=0/0/false img=0/0 err=0
+ПК  begovye-dorozhki.html        bg=rgb(244, 243, 239) accent=#B83A18 h1=77.76px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
+ПК  geografiya.html              bg=rgb(244, 243, 239) accent=#B83A18 h1=77.76px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
+ПК  index.html                   bg=rgb(244, 243, 239) accent=#B83A18 h1=106.56px r=0/0 rails=0 3D=0/0/false img=6/0 err=0
+ПК  kak-vybrat.html              bg=rgb(244, 243, 239) accent=#B83A18 h1=77.76px r=0/2 rails=0 3D=0/0/false img=0/0 err=0
+ПК  kontakty.html                bg=rgb(244, 243, 239) accent=#B83A18 h1=77.76px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
+ПК  modulnye-pokrytiya.html      bg=rgb(244, 243, 239) accent=#B83A18 h1=77.76px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
+ПК  o-kompanii.html              bg=rgb(244, 243, 239) accent=#B83A18 h1=77.76px r=0/-1 rails=0 3D=0/0/false img=2/0 err=0
+ПК  osveshhenie.html             bg=rgb(244, 243, 239) accent=#B83A18 h1=77.76px r=0/-1 rails=0 3D=0/0/false img=2/0 err=0
+ПК  padel-korty.html             bg=rgb(244, 243, 239) accent=#B83A18 h1=77.76px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
 ПК  prezentatsiya.html           bg=rgb(244, 243, 239) accent=#B83A18 h1=   64px r=0/0 rails=0 3D=0/0/false img=14/0 err=0
-ПК  privacy.html                 bg=rgb(244, 243, 239) accent=#B83A18 h1=109.44px r=0/-1 rails=0 3D=0/0/false img=0/0 err=0
-ПК  produktsiya.html             bg=rgb(244, 243, 239) accent=#B83A18 h1=109.44px r=0/0 rails=0 3D=0/0/false img=17/0 err=0
-ПК  proekty.html                 bg=rgb(244, 243, 239) accent=#B83A18 h1=109.44px r=0/0 rails=0 3D=0/0/false img=5/0 err=0
-ПК  pvh-pokrytiya.html           bg=rgb(244, 243, 239) accent=#B83A18 h1=109.44px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
-ПК  sotrudnichestvo.html         bg=rgb(244, 243, 239) accent=#B83A18 h1=109.44px r=0/-1 rails=0 3D=0/0/false img=0/0 err=0
-ПК  sportivnye-pokrytiya.html    bg=rgb(244, 243, 239) accent=#B83A18 h1=109.44px r=0/0 rails=0 3D=0/0/false img=5/0 err=0
-ПК  sportivnyj-parket.html       bg=rgb(244, 243, 239) accent=#B83A18 h1=109.44px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
-ПК  uslugi.html                  bg=rgb(244, 243, 239) accent=#B83A18 h1=109.44px r=0/0 rails=0 3D=0/0/false img=6/0 err=0
-МОБ 404.html                     bg=rgb(244, 243, 239) accent=#B83A18 h1= 44.8px r=0/0 rails=1 3D=0/0/false img=0/0 err=0
-МОБ begovye-dorozhki.html        bg=rgb(244, 243, 239) accent=#B83A18 h1= 44.8px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
-МОБ geografiya.html              bg=rgb(244, 243, 239) accent=#B83A18 h1= 44.8px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
-МОБ index.html                   bg=rgb(244, 243, 239) accent=#B83A18 h1= 50.7px r=0/0 rails=5 3D=0/0/false img=7/0 err=0
-МОБ kak-vybrat.html              bg=rgb(244, 243, 239) accent=#B83A18 h1= 44.8px r=0/0 rails=2 3D=0/0/false img=0/0 err=0
-МОБ kontakty.html                bg=rgb(244, 243, 239) accent=#B83A18 h1= 44.8px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
-МОБ modulnye-pokrytiya.html      bg=rgb(244, 243, 239) accent=#B83A18 h1= 44.8px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
-МОБ o-kompanii.html              bg=rgb(244, 243, 239) accent=#B83A18 h1= 44.8px r=0/-1 rails=4 3D=0/0/false img=2/0 err=0
-МОБ osveshhenie.html             bg=rgb(244, 243, 239) accent=#B83A18 h1= 44.8px r=0/-1 rails=1 3D=0/0/false img=2/0 err=0
-МОБ padel-korty.html             bg=rgb(244, 243, 239) accent=#B83A18 h1= 44.8px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
+ПК  privacy.html                 bg=rgb(244, 243, 239) accent=#B83A18 h1=77.76px r=0/-1 rails=0 3D=0/0/false img=0/0 err=0
+ПК  produktsiya.html             bg=rgb(244, 243, 239) accent=#B83A18 h1=77.76px r=0/0 rails=0 3D=0/0/false img=17/0 err=0
+ПК  proekty.html                 bg=rgb(244, 243, 239) accent=#B83A18 h1=77.76px r=0/0 rails=0 3D=0/0/false img=5/0 err=0
+ПК  pvh-pokrytiya.html           bg=rgb(244, 243, 239) accent=#B83A18 h1=77.76px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
+ПК  sotrudnichestvo.html         bg=rgb(244, 243, 239) accent=#B83A18 h1=77.76px r=0/-1 rails=0 3D=0/0/false img=0/0 err=0
+ПК  sportivnye-pokrytiya.html    bg=rgb(244, 243, 239) accent=#B83A18 h1=77.76px r=0/2 rails=0 3D=0/0/false img=5/0 err=0
+ПК  sportivnyj-parket.html       bg=rgb(244, 243, 239) accent=#B83A18 h1=77.76px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
+ПК  uslugi.html                  bg=rgb(244, 243, 239) accent=#B83A18 h1=77.76px r=0/0 rails=0 3D=0/0/false img=6/0 err=0
+МОБ 404.html                     bg=rgb(244, 243, 239) accent=#B83A18 h1=   40px r=0/2 rails=1 3D=0/0/false img=0/0 err=0
+МОБ begovye-dorozhki.html        bg=rgb(244, 243, 239) accent=#B83A18 h1=   40px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
+МОБ geografiya.html              bg=rgb(244, 243, 239) accent=#B83A18 h1=   40px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
+МОБ index.html                   bg=rgb(244, 243, 239) accent=#B83A18 h1= 50.7px r=0/0 rails=5 3D=0/0/false img=6/0 err=0
+МОБ kak-vybrat.html              bg=rgb(244, 243, 239) accent=#B83A18 h1=   40px r=0/2 rails=2 3D=0/0/false img=0/0 err=0
+МОБ kontakty.html                bg=rgb(244, 243, 239) accent=#B83A18 h1=   40px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
+МОБ modulnye-pokrytiya.html      bg=rgb(244, 243, 239) accent=#B83A18 h1=   40px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
+МОБ o-kompanii.html              bg=rgb(244, 243, 239) accent=#B83A18 h1=   40px r=0/-1 rails=4 3D=0/0/false img=2/0 err=0
+МОБ osveshhenie.html             bg=rgb(244, 243, 239) accent=#B83A18 h1=   40px r=0/-1 rails=1 3D=0/0/false img=2/0 err=0
+МОБ padel-korty.html             bg=rgb(244, 243, 239) accent=#B83A18 h1=   40px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
 МОБ prezentatsiya.html           bg=rgb(244, 243, 239) accent=#B83A18 h1= 38.4px r=0/0 rails=0 3D=0/0/false img=14/0 err=0
-МОБ privacy.html                 bg=rgb(244, 243, 239) accent=#B83A18 h1= 44.8px r=0/-1 rails=0 3D=0/0/false img=0/0 err=0
-МОБ produktsiya.html             bg=rgb(244, 243, 239) accent=#B83A18 h1= 44.8px r=0/0 rails=2 3D=0/0/false img=17/0 err=0
-МОБ proekty.html                 bg=rgb(244, 243, 239) accent=#B83A18 h1= 44.8px r=0/0 rails=1 3D=0/0/false img=5/0 err=0
-МОБ pvh-pokrytiya.html           bg=rgb(244, 243, 239) accent=#B83A18 h1= 44.8px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
-МОБ sotrudnichestvo.html         bg=rgb(244, 243, 239) accent=#B83A18 h1= 44.8px r=0/-1 rails=3 3D=0/0/false img=0/0 err=0
-МОБ sportivnye-pokrytiya.html    bg=rgb(244, 243, 239) accent=#B83A18 h1= 44.8px r=0/0 rails=2 3D=0/0/false img=5/0 err=0
-МОБ sportivnyj-parket.html       bg=rgb(244, 243, 239) accent=#B83A18 h1= 44.8px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
-МОБ uslugi.html                  bg=rgb(244, 243, 239) accent=#B83A18 h1= 44.8px r=0/0 rails=1 3D=0/0/false img=6/0 err=0
+МОБ privacy.html                 bg=rgb(244, 243, 239) accent=#B83A18 h1=   40px r=0/-1 rails=0 3D=0/0/false img=0/0 err=0
+МОБ produktsiya.html             bg=rgb(244, 243, 239) accent=#B83A18 h1=   40px r=0/0 rails=2 3D=0/0/false img=17/0 err=0
+МОБ proekty.html                 bg=rgb(244, 243, 239) accent=#B83A18 h1=   40px r=0/0 rails=1 3D=0/0/false img=5/0 err=0
+МОБ pvh-pokrytiya.html           bg=rgb(244, 243, 239) accent=#B83A18 h1=   40px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
+МОБ sotrudnichestvo.html         bg=rgb(244, 243, 239) accent=#B83A18 h1=   40px r=0/-1 rails=3 3D=0/0/false img=0/0 err=0
+МОБ sportivnye-pokrytiya.html    bg=rgb(244, 243, 239) accent=#B83A18 h1=   40px r=0/2 rails=2 3D=0/0/false img=5/0 err=0
+МОБ sportivnyj-parket.html       bg=rgb(244, 243, 239) accent=#B83A18 h1=   40px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0
+МОБ uslugi.html                  bg=rgb(244, 243, 239) accent=#B83A18 h1=   40px r=0/0 rails=1 3D=0/0/false img=6/0 err=0
 КЛИК-ОБХОД: 72 локальных URL + 4 доп. → 0 битых
 МОБ листание: 1 / 6 → 2 / 6
 ФОРМА: 3 поля + согласие → статус «Заявка подготовлена. Отправьте её в WhatsApp или поз…», WhatsApp-ссылка = 1

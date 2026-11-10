@@ -1,64 +1,43 @@
-Lighthouse 12.8.2 · версия 4 «РЕДАКЦИЯ» · ?v=20261109g · локальный предпросмотр
+Lighthouse 12.8.2 · версия 4.1 «РЕДАКЦИЯ» · ?v=20261109h · локальный предпросмотр
 Chromium headless, WebGL2/SwiftShader, 19 страниц desktop + главная mobile.
 
-ГЛАВНАЯ index.html — светлая редакционная сетка, крупное фото, CSS-зерно
+ГЛАВНАЯ index.html — диптих реальных проектов, видимый контент, CSS-зерно
   Desktop (--preset=desktop) : performance 99 / accessibility 100 / best-practices 100 / SEO 100
-    FCP 0.5 s · LCP 0.8 s · CLS 0.001 · TBT 0 ms · Speed Index 0.7 s
+    FCP 0.5 s · LCP 0.9 s · CLS 0.001 · TBT 0 ms · Speed Index 0.5 s
   Mobile (default throttling) : performance 86 / accessibility 100 / best-practices 100 / SEO 100
-    FCP 2.0 s · LCP 4.0 s · CLS 0.001 · TBT 40 ms · Speed Index 2.2 s
+    FCP 1.8 s · LCP 4.1 s · CLS 0.003 · TBT 0 ms · Speed Index 1.8 s
   Binary fails: нет.
 
 ВСЕ 19 СТРАНИЦ · Desktop
   accessibility 100 на всех 19 страницах.
-  best-practices 100 и SEO 100 на 18 страницах.
-  404.html: best-practices 96, SEO 63 — намеренный noindex,follow и закрытый
-  в песочнице хост q984q.github.io (абсолютный <base> нужен для Pages).
-  performance 98–100 (минимум 98 у 404.html, остальные 99–100).
-  Бинарных провалов нет нигде, кроме 404.html: errors-in-console и
-  is-crawlable (артефакт песочницы + noindex).
+  Минимумы без 404: performance 95 · accessibility 100 · best-practices 100 · SEO 100.
+  404.html: намеренный noindex и закрытый в песочнице q984q.github.io дают ожидаемые
+  errors-in-console / is-crawlable; остальные страницы без бинарных провалов.
+  osveshhenie.html: повторные прогоны 100 / 95 / 100; редкий CLS 0.126 от загрузки
+  Manrope 500 не даёт TBT и бинарных провалов, остальные метрики 100.
 
 ТАБЛИЦА · Desktop
-  Страница                         Perf  A11y  BP   SEO  Binary
-  404.html                        98   100   96   63   errors-in-console,is-crawlable
-  begovye-dorozhki.html          100   100  100  100   нет
-  geografiya.html                100   100  100  100   нет
-  index.html                      99   100  100  100   нет
-  kak-vybrat.html                100   100  100  100   нет
-  kontakty.html                  100   100  100  100   нет
-  modulnye-pokrytiya.html        100   100  100  100   нет
-  o-kompanii.html                 99   100  100  100   нет
-  osveshhenie.html                99   100  100  100   нет
-  padel-korty.html                99   100  100  100   нет
-  prezentatsiya.html              99   100  100  100   нет
-  privacy.html                   100   100  100  100   нет
-  produktsiya.html               100   100  100  100   нет
-  proekty.html                    99   100  100  100   нет
-  pvh-pokrytiya.html             100   100  100  100   нет
-  sotrudnichestvo.html           100   100  100  100   нет
-  sportivnye-pokrytiya.html       99   100  100  100   нет
-  sportivnyj-parket.html          99   100  100  100   нет
-  uslugi.html                     99   100  100  100   нет
+  файл                         perf acc BP SEO   FCP     LCP     CLS     TBT      SI
+  404.html                      98 100  96  63    0.5 s  1.1 s  0.001    0 ms  0.6 s
+  begovye-dorozhki.html        100 100 100 100    0.4 s  0.7 s  0.001    0 ms  0.4 s
+  geografiya.html              100 100 100 100    0.4 s  0.8 s  0.001    0 ms  0.4 s
+  index.html                    99 100 100 100    0.5 s  0.9 s  0.001    0 ms  0.5 s
+  kak-vybrat.html              100 100 100 100    0.5 s  0.7 s  0.001    0 ms  0.5 s
+  kontakty.html                100 100 100 100    0.4 s  0.7 s  0.029    0 ms  0.4 s
+  modulnye-pokrytiya.html       99 100 100 100    0.5 s  0.9 s  0.001    0 ms  0.5 s
+  o-kompanii.html               99 100 100 100    0.5 s  0.8 s  0.000    0 ms  0.5 s
+  osveshhenie.html              95 100 100 100    0.5 s  0.8 s  0.126    0 ms  0.5 s
+  padel-korty.html              99 100 100 100    0.5 s  0.9 s  0.001    0 ms  0.5 s
+  prezentatsiya.html            99 100 100 100    0.6 s  0.8 s  0.002    0 ms  0.6 s
+  privacy.html                 100 100 100 100    0.4 s  0.7 s  0.001    0 ms  0.4 s
+  produktsiya.html             100 100 100 100    0.5 s  0.8 s  0.000    0 ms  0.5 s
+  proekty.html                  99 100 100 100    0.4 s  0.9 s  0.001    0 ms  0.4 s
+  pvh-pokrytiya.html           100 100 100 100    0.4 s  0.8 s  0.001    0 ms  0.4 s
+  sotrudnichestvo.html         100 100 100 100    0.5 s  0.7 s  0.001    0 ms  0.5 s
+  sportivnye-pokrytiya.html     99 100 100 100    0.5 s  0.9 s  0.001    0 ms  0.5 s
+  sportivnyj-parket.html        99 100 100 100    0.5 s  0.9 s  0.001    0 ms  0.5 s
+  uslugi.html                  100 100 100 100    0.5 s  0.8 s  0.001    0 ms  0.5 s
 
-ПОЧЕМУ МЕТРИКИ СТАБИЛЬНЫ
-  · WebGL2-зерно не инициализируется при загрузке: с первого кадра виден
-    CSS-фолбэк img/grain.webp, один статичный кадр рисуется только после
-    первого жеста на широком экране. TBT главной = 0 мс.
-  · Адаптивный hero: 480w / 800w / 1200w через srcset + sizes.
-  · 8 ключевых WOFF2 предзагружены на 18 страницах — кириллические и
-    латинские подмножества не вызывают сдвиг вёрстки (CLS ≈ 0.001).
-  · Презентация: титул и финал на лёгком градиенте, font-preload убраны,
-    неактивные слайды получили content-visibility:hidden. TBT = 0 мс.
-  · Цветовые CSS-фильтры на больших фоновых изображениях убраны:
-    первый прогон давал до 600 мс длинной задачи на SwiftShader.
-
-СРАВНЕНИЕ С v3 «ГЛУБИНА» (?v=20261109e)
-  Desktop главная : 99 / 100 / 100 / 100  ->  99 / 100 / 100 / 100
-  Mobile главная  : 84 / 100 / 100 / 100  ->  86 / 100 / 100 / 100
-  LCP mobile      : 3.8 s -> 4.0 s · CLS mobile 0.003 -> 0.001
-  Минимум perf по 19 desktop: 90 -> 98 (404.html), остальные 99–100.
-  Удалены WebGL-башня, HUD, CSS-3D, тёмная палитра и неон; сохранены
-  19 URL, 26 JSON-LD, OG, 29 заглушек, формы, reduced-motion и фолбэк.
-
-Скриншоты: screens/v4/ (14 PNG), коллаж screens/v4-final.png
-Браузерный отчёт: screens/redesign-check.txt
-Бенчмарк KZ + мировых компаний: BENCHMARK.md
+Изменения v4.1 не добавили новых сетевых запросов: hero-диптих 119 KB,
+адаптивные 480w/800w — 35 / 62 KB, 19 OG перегенерированы, старый абстрактный кадр удалён.
+Скрытие контента до скролла убрано; полоса чтения и счётчики остались.

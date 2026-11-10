@@ -83,11 +83,14 @@ ok((pres.match(/--im:linear-gradient\(135deg,#EFEEE9,#F4F3EF\)/g) || []).length 
    'prezentatsiya: нет лёгкого градиентного фона на титуле и финале');
 for (const f of files.filter(x => x !== 'prezentatsiya.html'))
   ok((read(f).match(/rel="preload" as="font"/g) || []).length === 8, f + ': не 8 предзагрузок шрифтов');
-ok(fs.existsSync(path.join(R, 'img', 'hero-editorial.webp')), 'нет редакционного hero-кадра');
-for (const v of ['480', '800']) ok(fs.existsSync(path.join(R, 'img', 'hero-editorial-' + v + '.webp')),
+ok(fs.existsSync(path.join(R, 'img', 'hero-projects.webp')), 'нет редакционного hero-диптиха');
+for (const v of ['480', '800']) ok(fs.existsSync(path.join(R, 'img', 'hero-projects-' + v + '.webp')),
    'нет адаптивной версии hero ' + v + 'w');
-ok(/srcset="img\/hero-editorial-480\.webp 480w, img\/hero-editorial-800\.webp 800w, img\/hero-editorial\.webp 1200w"/.test(read('index.html')),
+ok(/srcset="img\/hero-projects-480\.webp 480w, img\/hero-projects-800\.webp 800w, img\/hero-projects\.webp 1200w"/.test(read('index.html')),
    'index: hero без адаптивного srcset');
+ok(/figcaption><b>ALMATY ARENA · TAMOS SPACE SCHOOL<\/b>/.test(read('index.html')),
+   'index: нет подписи конкретных проектов');
+ok(!/class="n7-proof"/.test(read('index.html')), 'index: осталась перекрывающая фото карточка');
 
 /* ---------- Все локальные ссылки и якоря целы ---------- */
 const ids = {};
@@ -131,6 +134,18 @@ ok(!/n7-marquee|n7intro|n7-foot-line|n7-hud|v3-iso|v3-tilt|data-depth/.test(i),
    'index: остался визуальный язык старой версии');
 ok(/id="n7Scene"/.test(i) && /n7-fallback/.test(i) && /v4-hero-media/.test(i),
    'index: нет редакционного первого экрана');
+
+/* ---------- Дизайнерский проход v4.1 ---------- */
+const css41 = read('n7-bold.css');
+ok(/\.reveal,\.rv\{opacity:1!important/.test(css41), 'n7-bold.css: карточки скрываются до скролла');
+ok(/\.v2-card-ic[^}]*display:none!important/.test(css41), 'n7-bold.css: остались бледные гигантские номера');
+ok(/\.pagehero \.w::after/.test(css41) && /clamp\(96px,10vh,132px\)/.test(css41),
+   'n7-bold.css: внутренняя шапка снова стала огромным пустым полем');
+ok(/\.bc a\{color:#101820;text-decoration:underline/.test(css41),
+   'n7-bold.css: хлебные крошки потеряли различимое подчёркивание');
+ok(/border-radius:2px!important/.test(css41), 'n7-bold.css: не единый язык углов UI-контролов');
+ok(/\.pagehero \+ section\{padding-top:clamp\(40px,5vw,72px\)/.test(css41),
+   'n7-bold.css: первый контентный блок снова отделён пустым полем');
 
 /* ---------- Заглушки и факты на остальных страницах ---------- */
 const stubs = files.reduce((n, f) => n + (read(f).match(/data-n7-stub=/g) || []).length, 0);
