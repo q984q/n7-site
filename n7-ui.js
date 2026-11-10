@@ -1,4 +1,4 @@
-/* Интерфейс N7: навигация по разделам, диммер освещения, сравнение покрытий,
+/* Интерфейс N7 v4: точечная навигация, диммер освещения, сравнение покрытий,
   Before/After «свет выключен / включён», микро-фидбек полей. */
 (function(){
 'use strict';
@@ -13,8 +13,8 @@ function slug(s){
  return String(s).toLowerCase().replace(/[а-яё]/g,function(c){return map[c]||''}).replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,42)||'section';
 }
 
-/* ---------- 1. Панель управления страницей: разделы + прогресс + быстрые действия ---------- */
-/* Единая на всех 18 страницах: одинаковая разметка, заголовок, прогресс и набор кнопок. */
+/* ---------- 1. Точечная навигация по разделам страницы ---------- */
+/* На коротких страницах вместо пустого оглавления — ссылки по сайту. */
 function toc(){
  var main=$('main')||d.body;
  var secs=$$('section',main).filter(function(s){return $('h2',s)});
@@ -41,8 +41,8 @@ function toc(){
  }).join('')+'</ol>';
  d.body.appendChild(el);
 
- var links=$$('.toc ol a[data-i]'),now=null;
- function set(i){links.forEach(function(a,k){a.classList.toggle('on',k===i)});if(now&&links.length)now.textContent=(i+1)+' / '+links.length}
+ var links=$$('.toc ol a[data-i]');
+ function set(i){links.forEach(function(a,k){a.classList.toggle('on',k===i)})}
  links.forEach(function(a){a.onclick=function(){set(parseInt(a.getAttribute('data-i'),10))}});
  if(!site&&typeof w.IntersectionObserver==='function'){
   var io=new IntersectionObserver(function(es){es.forEach(function(e){

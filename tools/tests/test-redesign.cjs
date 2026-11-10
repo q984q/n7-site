@@ -1,5 +1,5 @@
-/* N7 v3 «ГЛУБИНА»: полная замена визуального языка на 19 страницах.
-   Проверяем тёмную палитру, WebGL-сцену, CSS-3D, новую IA, единый каркас,
+/* N7 v4 «РЕДАКЦИЯ»: полная замена визуального языка на 19 страницах.
+   Проверяем светлую палитру, редакционную сетку, отсутствие 3D/HUD-декора,
    честные тексты, заглушки, целые ссылки/якоря и сохранённую SEO-разметку. */
 const fs = require('fs'), path = require('path');
 const R = path.resolve(__dirname, '..', '..');
@@ -15,7 +15,7 @@ for (const f of files) {
   ok(/<html lang="ru">/.test(s), f + ': нет lang="ru"');
   ok(/<link rel="stylesheet" href="n7-bold\.css\?v=[^"]+">/.test(s), f + ': нет n7-bold.css');
   ok(/<script src="n7-bold\.js\?v=[^"]+" defer><\/script>/.test(s), f + ': нет n7-bold.js');
-  ok(/<script src="n7-depth\.js\?v=[^"]+" defer><\/script>/.test(s), f + ': нет 3D-слоя');
+  ok(/<script src="n7-depth\.js\?v=[^"]+" defer><\/script>/.test(s), f + ': нет маркера v4');
   ok(!/fonts\.googleapis\.com|fonts\.gstatic\.com/.test(s), f + ': внешние шрифты');
   ok(/<title>/.test(s) && /name="description"/.test(s), f + ': потеряны title/description');
   if (f === '404.html') ok(/name="robots" content="noindex/.test(s), f + ': нет noindex');
@@ -27,7 +27,9 @@ for (const f of files) {
   ok(/class="skip"/.test(s) && /id="top"/.test(s), f + ': нет skip-link или #top');
   ok(!/n7intro|n7-intro\.js|data-theme=|id="theme"/.test(s), f + ': артефакт v1');
   ok(/<header class="n7-head">/.test(s) && /<footer class="n7-foot">/.test(s), f + ': нет каркаса');
-  ok(/theme-color" content="#05080F"/.test(s), f + ': theme-color не v3');
+  ok(/theme-color" content="#F4F3EF"/.test(s), f + ': theme-color не v4');
+  ok(!/v3-iso|v3-tilt|n7-hud|hud-frame|data-depth|stroke="#4DE8DC"/.test(s),
+     f + ': вернулся 3D/HUD-декор v3');
   /* только видимый текст: метаописания сохраняем дословно */
   const body = s.slice(s.indexOf('<body>'));
   const banned = ['комплексн', 'современные технологии', 'надёжн', 'высокое качество',
@@ -37,44 +39,55 @@ for (const f of files) {
   for (const b of banned) ok(!body.toLowerCase().includes(b.toLowerCase()), f + ': штамп «' + b + '»');
   const imgs = body.match(/<img\b[^>]*>/g) || [];
   ok(imgs.every(t => /\balt="[^"]*"/.test(t)), f + ': img без alt');
-  /* ни одного жёстко зашитого цвета v1/v2 */
-  ok(!/#f2c200|#ffd633|#ecece8|#0e0f10|#141516|#4EA8FF|#EAF0F5/i.test(s),
-     f + ': жёсткий цвет v1/v2 в HTML');
+  /* ни одного жёстко зашитого цвета старых версий */
+  ok(!/#f2c200|#ffd633|#ecece8|#0e0f10|#141516|#4EA8FF|#EAF0F5|#05080F|#4DE8DC|#FFB45C|#EAF3FA|#A8BCD0/i.test(s),
+     f + ': жёсткий цвет старой версии в HTML');
 }
 
-/* ---------- Дизайн-система v3 ---------- */
+/* ---------- Дизайн-система v4 ---------- */
 const css = read('n7-bold.css'), base = read('style.css'), fc = read('fonts.css');
 ok((css.match(/{/g) || []).length === (css.match(/}/g) || []).length, 'n7-bold.css: баланс скобок');
 ok((base.match(/{/g) || []).length === (base.match(/}/g) || []).length, 'style.css: баланс скобок');
-for (const t of ['--void:#05080F', '--ink:#070B14', '--cyan:#4DE8DC', '--amber:#FFB45C',
-  '--fg:#EAF3FA', '--mut:#A8BCD0', '--geo:', '--display:', '--mono:',
+for (const t of ['--void:#F4F3EF', '--ink:#FFFFFF', '--cyan:#B83A18', '--amber:#B83A18',
+  '--fg:#101820', '--mut:#5A6672', '--geo:', '--display:', '--mono:',
   '--n7-r:', '--n7-r-pill:', '@media(prefers-reduced-motion:reduce)', '[data-n7-stub]',
-  'transform-style:preserve-3d', '[data-depth]', '.v3-tilt', '.v3-iso', '#n7Scene',
-  '.n7-fallback', '.n7-hud', 'n7-webgl-on'])
+  'transform-style:flat', '.v4-hero-grid', '.v4-hero-media', '#n7Scene',
+  '.n7-fallback', 'n7-no-webgl', 'border-radius:0!important'])
   ok(css.includes(t), 'n7-bold.css: нет ' + t);
-ok(css.includes('ВЕРСИЯ 3'), 'n7-bold.css: не помечен как v3');
-ok(css.includes('.cp svg') || css.includes('[data-depth]'), 'n7-bold.css: нет параллакса');
-/* Ни одного нулевого радиуса у карточек и панелей */
-const zeroRules = [...css.matchAll(/([^{}]+)\{([^{}]*border-radius:\s*0\s*[;}][^{}]*)\}/g)]
-  .map(m => m[1].trim().replace(/\s+/g, ' '));
-ok(zeroRules.every(sel => /\.hero-photo|figure \.ph|\[aria-hidden/.test(sel)),
-   'n7-bold.css: нулевой радиус у карточки или панели: ' + zeroRules.join(' | '));
-ok(/:root\{--bg:#070B14/.test(base), 'style.css: базовая палитра не v3');
-ok(!/#f2c200|#ffd633|rgba\(242,194,0|#4EA8FF|#EAF0F5/i.test(base), 'style.css: остался цвет v1/v2');
+ok(css.includes('ВЕРСИЯ 4') && css.includes('РЕДАКЦИЯ'), 'n7-bold.css: не помечен как v4');
+ok(!/v3-iso|v3-tilt|n7-hud|preserve-3d|data-depth|#4DE8DC|#05080F|ВЕРСИЯ 3|ГЛУБИНА/.test(css),
+   'n7-bold.css: остался артефакт v3');
+ok(/:root\{--bg:#F4F3EF/.test(base), 'style.css: базовая палитра не v4');
+ok(!/#f2c200|#ffd633|rgba\(242,194,0|#4EA8FF|#EAF0F5|#05080F|#4DE8DC|#EAF3FA|#A8BCD0/i.test(base),
+   'style.css: остался цвет старой версии');
 ok(/--hd:'Inter Tight'/.test(base), 'style.css: заголовки не Inter Tight');
+ok(!/\.dock\{|@keyframes dockIn/.test(base), 'style.css: мёртвый dock не удалён');
 ok((fc.match(/@font-face/g) || []).length === 15, 'fonts.css: 15 локальных @font-face');
 ok(fc.includes("'Inter Tight'") && fc.includes("'IBM Plex Mono'") && fc.includes("'Unbounded'"),
-   'fonts.css: нет шрифтов v3');
+   'fonts.css: нет шрифтов системы');
 
 /* ---------- Манифест, иконки, OG ---------- */
 const man = JSON.parse(read('manifest.json'));
-ok(man.theme_color === '#05080F' && man.background_color === '#05080F',
-   'manifest.json: цвета не v3');
-ok(read('img/favicon.svg').includes('#4DE8DC'), 'favicon.svg: нет циана');
-ok(!read('img/favicon.svg').includes('#f2c200'), 'favicon.svg: остался жёлтый');
-ok(read('tools/make_og.py').includes('ГЛУБИНА'), 'make_og.py: генератор не v3');
+ok(man.theme_color === '#F4F3EF' && man.background_color === '#F4F3EF',
+   'manifest.json: цвета не v4');
+ok(read('img/favicon.svg').includes('#B83A18'), 'favicon.svg: нет акцента v4');
+ok(!read('img/favicon.svg').includes('#f2c200') && !read('img/favicon.svg').includes('#4DE8DC'),
+   'favicon.svg: остался цвет старой версии');
+ok(read('tools/make_og.py').includes('РЕДАКЦИЯ'), 'make_og.py: генератор не v4');
 ok(fs.readdirSync(path.join(R, 'img', 'og')).filter(f => f.endsWith('.webp')).length === 19,
    'img/og: не 19 превью');
+/* Презентация — отдельный лёгкий вход: без 8 font-preload и без больших фоновых фото. */
+const pres = read('prezentatsiya.html');
+ok(!/rel="preload" as="font"/.test(pres), 'prezentatsiya: лишние font-preload');
+ok((pres.match(/--im:linear-gradient\(135deg,#EFEEE9,#F4F3EF\)/g) || []).length === 2,
+   'prezentatsiya: нет лёгкого градиентного фона на титуле и финале');
+for (const f of files.filter(x => x !== 'prezentatsiya.html'))
+  ok((read(f).match(/rel="preload" as="font"/g) || []).length === 8, f + ': не 8 предзагрузок шрифтов');
+ok(fs.existsSync(path.join(R, 'img', 'hero-editorial.webp')), 'нет редакционного hero-кадра');
+for (const v of ['480', '800']) ok(fs.existsSync(path.join(R, 'img', 'hero-editorial-' + v + '.webp')),
+   'нет адаптивной версии hero ' + v + 'w');
+ok(/srcset="img\/hero-editorial-480\.webp 480w, img\/hero-editorial-800\.webp 800w, img\/hero-editorial\.webp 1200w"/.test(read('index.html')),
+   'index: hero без адаптивного srcset');
 
 /* ---------- Все локальные ссылки и якоря целы ---------- */
 const ids = {};
@@ -95,7 +108,7 @@ for (const f of files) {
   }
 }
 
-/* ---------- Главная: новая IA + сцена ---------- */
+/* ---------- Главная: новая IA + редакционный hero ---------- */
 const i = read('index.html');
 ok(/Строим\./.test(i) && /Сдаём\./.test(i) && /Отвечаем\./.test(i), 'index: нет героя');
 ok(!/СТРОИМ\. СДАЁМ\. ОТВЕЧАЕМ\./.test(i), 'index: остался uppercase-герой v1');
@@ -114,8 +127,10 @@ ok(/id="q-agree"/.test(i) && /n7-cta-big/.test(i), 'index: нет согласи
 ok(/wa\.me\/77778848818/.test(i) && /data-n7-stub="requisites"/.test(i),
    'index: нет WhatsApp или заглушки реквизитов');
 ok(!i.includes('US$'), 'index: остались USD-цены');
-ok(!/n7-marquee|n7intro|n7-foot-line/.test(i), 'index: остался визуальный язык v1');
-ok(/id="n7Scene"/.test(i) && /n7-hud/.test(i) && /n7-fallback/.test(i), 'index: нет 3D-первого экрана');
+ok(!/n7-marquee|n7intro|n7-foot-line|n7-hud|v3-iso|v3-tilt|data-depth/.test(i),
+   'index: остался визуальный язык старой версии');
+ok(/id="n7Scene"/.test(i) && /n7-fallback/.test(i) && /v4-hero-media/.test(i),
+   'index: нет редакционного первого экрана');
 
 /* ---------- Заглушки и факты на остальных страницах ---------- */
 const stubs = files.reduce((n, f) => n + (read(f).match(/data-n7-stub=/g) || []).length, 0);
@@ -127,6 +142,6 @@ for (const f of files) {
   ok(s.includes('+7 (777) 884-88-18') && s.includes('+7 (747) 534-40-14'), f + ': потерян телефон');
 }
 
-console.log(bad ? 'V3 «ГЛУБИНА»: ПРОВАЛ (' + bad + ')'
-  : 'V3 «ГЛУБИНА»: ВСЕ ПРОВЕРКИ ПРОЙДЕНЫ · страниц: ' + files.length + ' · заглушек: ' + stubs);
+console.log(bad ? 'V4 «РЕДАКЦИЯ»: ПРОВАЛ (' + bad + ')'
+  : 'V4 «РЕДАКЦИЯ»: ВСЕ ПРОВЕРКИ ПРОЙДЕНЫ · страниц: ' + files.length + ' · заглушек: ' + stubs);
 process.exit(bad ? 1 : 0);

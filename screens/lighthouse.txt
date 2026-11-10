@@ -1,37 +1,64 @@
-Lighthouse 12.8.2 · версия 3 «ГЛУБИНА» · ?v=20261109e · 2026-11-09
-Локальный предпросмотр http://127.0.0.1:8765, Chromium headless, WebGL2.
+Lighthouse 12.8.2 · версия 4 «РЕДАКЦИЯ» · ?v=20261109g · локальный предпросмотр
+Chromium headless, WebGL2/SwiftShader, 19 страниц desktop + главная mobile.
 
-ГЛАВНАЯ index.html — интерактивная WebGL2-сцена + CSS-3D + фото объекта
+ГЛАВНАЯ index.html — светлая редакционная сетка, крупное фото, CSS-зерно
   Desktop (--preset=desktop) : performance 99 / accessibility 100 / best-practices 100 / SEO 100
-    FCP 0.6 s · LCP 0.9 s · CLS 0.005 · TBT 0 ms · Speed Index 0.6 s
-  Mobile (default throttling) : performance 84 / accessibility 100 / best-practices 100 / SEO 100
-    FCP 2.7 s · LCP 3.8 s · CLS 0.003 · TBT 0 ms · Speed Index 2.7 s
+    FCP 0.5 s · LCP 0.8 s · CLS 0.001 · TBT 0 ms · Speed Index 0.7 s
+  Mobile (default throttling) : performance 86 / accessibility 100 / best-practices 100 / SEO 100
+    FCP 2.0 s · LCP 4.0 s · CLS 0.001 · TBT 40 ms · Speed Index 2.2 s
   Binary fails: нет.
 
 ВСЕ 19 СТРАНИЦ · Desktop
-  accessibility 100 · best-practices 100 · SEO 100 на 18 страницах.
-  404.html: best-practices 96, SEO 63, accessibility 100 — это намеренный
-  noindex,follow и закрытый в песочнице хост q984q.github.io (абсолютный
-  <base> нужен для GitHub Pages). На реальном Pages хост тот же, запросы успешны.
-  performance 90–100 (минимум 90 у osveshhenie.html).
-  Бинарных провалов audits нет нигде, кроме 404.html: errors-in-console и
+  accessibility 100 на всех 19 страницах.
+  best-practices 100 и SEO 100 на 18 страницах.
+  404.html: best-practices 96, SEO 63 — намеренный noindex,follow и закрытый
+  в песочнице хост q984q.github.io (абсолютный <base> нужен для Pages).
+  performance 98–100 (минимум 98 у 404.html, остальные 99–100).
+  Бинарных провалов нет нигде, кроме 404.html: errors-in-console и
   is-crawlable (артефакт песочницы + noindex).
 
-ПОЧЕМУ TBT = 0 ПРИ ЖИВОМ 3D
-  Первый замер с непрерывным requestAnimationFrame на программном рендерере
-  (SwiftShader) дал TBT 14 880 ms и performance 68. Рендерер теперь определяет
-  software-WebGL по WEBGL_debug_renderer_info, рисует один собранный кадр и не
-  запускает цикл; на аппаратном GPU сцена анимируется с FPS-cap 30 и паузой по
-  IntersectionObserver / visibilitychange. Мобильные ≤900 px, reduced-motion и
-  отсутствие WebGL2 получают CSS-фолбэк без инициализации контекста.
+ТАБЛИЦА · Desktop
+  Страница                         Perf  A11y  BP   SEO  Binary
+  404.html                        98   100   96   63   errors-in-console,is-crawlable
+  begovye-dorozhki.html          100   100  100  100   нет
+  geografiya.html                100   100  100  100   нет
+  index.html                      99   100  100  100   нет
+  kak-vybrat.html                100   100  100  100   нет
+  kontakty.html                  100   100  100  100   нет
+  modulnye-pokrytiya.html        100   100  100  100   нет
+  o-kompanii.html                 99   100  100  100   нет
+  osveshhenie.html                99   100  100  100   нет
+  padel-korty.html                99   100  100  100   нет
+  prezentatsiya.html              99   100  100  100   нет
+  privacy.html                   100   100  100  100   нет
+  produktsiya.html               100   100  100  100   нет
+  proekty.html                    99   100  100  100   нет
+  pvh-pokrytiya.html             100   100  100  100   нет
+  sotrudnichestvo.html           100   100  100  100   нет
+  sportivnye-pokrytiya.html       99   100  100  100   нет
+  sportivnyj-parket.html          99   100  100  100   нет
+  uslugi.html                     99   100  100  100   нет
 
-СРАВНЕНИЕ С v2 «СТАЛЬ» (8e3844e)
-  Desktop  : 99 / 100 / 100 / 100  ->  99 / 100 / 100 / 100
-  Mobile   : 82 / 100 / 100 / 100  ->  84 / 100 / 100 / 100
-  LCP mob  : 4.2 s -> 3.8 s · CLS mob 0.002 -> 0.003
-  Заставка удалена ещё в v2; в v3 первый экран не блокируется ничем:
-  LCP-элемент — текст h1, canvas и фото объекта не участвуют в LCP.
+ПОЧЕМУ МЕТРИКИ СТАБИЛЬНЫ
+  · WebGL2-зерно не инициализируется при загрузке: с первого кадра виден
+    CSS-фолбэк img/grain.webp, один статичный кадр рисуется только после
+    первого жеста на широком экране. TBT главной = 0 мс.
+  · Адаптивный hero: 480w / 800w / 1200w через srcset + sizes.
+  · 8 ключевых WOFF2 предзагружены на 18 страницах — кириллические и
+    латинские подмножества не вызывают сдвиг вёрстки (CLS ≈ 0.001).
+  · Презентация: титул и финал на лёгком градиенте, font-preload убраны,
+    неактивные слайды получили content-visibility:hidden. TBT = 0 мс.
+  · Цветовые CSS-фильтры на больших фоновых изображениях убраны:
+    первый прогон давал до 600 мс длинной задачи на SwiftShader.
 
-Скриншоты: screens/v3/ (14 PNG, 7 пар ПК/МОБ), коллаж screens/v3-final.png
+СРАВНЕНИЕ С v3 «ГЛУБИНА» (?v=20261109e)
+  Desktop главная : 99 / 100 / 100 / 100  ->  99 / 100 / 100 / 100
+  Mobile главная  : 84 / 100 / 100 / 100  ->  86 / 100 / 100 / 100
+  LCP mobile      : 3.8 s -> 4.0 s · CLS mobile 0.003 -> 0.001
+  Минимум perf по 19 desktop: 90 -> 98 (404.html), остальные 99–100.
+  Удалены WebGL-башня, HUD, CSS-3D, тёмная палитра и неон; сохранены
+  19 URL, 26 JSON-LD, OG, 29 заглушек, формы, reduced-motion и фолбэк.
+
+Скриншоты: screens/v4/ (14 PNG), коллаж screens/v4-final.png
 Браузерный отчёт: screens/redesign-check.txt
-Бенчмарк конкурентов: BENCHMARK.md
+Бенчмарк KZ + мировых компаний: BENCHMARK.md

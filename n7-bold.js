@@ -1,9 +1,8 @@
 /* ==========================================================================
-   N7 v2 «СТАЛЬ» — интерактив без зависимостей.
-   Оставляем рабочую форму из 3 полей с отправкой через WhatsApp и панель
-   управления, которая не мешает первому экрану. Из v1 убраны заставка,
-   кастомный курсор, бегущая строка и параллакс: они belonged к старому
-   визуальному языку и ухудшали LCP. Уважаем prefers-reduced-motion.
+   N7 v4 «РЕДАКЦИЯ» — рабочие формы и навигация без зависимостей.
+   Трёхпольная заявка уходит в WhatsApp, если серверный endpoint не задан.
+   Никаких заставок, кастомного курсора, 3D-наклона или параллакса.
+   Уважаем prefers-reduced-motion.
    ========================================================================== */
 (function(){
 'use strict';
@@ -11,7 +10,7 @@ var d=document,r=d.documentElement,w=window;
 var $=function(s,c){return (c||d).querySelector(s)};
 var RM=false;try{RM=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
 
-/* ---------- 1. Панель управления: появляется после первого экрана ---------- */
+/* ---------- 1. Точечная навигация: появляется после первого экрана ---------- */
 var tocRaf=0;
 function tocReveal(){
   tocRaf=0;
@@ -32,7 +31,7 @@ if(f){
   function say(msg,bad){
     if(!st)return;
     st.hidden=false;st.textContent=msg;
-    st.style.color=bad?'var(--err)':'var(--azure-deep)';
+    st.style.color=bad?'var(--err)':'var(--ac)';
   }
   function text(){
     return 'Заявка с сайта N7 Construction\nИмя: '+val('q-name')+

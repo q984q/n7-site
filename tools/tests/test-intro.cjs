@@ -1,6 +1,6 @@
-/* N7 v3 «ГЛУБИНА»: единый каркас и честный первый экран на всех 19 страницах.
-   Проверяем, что артефакты v1/v2 не вернулись, а 3D-слой подключён везде,
-   WebGL-сцена — только на главной и только с безопасным фолбэком. */
+/* N7 v4 «РЕДАКЦИЯ»: единый светлый каркас и честный первый экран на 19 страницах.
+   Проверяем, что артефакты v1/v2/v3 не вернулись, редакционная сетка
+   подключена везде, а минимальная WebGL-текстура — только на главной. */
 const fs = require('fs'), path = require('path');
 const R = path.resolve(__dirname, '..', '..');
 const files = fs.readdirSync(R).filter(f => f.endsWith('.html')).sort();
@@ -18,7 +18,7 @@ for (const f of files) {
   ok(!/localStorage\.getItem\("n7-theme"\)/.test(s), f + ': вернулось восстановление темы');
   /* Новый каркас */
   ok(/<html lang="ru">/.test(s), f + ': нет lang="ru"');
-  ok(/<meta name="theme-color" content="#05080F">/.test(s), f + ': theme-color не v3 void');
+  ok(/<meta name="theme-color" content="#F4F3EF">/.test(s), f + ': theme-color не v4 paper');
   ok(/<header class="n7-head">/.test(s), f + ': нет шапки');
   ok(/<footer class="n7-foot">/.test(s), f + ': нет подвала');
   ok(/id="menu"[^>]*aria-label="Основное меню"/.test(s), f + ': меню без доступного имени');
@@ -32,26 +32,29 @@ for (const f of files) {
   for (const css of ['fonts.css', 'style.css', 'n7-bold.css'])
     ok(new RegExp('<link rel="stylesheet" href="' + css + '\\?v=[^"]+"').test(s), f + ': нет ' + css);
   ok(!/<style>/.test(s), f + ': инлайновый CSS в head');
-  /* Единый CSS-3D слой на всех 19 страницах */
-  ok(/<script src="n7-depth\.js\?v=[^"]+" defer><\/script>/.test(s), f + ': нет n7-depth.js');
-  ok(/data-depth=/.test(s), f + ': нет параллакс-слоёв');
-  /* CSS-3D есть везде: изометрическая плита в pagehero, tilt-карточки или сцена */
-  ok(/v3-iso|v3-tilt|n7Scene/.test(s), f + ': нет CSS/3D-слоя');
-  if (/class="pagehero"/.test(s)) ok(/class="v3-iso"/.test(s), f + ': нет изометрии в pagehero');
-  /* Никаких жёстко зашитых цветов v1/v2 */
-  ok(!/#f2c200|#ffd633|#0e0f10|#141516|#4EA8FF|#EAF0F5/i.test(s), f + ': остался цвет v1/v2');
-  ok(!/stroke="#f2c200"/i.test(s), f + ': осталась жёлтая deco-линия');
+  /* v4 без 3D-декора */
+  ok(/<script src="n7-depth\.js\?v=[^"]+" defer><\/script>/.test(s), f + ': нет маркера v4');
+  ok(!/v3-iso|v3-tilt|n7-hud|hud-frame|data-depth|stroke="#4DE8DC"/.test(s),
+     f + ': вернулся 3D/HUD-декор v3');
+  ok(!/class="dock|id="n7Dock"/.test(s), f + ': вернулся плавающий dock');
+  /* Никаких жёстко зашитых цветов v1/v2/v3 */
+  ok(!/#f2c200|#ffd633|#0e0f10|#141516|#4EA8FF|#EAF0F5|#05080F|#4DE8DC|#FFB45C|#EAF3FA|#A8BCD0/i.test(s),
+     f + ': остался цвет старой версии');
 }
 
-/* Главная: WebGL-сцена + HUD + CSS-фолбэк */
+/* Главная: редакционный hero, минимальная текстура и CSS-фолбэк */
 const idx = fs.readFileSync(path.join(R, 'index.html'), 'utf8');
-ok(/<canvas id="n7Scene"[^>]*aria-hidden="true">/.test(idx), 'index: нет canvas сцены');
-ok(/<div class="n7-fallback"/.test(idx), 'index: нет CSS-фолбэка без WebGL');
-ok(/<div class="n7-hud"[^>]*aria-hidden="true">/.test(idx), 'index: нет HUD-слоя');
-ok(/<script src="n7-scene\.js\?v=[^"]+" defer><\/script>/.test(idx), 'index: нет рендерера');
-ok(!/rel="preload" as="image" href="img\/hero\.webp"/.test(idx), 'index: лишний preload фото');
+ok(/<canvas id="n7Scene"[^>]*aria-hidden="true">/.test(idx), 'index: нет canvas зерна');
+ok(/<div class="n7-fallback"[^>]*aria-hidden="true">/.test(idx), 'index: нет CSS-фолбэка');
+ok(!/n7-hud|hud-frame|v3-iso/.test(idx), 'index: вернулся HUD/изометрия');
+ok(/class="w v2-hero-grid v4-hero-grid"/.test(idx), 'index: нет редакционной сетки hero');
+ok(/class="v4-hero-media"/.test(idx) && /img\/hero-editorial\.webp/.test(idx),
+   'index: нет крупного архитектурного фото');
+ok(/fetchpriority="high"/.test(idx), 'index: у фото нет высокого приоритета');
+ok(/<script src="n7-scene\.js\?v=[^"]+" defer><\/script>/.test(idx), 'index: нет рендерера зерна');
+ok(!/rel="preload" as="image" href="img\/hero-editorial\.webp"/.test(idx), 'index: лишний preload фото');
 for (const f of files.filter(f => f !== 'index.html'))
-  ok(!/n7-scene\.js/.test(fs.readFileSync(path.join(R, f), 'utf8')), f + ': сцена грузится не на главной');
+  ok(!/n7-scene\.js/.test(fs.readFileSync(path.join(R, f), 'utf8')), f + ': зерно грузится не на главной');
 
 /* Рабочие контракты форм */
 ok(/<form id="n7Quick"/.test(idx), 'index: нет быстрой формы');
@@ -75,15 +78,18 @@ const main = fs.readFileSync(path.join(R, 'main.js'), 'utf8');
 ok(!/n7-theme/.test(main), 'main.js: вернулась инверсия темы');
 ok(!fs.existsSync(path.join(R, 'n7-intro.js')), 'n7-intro.js всё ещё в репозитории');
 
-/* Рендерер: WebGL2, фолбэки, пауза и отказ от мобильных */
+/* Рендерер: один кадр WebGL2, фолбэки, пауза и отказ от мобильных */
 const scene = fs.readFileSync(path.join(R, 'n7-scene.js'), 'utf8');
 for (const t of ['webgl2', 'prefers-reduced-motion', 'min-width: 900px', 'webglcontextlost',
-  'IntersectionObserver', 'visibilitychange', 'requestIdleCallback', 'devicePixelRatio'])
+  'IntersectionObserver', 'visibilitychange', 'requestIdleCallback', 'devicePixelRatio',
+  'pointerdown', 'n7FallbackReady'])
   ok(scene.includes(t), 'n7-scene.js: нет ' + t);
 ok(!/three\.js|THREE|cdn|unpkg|jsdelivr/i.test(scene), 'n7-scene.js: внешняя библиотека');
+ok(!/requestAnimationFrame\(/.test(scene), 'n7-scene.js: снова бесконечный rAF');
 const depth = fs.readFileSync(path.join(R, 'n7-depth.js'), 'utf8');
-for (const t of ['prefers-reduced-motion', 'hover: hover', 'IntersectionObserver', '--rx', '--py'])
-  ok(depth.includes(t), 'n7-depth.js: нет ' + t);
+ok(depth.includes('prefers-reduced-motion') && depth.includes('v4-editorial') &&
+   depth.includes('n7EditorialReady'), 'n7-depth.js: нет маркера v4');
+ok(!/--rx|--py|requestAnimationFrame\(/.test(depth), 'n7-depth.js: вернулся tilt/параллакс');
 
-console.log(bad ? 'КАРКАС V3: ПРОВАЛ (' + bad + ')' : 'Каркас v3 «ГЛУБИНА»: ВСЕ ПРОВЕРКИ ПРОЙДЕНЫ · страниц: ' + files.length);
+console.log(bad ? 'КАРКАС V4: ПРОВАЛ (' + bad + ')' : 'Каркас v4 «РЕДАКЦИЯ»: ВСЕ ПРОВЕРКИ ПРОЙДЕНЫ · страниц: ' + files.length);
 process.exit(bad ? 1 : 0);
