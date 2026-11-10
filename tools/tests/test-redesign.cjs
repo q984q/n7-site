@@ -147,6 +147,18 @@ ok(/border-radius:2px!important/.test(css41), 'n7-bold.css: не единый я
 ok(/\.pagehero \+ section\{padding-top:clamp\(40px,5vw,72px\)/.test(css41),
    'n7-bold.css: первый контентный блок снова отделён пустым полем');
 
+/* ---------- Современный слой v4.2 ---------- */
+const css42 = read('n7-bold.css');
+const bold42 = read('n7-bold.js');
+ok(/@view-transition\{navigation:auto\}/.test(css42) && /view-transition-name:n7-title/.test(css42),
+   'n7-bold.css: нет нативных cross-document View Transitions');
+ok(/animation-timeline:scroll\(root block\)/.test(css42) && /n7-hero-camera/.test(css42),
+   'n7-bold.css: нет scroll-driven «камеры» hero');
+ok(/prefers-reduced-motion:reduce/.test(css42) && /view-transition-name:none/.test(css42),
+   'n7-bold.css: современный слой не отключается при reduced-motion');
+ok(/'prefetch'/.test(bold42) && /requestIdleCallback/.test(bold42),
+   'n7-bold.js: нет тихой предзагрузки внутренних HTML-страниц');
+
 /* ---------- Заглушки и факты на остальных страницах ---------- */
 const stubs = files.reduce((n, f) => n + (read(f).match(/data-n7-stub=/g) || []).length, 0);
 ok(stubs === 29, 'заглушек должно быть 29, получилось ' + stubs);
@@ -158,5 +170,5 @@ for (const f of files) {
 }
 
 console.log(bad ? 'V4 «РЕДАКЦИЯ»: ПРОВАЛ (' + bad + ')'
-  : 'V4 «РЕДАКЦИЯ»: ВСЕ ПРОВЕРКИ ПРОЙДЕНЫ · страниц: ' + files.length + ' · заглушек: ' + stubs);
+  : 'V4.2 «РЕДАКЦИЯ»: ВСЕ ПРОВЕРКИ ПРОЙДЕНЫ · страниц: ' + files.length + ' · заглушек: ' + stubs);
 process.exit(bad ? 1 : 0);

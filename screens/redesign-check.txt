@@ -1,4 +1,4 @@
-ПРОВЕРКА V4.1 «РЕДАКЦИЯ» · 2026-11-10T17:34:50.647Z
+ПРОВЕРКА V4.2 «РЕДАКЦИЯ» · 2026-11-10T17:52:25.597Z
 Chromium: /tmp/chromium
 ПК  404.html                     bg=rgb(244, 243, 239) accent=#B83A18 h1=77.76px r=0/2 rails=0 3D=0/0/false img=0/0 err=0
 ПК  begovye-dorozhki.html        bg=rgb(244, 243, 239) accent=#B83A18 h1=77.76px r=0/-1 rails=0 3D=0/0/false img=1/0 err=0

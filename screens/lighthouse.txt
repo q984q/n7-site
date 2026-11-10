@@ -1,11 +1,11 @@
-Lighthouse 12.8.2 · версия 4.1 «РЕДАКЦИЯ» · ?v=20261109h · локальный предпросмотр
+Lighthouse 12.8.2 · версия 4.2 «РЕДАКЦИЯ» · ?v=20261109i · локальный предпросмотр
 Chromium headless, WebGL2/SwiftShader, 19 страниц desktop + главная mobile.
 
-ГЛАВНАЯ index.html — диптих реальных проектов, видимый контент, CSS-зерно
+ГЛАВНАЯ index.html — диптих проектов, View Transitions, scroll-driven камера
   Desktop (--preset=desktop) : performance 99 / accessibility 100 / best-practices 100 / SEO 100
     FCP 0.5 s · LCP 0.9 s · CLS 0.001 · TBT 0 ms · Speed Index 0.5 s
   Mobile (default throttling) : performance 86 / accessibility 100 / best-practices 100 / SEO 100
-    FCP 1.8 s · LCP 4.1 s · CLS 0.003 · TBT 0 ms · Speed Index 1.8 s
+    FCP 1.8 s · LCP 4.1 s · CLS 0.000 · TBT 23 ms · Speed Index 1.8 s
   Binary fails: нет.
 
 ВСЕ 19 СТРАНИЦ · Desktop
@@ -18,26 +18,27 @@ Chromium headless, WebGL2/SwiftShader, 19 страниц desktop + главна�
 
 ТАБЛИЦА · Desktop
   файл                         perf acc BP SEO   FCP     LCP     CLS     TBT      SI
-  404.html                      98 100  96  63    0.5 s  1.1 s  0.001    0 ms  0.6 s
+  404.html                      99 100  96  63    0.5 s  1.0 s  0.001    0 ms  0.6 s
   begovye-dorozhki.html        100 100 100 100    0.4 s  0.7 s  0.001    0 ms  0.4 s
-  geografiya.html              100 100 100 100    0.4 s  0.8 s  0.001    0 ms  0.4 s
+  geografiya.html              100 100 100 100    0.4 s  0.7 s  0.001    0 ms  0.4 s
   index.html                    99 100 100 100    0.5 s  0.9 s  0.001    0 ms  0.5 s
   kak-vybrat.html              100 100 100 100    0.5 s  0.7 s  0.001    0 ms  0.5 s
   kontakty.html                100 100 100 100    0.4 s  0.7 s  0.029    0 ms  0.4 s
   modulnye-pokrytiya.html       99 100 100 100    0.5 s  0.9 s  0.001    0 ms  0.5 s
-  o-kompanii.html               99 100 100 100    0.5 s  0.8 s  0.000    0 ms  0.5 s
+  o-kompanii.html              100 100 100 100    0.4 s  0.7 s  0.001    0 ms  0.4 s
   osveshhenie.html              95 100 100 100    0.5 s  0.8 s  0.126    0 ms  0.5 s
   padel-korty.html              99 100 100 100    0.5 s  0.9 s  0.001    0 ms  0.5 s
-  prezentatsiya.html            99 100 100 100    0.6 s  0.8 s  0.002    0 ms  0.6 s
+  prezentatsiya.html            99 100 100 100    0.7 s  0.8 s  0.002    0 ms  0.7 s
   privacy.html                 100 100 100 100    0.4 s  0.7 s  0.001    0 ms  0.4 s
-  produktsiya.html             100 100 100 100    0.5 s  0.8 s  0.000    0 ms  0.5 s
+  produktsiya.html             100 100 100 100    0.4 s  0.8 s  0.001    0 ms  0.4 s
   proekty.html                  99 100 100 100    0.4 s  0.9 s  0.001    0 ms  0.4 s
-  pvh-pokrytiya.html           100 100 100 100    0.4 s  0.8 s  0.001    0 ms  0.4 s
+  pvh-pokrytiya.html           100 100 100 100    0.5 s  0.8 s  0.001    0 ms  0.5 s
   sotrudnichestvo.html         100 100 100 100    0.5 s  0.7 s  0.001    0 ms  0.5 s
-  sportivnye-pokrytiya.html     99 100 100 100    0.5 s  0.9 s  0.001    0 ms  0.5 s
+  sportivnye-pokrytiya.html     99 100 100 100    0.5 s  1.0 s  0.001    0 ms  0.5 s
   sportivnyj-parket.html        99 100 100 100    0.5 s  0.9 s  0.001    0 ms  0.5 s
-  uslugi.html                  100 100 100 100    0.5 s  0.8 s  0.001    0 ms  0.5 s
+  uslugi.html                  100 100 100 100    0.4 s  0.7 s  0.001    0 ms  0.4 s
 
 Изменения v4.1 не добавили новых сетевых запросов: hero-диптих 119 KB,
 адаптивные 480w/800w — 35 / 62 KB, 19 OG перегенерированы, старый абстрактный кадр удалён.
-Скрытие контента до скролла убрано; полоса чтения и счётчики остались.
+Современный слой v4.2 не добавил JS-рендера: View Transitions, scroll-driven
+камера и idle-prefetch работают на нативных API; reduced-motion отключает их.

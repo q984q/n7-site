@@ -1,5 +1,5 @@
 /* ==========================================================================
- N7 · ВЕРСИЯ 4 «РЕДАКЦИЯ» (v4 / editorial)
+ N7 · ВЕРСИЯ 4.2 «РЕДАКЦИЯ» (v4 / editorial + modern layer)
  --------------------------------------------------------------------------
  Полная смена визуального языка после бенчмарка казахстанских и мировых
  компаний: светлая бумажная сетка, крупная архитектурная фотография,
@@ -895,3 +895,67 @@ figure:hover{transform:none!important}
 /* Первый контентный блок не отделён от шапки лишним пустым полем. */
 .pagehero + section{padding-top:clamp(40px,5vw,72px)!important}
 @media(max-width:620px){.pagehero + section{padding-top:36px!important}}
+
+
+/* ==========================================================================
+   СОВРЕМЕННЫЙ СЛОЙ v4.2
+   Нативные cross-document View Transitions и scroll-driven «камера» hero.
+   Никакого JS-рендера, HUD, 3D и скрытия контента: только браузерные API,
+   мягкий морфинг заголовка и движение объектива внутри уже видимого кадра.
+   В браузерах без поддержки остаётся обычная навигация и статичный диптих.
+   ========================================================================== */
+@view-transition{navigation:auto}
+
+header.n7-head{view-transition-name:n7-head}
+main h1{view-transition-name:n7-title}
+.v4-hero-media{view-transition-name:n7-hero}
+.slide h1{view-transition-name:none}
+
+::view-transition-old(root){animation:n7-vt-out .18s ease-in both}
+::view-transition-new(root){animation:n7-vt-in .34s cubic-bezier(.2,.8,.25,1) both}
+::view-transition-old(n7-title){animation:n7-title-out .26s cubic-bezier(.4,0,1,1) both}
+::view-transition-new(n7-title){animation:n7-title-in .46s cubic-bezier(.2,.8,.25,1) both}
+::view-transition-group(n7-head){animation-duration:.24s}
+::view-transition-old(n7-hero),
+::view-transition-new(n7-hero){animation-duration:.42s}
+
+@keyframes n7-vt-out{to{opacity:0;transform:translateY(-6px)}}
+@keyframes n7-vt-in{from{opacity:0;transform:translateY(10px)}}
+@keyframes n7-title-out{to{opacity:0;transform:translateY(-18px) scale(.985);filter:blur(2px)}}
+@keyframes n7-title-in{from{opacity:0;transform:translateY(22px) scale(1.015);filter:blur(2px)}}
+
+/* «Камера»: двигаем object-position и цвет, а не opacity/transform контента.
+   LCP-изображение остаётся видимым с первого кадра. */
+@supports (animation-timeline: scroll(root block)){
+  .v4-hero-media img{
+    animation:n7-hero-camera linear both;
+    animation-timeline:scroll(root block);
+    animation-range:0 100vh}
+  .v4-hero-media figcaption{
+    animation:n7-caption-drift linear both;
+    animation-timeline:scroll(root block);
+    animation-range:0 100vh}
+  .v2-eyebrow::before{
+    transform-origin:left center;
+    animation:n7-line-draw linear both;
+    animation-timeline:view();
+    animation-range:entry 0% cover 32%}
+}
+@keyframes n7-hero-camera{
+  from{object-position:50% 40%;filter:saturate(.98) contrast(1.01)}
+  to{object-position:50% 60%;filter:saturate(.84) contrast(1.04)}
+}
+@keyframes n7-caption-drift{from{transform:translateY(0)}to{transform:translateY(-6px)}}
+@keyframes n7-line-draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* Современный слой полностью уступает системной настройке и печати. */
+@media(prefers-reduced-motion:reduce){
+  header.n7-head,main h1,.v4-hero-media{view-transition-name:none}
+  .v4-hero-media img,.v4-hero-media figcaption,.v2-eyebrow::before{animation:none!important}
+  ::view-transition-old(root),::view-transition-new(root){animation:none!important}
+}
+@media print{
+  header.n7-head,main h1,.v4-hero-media{view-transition-name:none}
+  .v4-hero-media img,.v4-hero-media figcaption,.v2-eyebrow::before{animation:none!important}
+  ::view-transition-old(root),::view-transition-new(root){animation:none!important}
+}

@@ -93,5 +93,5 @@ ok(depth.includes('prefers-reduced-motion') && depth.includes('v4-editorial') &&
    depth.includes('n7EditorialReady'), 'n7-depth.js: нет маркера v4');
 ok(!/--rx|--py|requestAnimationFrame\(/.test(depth), 'n7-depth.js: вернулся tilt/параллакс');
 
-console.log(bad ? 'КАРКАС V4: ПРОВАЛ (' + bad + ')' : 'Каркас v4 «РЕДАКЦИЯ»: ВСЕ ПРОВЕРКИ ПРОЙДЕНЫ · страниц: ' + files.length);
+console.log(bad ? 'КАРКАС V4: ПРОВАЛ (' + bad + ')' : 'Каркас v4.2 «РЕДАКЦИЯ»: ВСЕ ПРОВЕРКИ ПРОЙДЕНЫ · страниц: ' + files.length);
 process.exit(bad ? 1 : 0);
