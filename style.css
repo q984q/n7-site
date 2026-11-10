@@ -350,7 +350,7 @@ ol.steps.s4{grid-template-columns:1fr}@media(min-width:900px){ol.steps.s4{grid-t
 .to-top{position:fixed;right:20px;bottom:20px;z-index:30;width:48px;height:48px;display:grid;place-items:center;background:var(--ac);color:#0B1016;border:0;border-radius:var(--r-sm);font:700 1.4rem var(--bd);cursor:pointer;opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .25s,transform .25s,visibility .25s}
 .to-top.on{opacity:1;visibility:visible;transform:none}
 .mbar{display:none}
-/* мобильная навигация теперь «островком» .dock — правила в конце файла */
+/* мобильная навигация — выпадающее меню в шапке */
 .zoom{cursor:zoom-in}
 .lb{position:fixed;inset:0;z-index:70;display:grid;place-items:center;background:rgba(10,11,12,.92);opacity:0;transition:opacity .25s;padding:60px 20px}
 .lb.on{opacity:1}
@@ -816,12 +816,8 @@ form.wz-off .wz-step[hidden]{display:block!important}
 .hscroll>a,.hscroll>button,.hscroll>li{white-space:nowrap}
 
 @media(max-width:760px){
-  .dock{display:grid;animation:dockIn .45s cubic-bezier(.2,.8,.2,1) both}
-  body.has-dock{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
-  .hero{padding-bottom:100px}
-  .to-top{display:none}  /* dock уже возвращает наверх, жёлтая кнопка перекрывала текст */
-  .toast{bottom:calc(104px + env(safe-area-inset-bottom,0px))}
-  .cmpbar{bottom:calc(96px + env(safe-area-inset-bottom,0px));flex-wrap:nowrap;overflow-x:auto;max-width:calc(100% - 24px);scrollbar-width:none}
+  .toast{bottom:calc(20px + env(safe-area-inset-bottom,0px))}
+  .cmpbar{bottom:calc(20px + env(safe-area-inset-bottom,0px));flex-wrap:nowrap;overflow-x:auto;max-width:calc(100% - 24px);scrollbar-width:none}
   .cmpbar::-webkit-scrollbar{display:none}
   .cmpbar>*{flex:0 0 auto}
 
@@ -871,10 +867,6 @@ form.wz-off .wz-step[hidden]{display:block!important}
   .kb details,.waiting>div{break-inside:avoid}
   section{padding:clamp(48px,10vw,80px) 0}
 }
-@media(max-width:380px){.dock-t{font-size:.58rem}.dock-i{min-height:48px}.dock-main{min-height:54px}}
-@media(prefers-reduced-motion:reduce){.dock{animation:none}.dock-i,.dock-i svg{transition:none}}
-@media(prefers-contrast:more){.dock{border-width:2px}}
-@media print{.dock{display:none!important}}
 
 /* очень узкие телефоны: шапка не должна вылезать за 320 px */
 @media(max-width:360px){
@@ -885,7 +877,6 @@ form.wz-off .wz-step[hidden]{display:block!important}
 .tools{gap:4px}
 .tools>.ib{width:36px;height:36px;flex-basis:36px}
 header .w{gap:8px}
-.dock-i{min-height:46px}
 }
 
 /* ============================================================

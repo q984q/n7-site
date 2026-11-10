@@ -1,5 +1,5 @@
-/* Интерфейс N7: оглавление с прогрессом, диммер освещения, сравнение покрытий,
-  Before/After «свет выключен / включён», быстрый вход в квиз, микро-фидбек полей. */
+/* Интерфейс N7: навигация по разделам, диммер освещения, сравнение покрытий,
+  Before/After «свет выключен / включён», микро-фидбек полей. */
 (function(){
 'use strict';
 var d=document,w=window;
@@ -33,21 +33,15 @@ function toc(){
    .map(function(a){return {href:a[0],text:a[1]}});
  }
  var el=d.createElement('nav');el.className='toc n7panel';
- el.setAttribute('aria-label','Панель управления страницей');
- el.innerHTML='<div class="tp"><b>Управление</b><span id="tocNow">'+(site?'Сайт':'1 / '+items.length)+'</span></div>'+
-  '<ol>'+items.map(function(x,i){
-   return '<li><a href="'+x.href+'"'+(site?'':' data-i="'+i+'"'+(i===0?' class="on"':''))+
-    '><span>'+esc(x.text.length>19?x.text.slice(0,18)+'…':x.text)+'</span></a></li>';
-  }).join('')+'</ol>'+
-  '<div class="tc-acts">'+
-   '<button type="button" data-act="quiz"><span aria-hidden="true">✦</span> Подобрать за 60 сек</button>'+
-   '<button type="button" data-act="search"><span aria-hidden="true">⌕</span> Поиск по сайту</button>'+
-   '<button type="button" data-act="list"><span aria-hidden="true">☰</span> Лист подбора</button>'+
-   '<a class="tc-go" href="kontakty.html">Получить расчёт →</a>'+
-  '</div>';
+ el.setAttribute('aria-label','Разделы страницы');
+ el.innerHTML='<ol>'+items.map(function(x,i){
+  var t=esc(x.text);
+  return '<li><a href="'+x.href+'"'+(site?'':' data-i="'+i+'"'+(i===0?' class="on"':''))+
+   ' title="'+t+'" aria-label="'+t+'"><span>'+t+'</span></a></li>';
+ }).join('')+'</ol>';
  d.body.appendChild(el);
 
- var links=$$('.toc ol a[data-i]'),now=$('#tocNow');
+ var links=$$('.toc ol a[data-i]'),now=null;
  function set(i){links.forEach(function(a,k){a.classList.toggle('on',k===i)});if(now&&links.length)now.textContent=(i+1)+' / '+links.length}
  links.forEach(function(a){a.onclick=function(){set(parseInt(a.getAttribute('data-i'),10))}});
  if(!site&&typeof w.IntersectionObserver==='function'){
@@ -56,17 +50,6 @@ function toc(){
   })},{rootMargin:'-25% 0px -65% 0px'});
   secs.forEach(function(s){io.observe(s)});
  }
- $$('.tc-acts button',el).forEach(function(btn){
-  btn.onclick=function(){
-   var a=btn.getAttribute('data-act');
-   if(a==='search'){if(w.n7Search)w.n7Search.open();else location.href='index.html?q='}
-   else if(a==='list'){if(w.n7List)w.n7List.open()}
-   else if(a==='quiz'){
-    if($('#quiz')&&w.n7Quiz)w.n7Quiz.open();
-    else location.href='sportivnye-pokrytiya.html#quiz';
-   }
-  };
- });
 }
 
 /* ---------- 2. Диммер освещения ---------- */
@@ -161,7 +144,7 @@ w.n7Compare={toggle:toggle};
 
 /* ---------- 5. Быстрый вход в квиз + микро-фидбек полей ---------- */
 function extras(){
- /* быстрый вход в квиз теперь живёт в единой панели.tc-acts и в dock — дубль не нужен */
+ /* быстрые действия доступны из шапки и самих разделов */
  $$('#lead input,#lead textarea,#lead select').forEach(function(el){
   el.addEventListener('input',function(){
    var ok=el.type==='checkbox'?el.checked:(el.value||'').trim().length>1;

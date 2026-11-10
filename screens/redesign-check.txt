@@ -1,9 +1,9 @@
-ПРОВЕРКА V3 «ГЛУБИНА» · 2026-11-09T16:46:41.141Z
+ПРОВЕРКА V3 «ГЛУБИНА» · 2026-11-10T07:04:24.083Z
 Chromium: /tmp/chromium
 ПК  404.html                     bg=rgb(7, 11, 20) cyan=#4DE8DC h1= 83.2px r=14/999/999 rails=0 3D=3/6 img=0/0 err=0
 ПК  begovye-dorozhki.html        bg=rgb(7, 11, 20) cyan=#4DE8DC h1= 83.2px r=14/-1/999 rails=0 3D=3/0 img=1/0 err=0
 ПК  geografiya.html              bg=rgb(7, 11, 20) cyan=#4DE8DC h1= 83.2px r=14/-1/999 rails=0 3D=3/0 img=1/0 err=0
-ПК  index.html                   bg=rgb(7, 11, 20) cyan=#4DE8DC h1=95.04px r=14/20/999 rails=0 3D=2/21 img=5/0 err=0
+ПК  index.html                   bg=rgb(7, 11, 20) cyan=#4DE8DC h1=95.04px r=14/20/999 rails=0 3D=2/21 img=6/0 err=0
 ПК  kak-vybrat.html              bg=rgb(7, 11, 20) cyan=#4DE8DC h1= 83.2px r=14/999/999 rails=0 3D=3/6 img=0/0 err=0
 ПК  kontakty.html                bg=rgb(7, 11, 20) cyan=#4DE8DC h1= 83.2px r=14/-1/999 rails=0 3D=3/0 img=1/0 err=0
 ПК  modulnye-pokrytiya.html      bg=rgb(7, 11, 20) cyan=#4DE8DC h1= 83.2px r=14/-1/999 rails=0 3D=3/0 img=1/0 err=0
@@ -22,7 +22,7 @@ Chromium: /tmp/chromium
 МОБ 404.html                     bg=rgb(7, 11, 20) cyan=#4DE8DC h1= 43.2px r=14/999/999 rails=1 3D=3/6 img=0/0 err=0
 МОБ begovye-dorozhki.html        bg=rgb(7, 11, 20) cyan=#4DE8DC h1= 43.2px r=14/-1/999 rails=0 3D=3/0 img=1/0 err=0
 МОБ geografiya.html              bg=rgb(7, 11, 20) cyan=#4DE8DC h1= 43.2px r=14/-1/999 rails=0 3D=3/0 img=1/0 err=0
-МОБ index.html                   bg=rgb(7, 11, 20) cyan=#4DE8DC h1= 43.2px r=14/20/999 rails=5 3D=2/21 img=5/0 err=0
+МОБ index.html                   bg=rgb(7, 11, 20) cyan=#4DE8DC h1= 43.2px r=14/20/999 rails=5 3D=2/21 img=6/0 err=0
 МОБ kak-vybrat.html              bg=rgb(7, 11, 20) cyan=#4DE8DC h1= 43.2px r=14/999/999 rails=2 3D=3/6 img=0/0 err=0
 МОБ kontakty.html                bg=rgb(7, 11, 20) cyan=#4DE8DC h1= 43.2px r=14/-1/999 rails=0 3D=3/0 img=1/0 err=0
 МОБ modulnye-pokrytiya.html      bg=rgb(7, 11, 20) cyan=#4DE8DC h1= 43.2px r=14/-1/999 rails=0 3D=3/0 img=1/0 err=0
